@@ -8,7 +8,8 @@ mkdir -p nginx/conf.d nginx/ssl
 ```
 
 2. Create config file `nginx/conf.d/app.conf`
-```
+
+```conf
 server {
     listen 80;
     server_name your-domain.com;
@@ -70,7 +71,7 @@ docker run -d -p 80:80 -p 443:443 \
 Should properly set http and websocket proxy, otherwise, stream(for example AI stream output) will fail.
 
 ### Apache use below configuration to forward request
-```
+```conf
 # Forward HTTP requests  
 ProxyPass / http://localhost:3000/ nocanon  
 ProxyPassReverse / http://localhost:3000/  
@@ -81,7 +82,7 @@ ProxyPassReverse / ws://localhost:3000/
 ```
 
 ### Nginx covert to below
-```
+```conf
 # Primary proxy
 proxy_pass http://localhost:3000;
 proxy_set_header Host $host;
