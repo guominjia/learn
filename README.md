@@ -18,4 +18,5 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [Open-WebUI](open-webui/README.md) — experiments and notes about running or configuring Open-WebUI projects
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
-- [Artificial-Intelligence](ai/README.md) - ai
+- [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
+- [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
