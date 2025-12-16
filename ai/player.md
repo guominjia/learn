@@ -3,7 +3,7 @@ Key players in the AI ecosystem.
 
 ## Companies
 
-### China
+### CN
 
 [![DeepSeek](https://www.google.com/s2/favicons?domain=deepseek.com&sz=16)DeepSeek](http://deepseek.com/),
 [![Moonshot](https://www.google.com/s2/favicons?domain=moonshot.ai&sz=16)Moonshot](https://www.moonshot.ai/),
@@ -31,11 +31,15 @@ Key players in the AI ecosystem.
 [![Meta](https://www.google.com/s2/favicons?domain=meta.com&sz=16)Meta](https://www.meta.com/),
 [![CoreWeave](https://www.google.com/s2/favicons?domain=coreweave.com&sz=16)CoreWeave](https://coreweave.com/),
 [![Amazon](https://www.google.com/s2/favicons?domain=amazon.com&sz=16)Amazon](https://www.amazon.com/),
-[![Microsoft](https://www.google.com/s2/favicons?domain=microsoft.com&sz=16)Microsoft](https://www.microsoft.com/)
+[![Microsoft](https://www.google.com/s2/favicons?domain=microsoft.com&sz=16)Microsoft](https://www.microsoft.com/),
+[![Openmined](https://www.google.com/s2/favicons?domain=openmined.org&sz=16)Openmined](https://openmined.org/),
+[![Openmind](https://www.google.com/s2/favicons?domain=openmind.org&sz=16)Openmind](https://openmind.org/),
+[![Pytorch](https://www.google.com/s2/favicons?domain=pytorch.org&sz=16)Pytorch](https://pytorch.org/),
+[![TensorFlow](https://www.google.com/s2/favicons?domain=tensorflow.org&sz=16)TensorFlow](https://www.tensorflow.org/)
 
 ## Products
 
-### China
+### CN
 
 [![Doubao](https://www.google.com/s2/favicons?domain=doubao.com&sz=16)Doubao](https://doubao.com/),
 [![DeepSeek](https://www.google.com/s2/favicons?domain=deepseek.com&sz=16)DeepSeek](http://deepseek.com/),
@@ -51,15 +55,18 @@ Key players in the AI ecosystem.
 [![vLLM](https://www.google.com/s2/favicons?domain=docs.vllm.ai&sz=16)vLlm](https://docs.vllm.ai/en/latest/),
 [![OpenAI](https://www.google.com/s2/favicons?domain=openai.com&sz=16)OpenAI](https://openai.com/),
 [![Claude](https://www.google.com/s2/favicons?domain=claude.ai&sz=16)Claude](https://claude.ai/),
+[![Wandb](https://www.google.com/s2/favicons?domain=wandb.ai&sz=16)Wandb](https://wandb.ai/site),
 
 ## SDKs
-- China:
+- CN:
   - [DeepSeek](https://github.com/deepseek-ai):
       [DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR),
-- America:
+- US:
   - [HuggingFace](https://github.com/huggingface):
       [Evaluate](https://github.com/huggingface/evaluate/),
       [LightEval](https://github.com/huggingface/lighteval),
   - [vLLM](https://github.com/vllm-project)
-  - [Wandb](https://wandb.ai/site)
-
+  - [OpenMined](https://github.com/openmined/)
+  - [OpenMind](https://github.com/openmind/)
+  - [TensorFlow](https://github.com/tensorflow/)
+  - [PyTorch](https://github.com/pytorch/)
