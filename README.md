@@ -23,3 +23,4 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
 - [python](python/README.md) — Python language fundamentals, standard library, and core documentation references
+- [neo4j](neo4j/README.md) — Neo4j graph database notes, Cypher queries, and graph data modeling 
