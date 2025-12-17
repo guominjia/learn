@@ -30,4 +30,5 @@ This repository is organized by topic. Each topic has its own page with notes, l
 
 ## Useful Links
 
-[![iconfont](https://www.google.com/s2/favicons?domain=www.iconfont.cn&sz=16)iconfont](https://www.iconfont.cn/)
+[![iconfont](https://www.google.com/s2/favicons?domain=www.iconfont.cn&sz=16)iconfont](https://www.iconfont.cn/),
+[![supabase](https://www.google.com/s2/favicons?domain=supabase.com&sz=16)supabase](https://www.iconfont.cn/)
