@@ -25,3 +25,4 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [python](python/README.md) — Python language fundamentals, standard library, and core documentation references
 - [neo4j](neo4j/README.md) — Neo4j graph database notes, Cypher queries, and graph data modeling 
 - [mermaid](mermaid/README.md) — Mermaid diagram syntax, flowcharts, and text-based visualization techniques
+- [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
