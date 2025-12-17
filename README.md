@@ -22,3 +22,4 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Security](security/README.md) — security best practices, vulnerabilities, and hardening techniques
 - [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
+- [python](python/README.md) — Python language fundamentals, standard library, and core documentation references
