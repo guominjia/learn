@@ -21,3 +21,4 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
 - [Security](security/README.md) — security best practices, vulnerabilities, and hardening techniques
 - [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
+- [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
