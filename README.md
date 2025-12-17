@@ -27,3 +27,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [mermaid](mermaid/README.md) — Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
+
+## Useful Links
+
+[![iconfont](https://www.google.com/s2/favicons?domain=www.iconfont.cn&sz=16)iconfont](https://www.iconfont.cn/)
