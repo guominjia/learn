@@ -27,6 +27,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [mermaid](mermaid/README.md) — Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
+- [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
 
 ## Useful Links
 
