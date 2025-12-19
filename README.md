@@ -30,6 +30,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
 - [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
+- [Invest](invest/README.md) — personal investing notes, strategies, and data analysis examples
 
 ## Useful Links
 
