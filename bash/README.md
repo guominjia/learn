@@ -1,6 +1,7 @@
 # Bash
 
 ## Command
+**See**: [count-commits](count-commits.md)
 
 ###  Use following command to count changes in OldPackage from Package create
 
