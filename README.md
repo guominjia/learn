@@ -16,6 +16,7 @@ The goal of this repository is to provide a single place to:
 This repository is organized by topic. Each topic has its own page with notes, links, and examples:
 
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
+- [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
 - [Open-WebUI](open-webui/README.md) — experiments and notes about running or configuring Open-WebUI projects
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
