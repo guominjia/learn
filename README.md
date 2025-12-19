@@ -29,6 +29,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
+- [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
 
 ## Useful Links
 
