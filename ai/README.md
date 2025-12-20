@@ -10,3 +10,9 @@ Notes about AI: industry, products, news, and knowledges.
 
 ## [Player](player.md)
 Includes Google, OpenAI, ByteDance, Meta, Huawei, Alibaba, etc.
+
+## [RL](reinforcement-learning.md)
+Experiences about RL
+
+## [HF](https://huggingface.co/welcome)
+Hugging Face
