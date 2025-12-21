@@ -1,0 +1,6 @@
+ddgs==9.5.5
+langchain==0.3.27
+langchain-community==0.3.29
+langchain-openai==0.3.32
+langgraph==0.6.7
+streamlit==1.49.1
