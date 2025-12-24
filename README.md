@@ -31,6 +31,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
 - [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
 - [xwindow](xwindow/README.md) — X11, Xvfb virtual display, xdotool automation
+- [edk2](edk2/README.md) — TianoCore EDK2 UEFI firmware development, EmulatorPkg builds, and platform notes
 - [Invest](invest/README.md) — personal investing notes, strategies, and data analysis examples
 
 ## Useful Links
