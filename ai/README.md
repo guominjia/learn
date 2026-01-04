@@ -22,5 +22,6 @@ Hugging Face
   - [Copilot MCP](https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md)
 
 ##[Memory](https://github.com/Shichun-Liu/Agent-Memory-Paper-List)
+- https://github.com/guominjia/learn/tree/code_study/memory
 - [Agent Memory](https://mp.weixin.qq.com/s/DT_HfzOMHXT8hApNjBzGOA)
   - <https://arxiv.org/abs/2512.13564>
