@@ -9,7 +9,7 @@ Notes about AI: industry, products, news, and knowledges.
 - <https://tiktokenizer.vercel.app/>
 
 ## [Player](player.md)
-Includes Google, OpenAI, ByteDance, Meta, Huawei, Alibaba, etc.
+Includes Google, Meta, Microsoft, OpenAI, ByteDance, Huawei, Alibaba, etc.
 
 ## [RL](reinforcement-learning.md)
 Experiences about RL
