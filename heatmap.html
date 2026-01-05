@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户统计仪表板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .header-title span {
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .header-date {
+            font-size: 14px;
+            color: #999;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .activity-heatmap {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 12px;
+            overflow-x: auto;
+        }
+
+        .month-labels {
+            display: grid;
+            grid-template-columns: repeat(12, 70px);
+            grid-auto-flow: row;
+            gap: 4px;
+            margin-top: 23px;
+        }
+
+        .month-labels span {
+            font-size: 10px;
+            color: #666;
+            white-space: nowrap;
+            transform: translateY(-2px);
+        }
+
+        .heatmap-grid {
+            display: grid;
+            grid-template-rows: repeat(7, 14px);
+            grid-auto-flow: column;
+            grid-auto-columns: 14px;
+            gap: 3px;
+            margin: 20px 0;
+        }
+
+        .heatmap-cell {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            background: #eee;
+            transition: all 0.2s ease;
+        }
+
+        .heatmap-cell:hover {
+            transform: scale(1.5);
+            z-index: 10;
+        }
+
+        .heatmap-cell.level-1 { background: #c6e48b; }
+        .heatmap-cell.level-2 { background: #7bc96f; }
+        .heatmap-cell.level-3 { background: #239a3b; }
+        .heatmap-cell.level-4 { background: #196127; }
+
+        .rank-list {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .rank-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .rank-number {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+        }
+
+        .rank-icon {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .rank-info {
+            flex: 1;
+        }
+
+        .rank-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .rank-meta {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .rank-bar {
+            flex: 2;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+
+        .rank-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .rank-value {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 60px;
+            text-align: right;
+        }
+
+        .legend {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-box {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rank-bar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div>
+                <div class="header-title">用户，这是你的第 <span>156</span> 天</div>
+                <div class="header-date">注册于：2024-08-01 | 更新于：2026-01-05</div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>助手数量</h3>
+                <div class="value">8</div>
+                <div class="subtitle">上月新增 3 个</div>
+            </div>
+            <div class="stat-card">
+                <h3>话题总数</h3>
+                <div class="value">45</div>
+                <div class="subtitle">上月新增 12 个</div>
+            </div>
+            <div class="stat-card">
+                <h3>消息总数</h3>
+                <div class="value">389</div>
+                <div class="subtitle">上月新增 156 条</div>
+            </div>
+            <div class="stat-card">
+                <h3>总字数</h3>
+                <div class="value">3.2M</div>
+                <div class="subtitle">上月新增 1.1M</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">过去一年的活动</div>
+            <div class="activity-heatmap">
+                <div class="month-labels" id="monthLabels"></div>
+                <div class="heatmap-grid" id="heatmap"></div>
+                <div class="legend">
+                    <span>不活跃</span>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #eee;"></div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #c6e48b;"></div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #7bc96f;"></div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #239a3b;"></div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #196127;"></div>
+                    </div>
+                    <span>活跃</span>
+                </div>
+                <div style="text-align: center; margin-top: 15px; color: #666; font-size: 14px;">
+                    过去一年共发送 389 条消息
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">模型使用排名</div>
+            <div class="rank-list">
+                <div class="rank-item">
+                    <div class="rank-number">1</div>
+                    <div class="rank-icon">🤖</div>
+                    <div class="rank-info">
+                        <div class="rank-name">Claude Sonnet 4.5</div>
+                        <div class="rank-meta">智能对话模型</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="rank-value">245 次</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">2</div>
+                    <div class="rank-icon">⚡</div>
+                    <div class="rank-info">
+                        <div class="rank-name">GPT-4 Turbo</div>
+                        <div class="rank-meta">快速响应模型</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 65%;"></div>
+                    </div>
+                    <div class="rank-value">89 次</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">3</div>
+                    <div class="rank-icon">🎯</div>
+                    <div class="rank-info">
+                        <div class="rank-name">DeepSeek R1</div>
+                        <div class="rank-meta">专业分析模型</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 40%;"></div>
+                    </div>
+                    <div class="rank-value">55 次</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">助手使用排名</div>
+            <div class="rank-list">
+                <div class="rank-item">
+                    <div class="rank-number">1</div>
+                    <div class="rank-icon">💬</div>
+                    <div class="rank-info">
+                        <div class="rank-name">智能助手</div>
+                        <div class="rank-meta">通用对话助手</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="rank-value">38 个话题</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">2</div>
+                    <div class="rank-icon">📝</div>
+                    <div class="rank-info">
+                        <div class="rank-name">写作助手</div>
+                        <div class="rank-meta">内容创作专家</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 35%;"></div>
+                    </div>
+                    <div class="rank-value">5 个话题</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">3</div>
+                    <div class="rank-icon">💻</div>
+                    <div class="rank-info">
+                        <div class="rank-name">编程助手</div>
+                        <div class="rank-meta">代码开发专家</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 25%;"></div>
+                    </div>
+                    <div class="rank-value">2 个话题</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">话题内容排名</div>
+            <div class="rank-list">
+                <div class="rank-item">
+                    <div class="rank-number">1</div>
+                    <div class="rank-icon">🔧</div>
+                    <div class="rank-info">
+                        <div class="rank-name">Docker 环境配置</div>
+                        <div class="rank-meta">技术讨论</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="rank-value">52 条消息</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">2</div>
+                    <div class="rank-icon">🎨</div>
+                    <div class="rank-info">
+                        <div class="rank-name">网页设计方案</div>
+                        <div class="rank-meta">设计讨论</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 80%;"></div>
+                    </div>
+                    <div class="rank-value">42 条消息</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">3</div>
+                    <div class="rank-icon">📊</div>
+                    <div class="rank-info">
+                        <div class="rank-name">数据分析项目</div>
+                        <div class="rank-meta">数据科学</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 65%;"></div>
+                    </div>
+                    <div class="rank-value">34 条消息</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">4</div>
+                    <div class="rank-icon">🌐</div>
+                    <div class="rank-info">
+                        <div class="rank-name">API 开发指南</div>
+                        <div class="rank-meta">后端开发</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 50%;"></div>
+                    </div>
+                    <div class="rank-value">26 条消息</div>
+                </div>
+                <div class="rank-item">
+                    <div class="rank-number">5</div>
+                    <div class="rank-icon">✍️</div>
+                    <div class="rank-info">
+                        <div class="rank-name">文章写作技巧</div>
+                        <div class="rank-meta">内容创作</div>
+                    </div>
+                    <div class="rank-bar">
+                        <div class="rank-bar-fill" style="width: 40%;"></div>
+                    </div>
+                    <div class="rank-value">21 条消息</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成热力图
+        const monthMap = new Map();
+        const heatmap = document.getElementById('heatmap');
+        const today = new Date();
+        const oneYearAgo = new Date(today);
+        oneYearAgo.setDate(today.getDate() - 365);
+
+        for (let i = 0; i < 371; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'heatmap-cell';
+            
+            const randomLevel = Math.random();
+            if (randomLevel > 0.85) {
+                cell.classList.add('level-4');
+            } else if (randomLevel > 0.7) {
+                cell.classList.add('level-3');
+            } else if (randomLevel > 0.5) {
+                cell.classList.add('level-2');
+            } else if (randomLevel > 0.3) {
+                cell.classList.add('level-1');
+            }
+            
+            const currentDate = new Date(oneYearAgo);
+            currentDate.setDate(oneYearAgo.getDate() + i);
+            cell.title = currentDate.toLocaleDateString('zh-CN');
+
+            const month = currentDate.getMonth();
+            if (!monthMap.has(month)) {
+                monthMap.set(month, currentDate); // 计算列索引
+            }
+            heatmap.appendChild(cell);
+        }
+
+        const monthLabels = document.getElementById('monthLabels');
+        monthMap.forEach((currentDate, month) => {
+            const label = document.createElement('span');
+            label.textContent = currentDate.toLocaleString('zh-CN', { 
+                month: 'short' 
+            });
+            monthLabels.appendChild(label);
+        });
+
+        // 添加动画效果
+        const rankItems = document.querySelectorAll('.rank-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                }
+            });
+        });
+
+        rankItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.5s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
