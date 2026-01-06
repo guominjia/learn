@@ -64,3 +64,5 @@ print(f"mean_reward={mean_reward:.2f} +/- {std_reward}")
 - https://github.com/huggingface/huggingface_sb3
 - https://stable-baselines3.readthedocs.io/
 - https://gymnasium.farama.org/introduction/basic_usage/
+- http://incompleteideas.net/book/
+- http://incompleteideas.net/
