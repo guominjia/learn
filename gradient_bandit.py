@@ -66,13 +66,18 @@ class TestBed:
     """
     k-armed bandit test bed
     """
-    def __init__(self, n_actions=10):
+    def __init__(self, n_actions=10, reward_mean=4.0):
         """
         Initialize test bed with true action values
+        
+        Parameters:
+        - n_actions: number of actions
+        - reward_mean: mean reward offset (baseline shift)
         """
         self.n_actions = n_actions
-        # True action values sampled from normal distribution
-        self.q_true = np.random.randn(n_actions)
+        self.reward_mean = reward_mean
+        # True action values sampled from normal distribution with offset
+        self.q_true = np.random.randn(n_actions) + reward_mean
         self.optimal_action = np.argmax(self.q_true)
         
     def get_reward(self, action):
@@ -82,9 +87,13 @@ class TestBed:
         return np.random.randn() + self.q_true[action]
 
 
-def run_experiment(n_runs=2000, n_steps=1000, n_actions=10, alphas=[0.1, 0.4], use_baseline=True):
+def run_experiment(n_runs=2000, n_steps=1000, n_actions=10, alphas=[0.1, 0.4], 
+                   use_baseline=True, reward_mean=4.0):
     """
     Run bandit experiment with different step sizes
+    
+    Parameters:
+    - reward_mean: offset for reward distribution (tests baseline importance)
     """
     results = {}
     
@@ -98,7 +107,7 @@ def run_experiment(n_runs=2000, n_steps=1000, n_actions=10, alphas=[0.1, 0.4], u
                 print(f"  Run {run + 1}/{n_runs}")
             
             # Create new bandit problem and agent
-            bandit = TestBed(n_actions)
+            bandit = TestBed(n_actions, reward_mean=reward_mean)
             agent = GradientBandit(n_actions, alpha=alpha, use_baseline=use_baseline)
             
             for step in range(n_steps):
@@ -161,12 +170,15 @@ def plot_results(results_baseline, results_no_baseline):
 if __name__ == "__main__":
     print("Testing Gradient Bandit Algorithm")
     print("=" * 50)
+    print("NOTE: Using reward offset of +4 to demonstrate baseline importance")
+    print("=" * 50)
     
     # Test parameters
     n_runs = 2000
     n_steps = 1000
     n_actions = 10
     alphas = [0.1, 0.4]
+    reward_mean = 4.0  # Important: non-zero mean to show baseline effect
     
     # Run with baseline
     print("\n### Running with Baseline ###")
@@ -175,7 +187,8 @@ if __name__ == "__main__":
         n_steps=n_steps, 
         n_actions=n_actions, 
         alphas=alphas,
-        use_baseline=True
+        use_baseline=True,
+        reward_mean=reward_mean
     )
     
     # Run without baseline
@@ -185,7 +198,8 @@ if __name__ == "__main__":
         n_steps=n_steps, 
         n_actions=n_actions, 
         alphas=alphas,
-        use_baseline=False
+        use_baseline=False,
+        reward_mean=reward_mean
     )
     
     # Plot results
@@ -204,3 +218,7 @@ if __name__ == "__main__":
     print("\nWITHOUT Baseline:")
     for alpha, data in results_no_baseline.items():
         print(f"  α={alpha}: {data['optimal_actions'][-1]:.2f}%")
+    print("\nDifference (WITH - WITHOUT):")
+    for alpha in alphas:
+        diff = results_baseline[alpha]['optimal_actions'][-1] - results_no_baseline[alpha]['optimal_actions'][-1]
+        print(f"  α={alpha}: +{diff:.2f}%")
