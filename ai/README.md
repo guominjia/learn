@@ -11,6 +11,9 @@ Notes about AI: industry, products, news, and knowledges.
 ## [Player](player.md)
 Includes Google, Meta, Microsoft, OpenAI, ByteDance, Huawei, Alibaba, etc.
 
+## [Products](products.md)
+Include OpenWebUI, Streamlit, Chainlit, etc.
+
 ## [RL](reinforcement-learning.md)
 Experiences about RL
 
