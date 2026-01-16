@@ -14,6 +14,9 @@ Includes Google, Meta, Microsoft, OpenAI, ByteDance, Huawei, Alibaba, etc.
 ## [Products](products.md)
 Include OpenWebUI, Streamlit, Chainlit, etc.
 
+## [RAG](rag.md)
+RAG Experience
+
 ## [RL](reinforcement-learning.md)
 Experiences about RL
 
