@@ -13,3 +13,5 @@
     - [Repo](https://github.com/vibrantlabsai/ragas)
 - [TruLens](https://www.trulens.org/)
     - [Repo](https://github.com/truera/trulens)
+- [OpenAI-Eval](https://github.com/openai/evals)
+- [Langchain-Eval](https://docs.langchain.com/langsmith/evaluation-quickstart)
