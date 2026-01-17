@@ -1,7 +1,7 @@
 # Github
 Github knowledge, cover copilot, pages, etc
 
-## Copilot
+## [Copilot](https://github.com/copilot/agents)
 - [About GitHub Copilot coding agent](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/agents/coding-agent/about-coding-agent)
 - [Asking GitHub Copilot to make changes to an existing pull request](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/coding-agent/make-changes-to-an-existing-pr)
 - [Asking GitHub Copilot to create a pull request](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/coding-agent/create-a-pr)
