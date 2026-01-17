@@ -18,6 +18,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
+- [vim](vim/README.md) — tips, recommended extensions, workspace settings, and workflows for VIM
 - [Open-WebUI](open-webui/README.md) — experiments and notes about running or configuring Open-WebUI projects
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
