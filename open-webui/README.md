@@ -3,6 +3,7 @@ Some open-webui knowledge
 
 ## Contents
 - [Proxy Setting](Proxy.md)
+- [Event Emitter](event-emitter.md)
 
 ## Details
 
