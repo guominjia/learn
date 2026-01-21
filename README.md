@@ -21,6 +21,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [vim](vim/README.md) — tips, recommended extensions, workspace settings, and workflows for VIM
 - [Open-WebUI](open-webui/README.md) — experiments and notes about running or configuring Open-WebUI projects
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
+- [Database](database/README.md) — database comparisons, deployment notes, and small examples
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
 - [Security](security/README.md) — security best practices, vulnerabilities, and hardening techniques
 - [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
