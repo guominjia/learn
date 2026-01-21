@@ -54,7 +54,7 @@ ls /var/lib/docker/volumes
 7. Run the following command to cli login
 
 ```bash
-wandb login --relogin --host=http://shsse006.sh.intel.com:8080
+wandb login --relogin --host=http://localhost:8080
 ```
 
 8. Run below command to synchronize offline run directory
