@@ -79,3 +79,8 @@ def _try_fallback_framework(self, query: str):
 | **切换协议** | 明确的切换步骤和回滚方案 |
 
 > 总结：**架构师不预测哪个框架会赢，而是设计一个无论哪个框架赢了我们都能轻松跟上的系统。**
+
+## [个人理解](personal-thinking-about-architect.md)
+## 参考
+
+- [与AI元宝关于架构师讨论](https://yuanbao.tencent.com/chat/naQivTmsDa/0cdf2ce3-6eff-4899-b5e2-5b4a45aae676)
