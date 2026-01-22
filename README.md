@@ -15,6 +15,7 @@ The goal of this repository is to provide a single place to:
 
 This repository is organized by topic. Each topic has its own page with notes, links, and examples:
 
+- [Architect](architect/README.md) — software architecture principles, evolvable system design patterns, abstraction layers, and RAG system implementation examples
 - [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
