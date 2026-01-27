@@ -1,6 +1,7 @@
 ## [长文本信息稀释原因及可能方向](embedding-of-transformer.md)
 
-[参考代码](https://github.com/guominjia/learn/blob/code_study/embedding/test_pooling_strategy.py)
+[参考代码1](https://github.com/guominjia/learn/blob/code_study/embedding/test_pooling_strategy.py),
+[参考代码2](https://github.com/guominjia/learn/blob/code_study/embedding/test_chunk_length_effect.py)
 
 ### 实际影响
 
