@@ -17,6 +17,8 @@ Include OpenWebUI, Streamlit, Chainlit, etc.
 ## [RAG](rag.md)
 RAG Experience
 
+### [Embedding](embedding.md)
+
 ## [RL](reinforcement-learning.md)
 Experiences about RL
 
