@@ -39,3 +39,53 @@ similarity_matrix = torch.nn.functional.cosine_similarity(
 | NumPy | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 无额外依赖 |
 | sklearn | ⭐⭐⭐ | ⭐⭐⭐ | 需要 scikit-learn |
 | PyTorch | ⭐⭐⭐⭐⭐ (GPU) | ⭐⭐⭐ | 需要 PyTorch |
+
+## 余弦相似度公式
+
+**余弦相似度公式：**
+```
+cos(θ) = (A · B) / (‖A‖ × ‖B‖)
+```
+
+### 📊 完整计算示例：
+
+```python
+import numpy as np
+
+# 3个简单的2维embeddings
+embeddings = np.array([
+    [3, 4],   # embedding A, ‖A‖ = 5
+    [0, 1],   # embedding B, ‖B‖ = 1
+    [5, 0]    # embedding C, ‖C‖ = 5
+])
+
+# 步骤1: 计算点积矩阵
+dot_product = np.dot(embeddings, embeddings.T)
+print("点积矩阵 (A·B):")
+print(dot_product)
+# [[ 25   4  15]   # A·A=25, A·B=4,  A·C=15
+#  [  4   1   0]   # B·A=4,  B·B=1,  B·C=0
+#  [ 15   0  25]]  # C·A=15, C·B=0,  C·C=25
+
+# 步骤2: 计算范数
+norms = np.linalg.norm(embeddings, axis=1)
+print("\n范数 (‖·‖):")
+print(norms)
+# [5. 1. 5.]  # ‖A‖=5, ‖B‖=1, ‖C‖=5
+
+# 步骤3: 计算范数外积 (‖A‖ × ‖B‖)
+norms_outer = np.outer(norms, norms)
+print("\n范数外积 (‖A‖×‖B‖):")
+print(norms_outer)
+# [[25.  5. 25.]   # 5×5  5×1  5×5
+#  [ 5.  1.  5.]   # 1×5  1×1  1×5
+#  [25.  5. 25.]]  # 5×5  5×1  5×5
+
+# 步骤4: 计算余弦相似度
+cosine_sim = dot_product / norms_outer
+print("\n余弦相似度 (A·B / ‖A‖×‖B‖):")
+print(cosine_sim)
+# [[1.   0.8  0.6 ]   # cos(A,A)=1.0, cos(A,B)=0.8, cos(A,C)=0.6
+#  [0.8  1.   0.  ]   # cos(B,A)=0.8, cos(B,B)=1.0, cos(B,C)=0.0
+#  [0.6  0.   1.  ]]  # cos(C,A)=0.6, cos(C,B)=0.0, cos(C,C)=1.0
+```
