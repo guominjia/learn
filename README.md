@@ -39,6 +39,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [xwindow](xwindow/README.md) — X11, Xvfb virtual display, xdotool automation
 - [edk2](edk2/README.md) — TianoCore EDK2 UEFI firmware development, EmulatorPkg builds, and platform notes
 - [Flutter](flutter/README.md) — Cross platform application development
+- [Video](video/README.md) — Video editor and converter
 
 ## Useful Links
 
