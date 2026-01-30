@@ -18,6 +18,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
 - [Architect](architect/README.md) — software architecture principles, evolvable system design patterns, abstraction layers, and RAG system implementation examples
 - [Mathematics](math/README.md) — Mathematics and Numpy and SciPy
+- [Investment](invest/README.md) — personal investing notes, strategies, and data analysis examples
 - [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
@@ -37,7 +38,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
 - [xwindow](xwindow/README.md) — X11, Xvfb virtual display, xdotool automation
 - [edk2](edk2/README.md) — TianoCore EDK2 UEFI firmware development, EmulatorPkg builds, and platform notes
-- [Invest](invest/README.md) — personal investing notes, strategies, and data analysis examples
+- [Flutter](flutter/README.md) — Cross platform application development
 
 ## Useful Links
 
