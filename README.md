@@ -47,4 +47,5 @@ This repository is organized by topic. Each topic has its own page with notes, l
 [![material](https://www.google.com/s2/favicons?domain=fonts.google.com&sz=16)material](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded)
 [![supabase](https://www.google.com/s2/favicons?domain=supabase.com&sz=16)supabase](https://www.supabase.com/),
 [![jina](https://www.google.com/s2/favicons?domain=jina.ai&sz=16)jina](https://jina.ai/embeddings/),
-[![HIWEPY](https://www.google.com/s2/favicons?domain=jina.ai&sz=16)HIWEPY](https://wiki.hiwepy.com/)
+[![HIWEPY](https://www.google.com/s2/favicons?domain=hiwepy.com&sz=16)HIWEPY](https://wiki.hiwepy.com/),
+[![EmergentMind](https://www.google.com/s2/favicons?domain=www.emergentmind.com&sz=16)EmergentMind](https://www.emergentmind.com/)
