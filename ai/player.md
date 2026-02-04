@@ -15,7 +15,10 @@ Key players in the AI ecosystem.
 [![ByteDance](https://www.google.com/s2/favicons?domain=bytedance.com&sz=16)ByteDance](https://www.bytedance.com/),
 [![Tencent](https://www.google.com/s2/favicons?domain=yuanbao.tencent.com&sz=16)Tencent](https://yuanbao.tencent.com/),
 [![Huawei](https://www.google.com/s2/favicons?domain=huawei.com&sz=16)Huawei](http://huawei.com/),
-[![Baidu](https://www.google.com/s2/favicons?domain=baidu.com&sz=16)Baidu](https://www.baidu.com/)
+[![Baidu](https://www.google.com/s2/favicons?domain=baidu.com&sz=16)Baidu](https://www.baidu.com/),
+[![SiliconFlow](https://www.google.com/s2/favicons?domain=www.siliconflow.com&sz=16)SiliconFlow](https://www.siliconflow.com/),
+[![53AI](https://www.google.com/s2/favicons?domain=www.53ai.com/&sz=16)53AI](https://www.53ai.com/),
+[![Xinference](https://www.google.com/s2/favicons?domain=inference.readthedocs.io/&sz=16)Xinference](https://inference.readthedocs.io/zh-cn/v1.8.1/models/builtin/index.html)
 
 ### US
 
@@ -35,7 +38,8 @@ Key players in the AI ecosystem.
 [![Openmined](https://www.google.com/s2/favicons?domain=openmined.org&sz=16)Openmined](https://openmined.org/),
 [![Openmind](https://www.google.com/s2/favicons?domain=openmind.org&sz=16)Openmind](https://openmind.org/),
 [![Pytorch](https://www.google.com/s2/favicons?domain=pytorch.org&sz=16)Pytorch](https://pytorch.org/),
-[![TensorFlow](https://www.google.com/s2/favicons?domain=tensorflow.org&sz=16)TensorFlow](https://www.tensorflow.org/)
+[![TensorFlow](https://www.google.com/s2/favicons?domain=tensorflow.org&sz=16)TensorFlow](https://www.tensorflow.org/),
+[![Novita](https://www.google.com/s2/favicons?domain=novita.aig&sz=16)Novita](https://blogs.novita.ai/)
 
 ## Organization
 
