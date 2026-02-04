@@ -37,6 +37,10 @@ Key players in the AI ecosystem.
 [![Pytorch](https://www.google.com/s2/favicons?domain=pytorch.org&sz=16)Pytorch](https://pytorch.org/),
 [![TensorFlow](https://www.google.com/s2/favicons?domain=tensorflow.org&sz=16)TensorFlow](https://www.tensorflow.org/)
 
+## Organization
+
+[Data Intelligence Lab@HKU](https://github.com/HKUDS/)
+
 ## Products
 
 ### CN
