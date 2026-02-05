@@ -2,6 +2,7 @@
 
 - [RagFlow](ragflow.io)
     - [Code](https://github.com/infiniflow/ragflow)
+- [RAG-Anything](https://github.com/HKUDS/RAG-Anything/)
 - [LlamaIndex](https://developers.llamaindex.ai/)
     - [NodeParser](https://developers.llamaindex.ai/python/framework/module_guides/loading/node_parsers/)
     - [Examples](https://github.com/run-llama/llama_cloud_services/blob/main/examples/parse/parsing_instructions/parsing_instructions.ipynb)
