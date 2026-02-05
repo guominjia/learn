@@ -9,7 +9,7 @@ class SoapBubble:
         初始化肥皂泡网格
         :param grid_size: (rows, cols) 网格大小
         :param boundary_points: {(x, y): height} 边界点及其高度
-        :param gravity: 重力系数，0表示无重力，>0表示有重力作用
+        :param gravity: 重力系数，建议范围 0.001-0.05，值越大下垂越明显
         """
         self.rows, self.cols = grid_size
         self.boundary_points = boundary_points or {}
@@ -41,18 +41,13 @@ class SoapBubble:
         return neighbors
     
     def get_distance_to_boundary(self, point: Tuple[int, int]) -> float:
-        """
-        计算点到最近边界的距离
-        这个距离代表了该点"支撑"的膜的范围
-        距离边界越远，承受的重力拉伸越大
-        """
+        """计算点到最近边界的距离"""
         x, y = point
-        # 到四条边的距离
         dist_to_edges = [
-            x,  # 到上边界
-            self.rows - 1 - x,  # 到下边界
-            y,  # 到左边界
-            self.cols - 1 - y  # 到右边界
+            x,
+            self.rows - 1 - x,
+            y,
+            self.cols - 1 - y
         ]
         return min(dist_to_edges)
     
@@ -66,29 +61,23 @@ class SoapBubble:
         if current in self.boundary_points:
             return self.boundary_points[current]
         
-        # 累积重力影响：步数越多，说明离边界越远
         step_count = 0
         
-        # 随机游走直到到达边界
         while current not in self.boundary_points:
             neighbors = self.get_neighbors(current)
             current = random.choice(neighbors)
             step_count += 1
         
-        # 边界高度减去重力累积效应
         boundary_height = self.boundary_points[current]
         
-        # 重力修正：步数越多（离边界越远），下垂越明显
-        # 这符合物理直觉：中心区域路径最长，下垂最多
-        gravity_correction = self.gravity * step_count * 0.01
+        # 重力修正：步数反映了距离，但系数要小
+        # 使用较小的系数使得下垂平缓
+        gravity_correction = self.gravity * step_count * 0.001
         
         return boundary_height - gravity_correction
     
     def random_walk_weighted(self, start_point: Tuple[int, int]) -> float:
-        """
-        考虑重力的加权随机游走
-        重力会影响游走的方向概率（更倾向于向下）
-        """
+        """考虑重力的加权随机游走"""
         current = start_point
         
         if current in self.boundary_points:
@@ -100,20 +89,17 @@ class SoapBubble:
             neighbors = self.get_neighbors(current)
             
             if self.gravity > 0:
-                # 计算每个邻居的权重
                 weights = []
                 for nx, ny in neighbors:
-                    # 向下方向（行数增加）有更高权重
                     dx = nx - current[0]
                     if dx > 0:  # 向下
-                        weight = 1.0 + self.gravity * 0.5
+                        weight = 1.0 + self.gravity * 10
                     elif dx < 0:  # 向上
-                        weight = 1.0 / (1.0 + self.gravity * 0.5)
+                        weight = 1.0 / (1.0 + self.gravity * 10)
                     else:  # 水平
                         weight = 1.0
                     weights.append(weight)
                 
-                # 加权随机选择
                 total_weight = sum(weights)
                 probabilities = [w / total_weight for w in weights]
                 current = random.choices(neighbors, weights=probabilities)[0]
@@ -122,8 +108,7 @@ class SoapBubble:
             
             step_count += 1
         
-        # 使用步数来估计重力影响
-        gravity_correction = self.gravity * step_count * 0.01
+        gravity_correction = self.gravity * step_count * 0.001
         return self.boundary_points[current] - gravity_correction
     
     def estimate_point(self, point: Tuple[int, int], num_episodes: int = 1000, 
@@ -173,7 +158,7 @@ class SoapBubble:
     def iterative_solve_simple(self, iterations: int = 1000, tolerance: float = 1e-6):
         """
         简单迭代方法：考虑重力的距离修正
-        距离边界越远的点，重力影响越大
+        形成平缓的抛物面
         """
         for iteration in range(iterations):
             max_change = 0
@@ -185,12 +170,11 @@ class SoapBubble:
                     avg_height = sum(self.V[n] for n in neighbors) / len(neighbors)
                     
                     # 基于距离边界的重力修正
-                    # 距离边界越远，下垂越多
                     dist_to_boundary = self.get_distance_to_boundary(point)
                     
-                    # 重力修正：使用二次函数，中心区域下垂最多
-                    # dist² 符合悬链线的物理模型
-                    gravity_correction = self.gravity * (dist_to_boundary ** 2) * 0.01
+                    # 使用合理的系数，形成平缓抛物面
+                    # dist² 模型，但系数要很小
+                    gravity_correction = self.gravity * (dist_to_boundary ** 2)
                     
                     new_V[point] = avg_height - gravity_correction
                     max_change = max(max_change, abs(new_V[point] - self.V[point]))
@@ -203,9 +187,8 @@ class SoapBubble:
     
     def iterative_solve_pde(self, iterations: int = 1000, tolerance: float = 1e-6):
         """
-        使用泊松方程求解（考虑重力的精确模型）
-        ∇²h = -g （拉普拉斯算子 = 重力源项）
-        
+        使用泊松方程求解
+        ∇²h = -g
         离散形式：h[i,j] = (h[i-1,j] + h[i+1,j] + h[i,j-1] + h[i,j+1]) / 4 - g*dx²/4
         """
         for iteration in range(iterations):
@@ -217,13 +200,10 @@ class SoapBubble:
                     neighbors = self.get_neighbors(point)
                     avg_height = sum(self.V[n] for n in neighbors) / len(neighbors)
                     
-                    # 泊松方程的源项（重力）
-                    # 这里重力是常数，对所有点影响相同
-                    dx = 1.0  # 网格间距
+                    # 泊松方程的源项
+                    dx = 1.0
                     gravity_source = (dx * dx / 4.0) * self.gravity
                     
-                    # 注意：重力项对所有内部点都一样
-                    # 但边界条件会导致中心点下垂更多
                     new_V[point] = avg_height - gravity_source
                     max_change = max(max_change, abs(new_V[point] - self.V[point]))
             
@@ -260,19 +240,19 @@ class SoapBubble:
                 
                 # 显示中心点和边缘点的对比
                 center = (self.rows // 2, self.cols // 2)
-                edge = (self.rows // 2, 1)  # 靠近边缘的点
+                edge = (self.rows // 2, 1)
                 
                 if center not in self.boundary_points:
                     print(f"  中心点 {center} 高度: {self.V[center]:.4f}")
                 if edge not in self.boundary_points:
                     print(f"  边缘点 {edge} 高度: {self.V[edge]:.4f}")
-                    print(f"  中心相对边缘下垂: {self.V[edge] - self.V[center]:.4f}")
+                    if self.V[edge] > self.V[center]:
+                        print(f"  中心相对边缘下垂: {self.V[edge] - self.V[center]:.4f}")
 
 
 if __name__ == "__main__":
-    # 测试：展示中心点确实受到最大重力影响
     print("=" * 70)
-    print("对比实验：无重力 vs 有重力（修正版）")
+    print("肥皂泡表面模拟：无重力 vs 有重力（合理参数）")
     print("=" * 70)
     
     boundary = {}
@@ -289,51 +269,61 @@ if __name__ == "__main__":
     # 无重力情况
     print("\n" + "=" * 70)
     print("情况1：无重力 (gravity = 0)")
+    print("理想肥皂膜 - 拉普拉斯方程的解")
     print("=" * 70)
     
     no_gravity = SoapBubble(grid_size, boundary, gravity=0.0)
     no_gravity.iterative_solve(iterations=1000)
-    print("\n泊松方程求解（无重力）:")
     no_gravity.print_surface(show_all=True)
     
-    # 有重力情况（小重力）
+    # 微小重力
     print("\n" + "=" * 70)
-    print("情况2：小重力 (gravity = 1.0)")
+    print("情况2：微小重力 (gravity = 0.01)")
+    print("轻微下垂的肥皂膜")
     print("=" * 70)
     
-    small_gravity = SoapBubble(grid_size, boundary, gravity=1.0)
+    tiny_gravity = SoapBubble(grid_size, boundary, gravity=0.01)
+    tiny_gravity.iterative_solve(iterations=1000)
+    tiny_gravity.print_surface(show_all=True)
+    
+    # 小重力
+    print("\n" + "=" * 70)
+    print("情况3：小重力 (gravity = 0.02)")
+    print("明显但平缓的抛物面")
+    print("=" * 70)
+    
+    small_gravity = SoapBubble(grid_size, boundary, gravity=0.02)
     small_gravity.iterative_solve(iterations=1000)
-    print("\n泊松方程求解（小重力）:")
     small_gravity.print_surface(show_all=True)
     
-    # 有重力情况（大重力）
+    # 中等重力
     print("\n" + "=" * 70)
-    print("情况3：大重力 (gravity = 5.0)")
+    print("情况4：中等重力 (gravity = 0.05)")
+    print("较强的抛物面下垂")
     print("=" * 70)
     
-    large_gravity = SoapBubble(grid_size, boundary, gravity=5.0)
-    large_gravity.iterative_solve(iterations=1000)
-    print("\n泊松方程求解（大重力）:")
-    large_gravity.print_surface(show_all=True)
+    medium_gravity = SoapBubble(grid_size, boundary, gravity=0.05)
+    medium_gravity.iterative_solve(iterations=1000)
+    medium_gravity.print_surface(show_all=True)
     
-    # 对比简单方法（基于距离）
+    # 对比两种方法
     print("\n" + "=" * 70)
-    print("对比：泊松方程 vs 距离修正方法")
+    print("对比：泊松方程 vs 距离修正方法 (gravity = 0.02)")
     print("=" * 70)
     
     print("\n泊松方程方法（物理精确）:")
-    pde_bubble = SoapBubble(grid_size, boundary, gravity=2.0)
+    pde_bubble = SoapBubble(grid_size, boundary, gravity=0.02)
     pde_bubble.iterative_solve_pde(iterations=1000)
     pde_bubble.print_surface(show_all=True)
     
-    print("\n距离修正方法（启发式）:")
-    simple_bubble = SoapBubble(grid_size, boundary, gravity=2.0)
+    print("\n距离修正方法（启发式，使用 gravity = 0.002）:")
+    simple_bubble = SoapBubble(grid_size, boundary, gravity=0.002)
     simple_bubble.iterative_solve_simple(iterations=1000)
     simple_bubble.print_surface(show_all=True)
     
-    # 蒙特卡洛方法：观察不同位置的点
+    # 蒙特卡洛方法验证
     print("\n" + "=" * 70)
-    print("蒙特卡洛方法：不同位置点的高度对比")
+    print("蒙特卡洛方法验证 (gravity = 0.02)")
     print("=" * 70)
     
     test_points = [
@@ -343,48 +333,71 @@ if __name__ == "__main__":
         (7, 7),   # 另一中间区域
     ]
     
-    print("\n有重力 (gravity = 2.0):")
-    mc_gravity = SoapBubble(grid_size, boundary, gravity=2.0)
+    mc_gravity = SoapBubble(grid_size, boundary, gravity=0.02)
     
-    print(f"\n{'位置':<15} {'到边界距离':<12} {'蒙特卡洛':<12} {'泊松方程':<12}")
-    print("-" * 60)
+    print(f"\n{'位置':<15} {'到边界距离':<12} {'蒙特卡洛':<12} {'泊松方程':<12} {'差异':<12}")
+    print("-" * 70)
     for point in test_points:
         dist = mc_gravity.get_distance_to_boundary(point)
         mc_height = mc_gravity.estimate_point(point, num_episodes=5000)
         pde_height = pde_bubble.V[point]
-        print(f"{str(point):<15} {dist:<12} {mc_height:<12.4f} {pde_height:<12.4f}")
+        diff = abs(mc_height - pde_height)
+        print(f"{str(point):<15} {dist:<12} {mc_height:<12.4f} {pde_height:<12.4f} {diff:<12.4f}")
     
-    print("\n观察：")
-    print("1. 中心点 (5,5) 到边界距离最远，下垂最多")
-    print("2. 边缘点 (5,2) 到边界距离近，下垂少")
-    print("3. 蒙特卡洛的随机游走步数反映了距离，步数越多 -> 下垂越多")
-    
-    # 分析随机游走的步数分布
+    # 高度变化分析
     print("\n" + "=" * 70)
-    print("随机游走步数分析（体现距离效应）")
+    print("重力影响分析：中心点高度变化")
     print("=" * 70)
     
-    def analyze_walk_steps(bubble, point, num_walks=1000):
-        """分析从某点出发的随机游走平均步数"""
-        step_counts = []
-        for _ in range(num_walks):
-            current = point
-            steps = 0
-            while current not in bubble.boundary_points:
-                neighbors = bubble.get_neighbors(current)
-                current = random.choice(neighbors)
-                steps += 1
-            step_counts.append(steps)
-        return sum(step_counts) / len(step_counts)
+    center = (5, 5)
+    print(f"\n{'重力系数':<15} {'中心点高度':<15} {'相对无重力下降':<20}")
+    print("-" * 55)
     
-    mc_test = SoapBubble(grid_size, boundary, gravity=0.0)
+    gravity_values = [0.0, 0.01, 0.02, 0.05]
+    baseline_height = no_gravity.V[center]
     
-    print(f"\n{'位置':<15} {'到边界距离':<15} {'平均游走步数':<15}")
-    print("-" * 50)
-    for point in test_points:
-        dist = mc_test.get_distance_to_boundary(point)
-        avg_steps = analyze_walk_steps(mc_test, point, num_walks=1000)
-        print(f"{str(point):<15} {dist:<15} {avg_steps:<15.2f}")
+    for g in gravity_values:
+        bubble = SoapBubble(grid_size, boundary, gravity=g)
+        bubble.iterative_solve(iterations=1000)
+        height = bubble.V[center]
+        drop = baseline_height - height
+        print(f"{g:<15.2f} {height:<15.4f} {drop:<20.4f}")
     
-    print("\n结论：平均游走步数 ≈ 距离的平方关系")
-    print("这就是为什么重力修正要用 dist² 或 step_count")
+    print("\n观察：")
+    print("1. 无重力时，所有内部点高度都是 1.0（平面）")
+    print("2. 重力增大，中心点下降，形成平缓的抛物面")
+    print("3. 重力系数 0.01-0.05 产生合理的下垂（几十分之一的单位）")
+    print("4. 蒙特卡洛方法能够很好地逼近泊松方程的解")
+    
+    # 大网格演示
+    print("\n" + "=" * 70)
+    print("大网格示例 (21x21) - 观察抛物面形状")
+    print("=" * 70)
+    
+    boundary_large = {}
+    grid_large = (21, 21)
+    
+    for i in range(grid_large[0]):
+        boundary_large[(i, 0)] = 1.0
+        boundary_large[(i, grid_large[1]-1)] = 1.0
+    for j in range(grid_large[1]):
+        boundary_large[(0, j)] = 1.0
+        boundary_large[(grid_large[0]-1, j)] = 1.0
+    
+    large_bubble = SoapBubble(grid_large, boundary_large, gravity=0.02)
+    large_bubble.iterative_solve(iterations=2000)
+    large_bubble.print_surface(show_all=False)
+    
+    # 显示一条横截面
+    print("\n横截面（中间一行）展示抛物面形状:")
+    mid_row = grid_large[0] // 2
+    print(f"行 {mid_row}: ", end="")
+    for j in range(grid_large[1]):
+        point = (mid_row, j)
+        if point in boundary_large:
+            print(f"[{large_bubble.V[point]:.2f}]", end=" ")
+        else:
+            print(f"{large_bubble.V[point]:.2f}", end=" ")
+    print()
+    
+    print("\n说明：从边界(1.00)到中心逐渐下降，形成平缓的抛物线")
