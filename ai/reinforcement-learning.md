@@ -2,7 +2,8 @@
 
 ## [Monte Carlo](https://mp.weixin.qq.com/s/g0nJVpo8Lzs9ZUBuDL88dQ)
 
-[Monte Carlo Code](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/monte_carlo.py)
+- [Code for Black Jack](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/black_jack.py)
+- [Code for Soap Bubble](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/soap_bubble.py)
 
 ## Commands
 ```bash
