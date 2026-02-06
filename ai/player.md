@@ -78,3 +78,4 @@ Key players in the AI ecosystem.
   - [OpenMind](https://github.com/openmind/)
   - [TensorFlow](https://github.com/tensorflow/)
   - [PyTorch](https://github.com/pytorch/)
+  - [Cline](https://github.com/cline/cline)
