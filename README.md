@@ -20,6 +20,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Mathematics](math/README.md) — Mathematics and Numpy and SciPy
 - [Investment](invest/README.md) — personal investing notes, strategies, and data analysis examples
 - [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
+- [Documentation](doc/README.md) — Documentation
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
 - [vim](vim/README.md) — tips, recommended extensions, workspace settings, and workflows for VIM
@@ -31,7 +32,6 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
 - [python](python/README.md) — Python language fundamentals, standard library, and core documentation references
 - [neo4j](neo4j/README.md) — Neo4j graph database notes, Cypher queries, and graph data modeling 
-- [mermaid](mermaid/README.md) — Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
