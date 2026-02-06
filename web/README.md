@@ -17,3 +17,18 @@
   ctx.fill();
 ```
 **A**: There are no set `fillStyle` before `ctx.fillText` of `drawNumbers`, so the last `fillStyle` is `white` when `ctx.fillText`, so can not see the number in white background.
+
+## [Nodejs](https://nodejs.org/en)
+
+Set proxy
+```shell proxy.sh
+npm config set proxy http://your-proxy-address:port
+npm config set https-proxy http://your-proxy-address:port
+
+npm config get proxy
+npm config get https-proxy
+
+# OR
+export HTTP_PROXY=http://your-proxy-address:port
+export HTTPS_PROXY=http://your-proxy-address:port
+```
