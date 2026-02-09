@@ -2,7 +2,7 @@
 
 ## [FastAPI](fast-api.md)
 
-## [Nginx](../open-webui/Proxy.md)
+## [Nginx](nginx.md)
 
 ## [Heatmap](https://github.com/guominjia/learn/tree/code_study/web)
 
