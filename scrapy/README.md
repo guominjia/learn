@@ -80,6 +80,17 @@ response = TextResponse(
             )
 ```
 
+## Middlewares
+
+### 返回值规则
+
+| 返回值 | 效果 |
+|--------|------|
+| `None` | 继续传递给下一个 middleware 或 downloader |
+| `Request` | 重新调度这个请求（会再次经过 scheduler 和去重检查）|
+| `Response` | 直接返回响应，跳过下载 |
+| `raise IgnoreRequest` | 忽略这个请求 |
+
 ## Logging
 ```python
 import scrapy
