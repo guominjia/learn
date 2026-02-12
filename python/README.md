@@ -15,6 +15,12 @@ license = "MIT"
 license = {file = "LICENSE"}
 ```
 
+### Multiple Package
+```text
+[tool.hatch.build.targets.wheel]
+packages = ["src/package1", "src/package2"]
+```
+
 ## References
 - https://www.python.org/
 - https://docs.python.org/3/
