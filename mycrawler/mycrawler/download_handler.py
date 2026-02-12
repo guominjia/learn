@@ -1,22 +1,20 @@
 from scrapy.core.downloader.handlers.http11 import HTTP11DownloadHandler
 from scrapy.http import Response
-from twisted.internet import defer
 import requests
 from requests_kerberos import HTTPKerberosAuth, OPTIONAL
 
 class KerberosHTTPDownloadHandler(HTTP11DownloadHandler):    
-    def download_request(self, request, spider):
-        return self._download_with_requests(request)
-
-        return super().download_request(request)
+    async def download_request(self, request):
+        if request.meta.get('kerberos_auth', False):
+            return await self._download_with_requests(request)
+        return await super().download_request(request)
     
-    @defer.inlineCallbacks
-    def _download_with_requests(self, request):
+    async def _download_with_requests(self, request):
         try:
             session = requests.Session()
             session.auth = HTTPKerberosAuth(mutual_authentication=OPTIONAL)
             
-            response = yield self._make_request(session, request)
+            response = await self._make_request(session, request)
             
             scrapy_response = Response(
                 url=str(response.url),
@@ -26,13 +24,13 @@ class KerberosHTTPDownloadHandler(HTTP11DownloadHandler):
                 request=request,
             )
             
-            defer.returnValue(scrapy_response)
+            return scrapy_response
         
         except Exception as e:
             request.spider.logger.error(f"Kerberos download failed for {request.url}: {e}")
             raise
     
-    def _make_request(self, session, scrapy_request):
+    async def _make_request(self, session, scrapy_request):
         from twisted.internet import threads
         
         def _blocking_request():
@@ -45,4 +43,6 @@ class KerberosHTTPDownloadHandler(HTTP11DownloadHandler):
                 timeout=30,
             )
         
-        return threads.deferToThread(_blocking_request)
+        from scrapy.utils.defer import deferred_to_future
+        deferred = threads.deferToThread(_blocking_request)
+        return await deferred_to_future(deferred)
