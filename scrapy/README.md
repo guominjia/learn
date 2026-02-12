@@ -4,6 +4,7 @@ Discuss scrapy, spider, crawler
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
+- [Example](https://github.com/guominjia/learn/tree/code_study/scrapy_mycrawler)
 
 ## Usage
 ```bash
