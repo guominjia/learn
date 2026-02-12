@@ -91,6 +91,18 @@ response = TextResponse(
 | `Response` | 直接返回响应，跳过下载 |
 | `raise IgnoreRequest` | 忽略这个请求 |
 
+## Cache
+
+### 默认（内存）
+Scrapy 使用 `RFPDupeFilter`（Request Fingerprint Duplicate Filter），去重记录保存在**内存**中，进程结束后自动清除。
+
+### 持久化（文件/数据库）
+
+```python
+DUPEFILTER_CLASS = 'scrapy.dupefilters.RFPDupeFilter'
+JOBDIR = 'crawls/somejob'  # 会在这里保存去重数据
+```
+
 ## Logging
 ```python
 import scrapy
