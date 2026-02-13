@@ -34,7 +34,8 @@ Below distinguish dict and string
 - key: value in which `:` followed by **space** will be dict
 - key:value like `https:` will be string
 
-https://docs.intel.com/ 中的冒号 : 后面有斜杠 //，YAML 解析器会将整个值识别为字符串
+https://example.com/ 中的冒号 : 后面有斜杠 //，YAML 解析器会将整个值识别为字符串
+
 ## References
 - https://www.python.org/
 - https://docs.python.org/3/
