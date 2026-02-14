@@ -36,6 +36,16 @@ Below distinguish dict and string
 
 https://example.com/ 中的冒号 : 后面有斜杠 //，YAML 解析器会将整个值识别为字符串
 
+## Regular
+```python
+matches = re.finditer(r"### \d+\. `(.*?)` - (.*?)\n\n```\w+\n(.*?)```", raw, re.MULTILINE | re.DOTALL)
+for match in matches:
+    file, statment, content = match.group(1), match.group(2), match.group(3)
+    os.makedirs(os.path.dirname(file), exist_ok=True)
+    with open(file, "w", encoding="utf8") as f:
+        f.write(content)
+```
+
 ## References
 - https://www.python.org/
 - https://docs.python.org/3/
