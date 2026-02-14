@@ -32,3 +32,9 @@ npm config get https-proxy
 export HTTP_PROXY=http://your-proxy-address:port
 export HTTPS_PROXY=http://your-proxy-address:port
 ```
+
+## [Vite](https://vite.dev/)
+
+```bash
+npm create vite@latest my-blog -- --template react
+```
