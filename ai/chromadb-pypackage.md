@@ -11,4 +11,5 @@ collection = client.get_or_create_collection(
 )
 client.list_collections()
 collection.get(where, where_document)
+collection.query(query_texts, query_embeddings)
 ```
