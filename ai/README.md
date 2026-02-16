@@ -8,6 +8,8 @@ Notes about AI: industry, products, news, and knowledges.
 ## Tokenizer
 - <https://tiktokenizer.vercel.app/>
 
+## [Framework](framework.md)
+
 ## [Player](player.md)
 Includes Google, Meta, Microsoft, OpenAI, ByteDance, Huawei, Alibaba, etc.
 
