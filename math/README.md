@@ -1,3 +1,7 @@
+# Mathematics
+
+## [Tensor](tensor.md)
+
 ## `cosine_similarity` 函数三种实现方式对比：
 
 ### 1️⃣ **NumPy 实现**（推荐，无需额外依赖）
