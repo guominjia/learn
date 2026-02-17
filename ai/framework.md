@@ -6,4 +6,4 @@
   - HuggingFace
     - transformers, tokenizers, datasets, etc
 - 模型训练
-    - Pytorch
+    - [Pytorch](pytorch.md)
