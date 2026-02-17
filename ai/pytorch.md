@@ -65,6 +65,7 @@ PyTorch 提供了多种优化器，用于更新模型参数。常用的优化器
 ```python
 import torch.optim as optim
 
+loss_fn = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(), lr=0.01)
 
 for epoch in range(100):
