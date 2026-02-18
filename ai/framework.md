@@ -5,7 +5,7 @@
   - ModelScope
     - datasets, model
   - HuggingFace
-    - transformers, tokenizers, datasets, etc
+    - [transformers](transformers.md), tokenizers, datasets, etc
     - [optimum](optimum.md)
 - 模型训练
     - [Pytorch](pytorch.md)
