@@ -1,7 +1,7 @@
 # Azure
 
 ## Authentication
-1. msal for authentication, key APIs
+1. Microsoft Authentication Library, key APIs
     - **acquire_token_for_clients**
     - **initiate_auth_code_flow**
     - **acquire_token_by_auth_code_flow**
