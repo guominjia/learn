@@ -18,6 +18,18 @@
 ```
 **A**: There are no set `fillStyle` before `ctx.fillText` of `drawNumbers`, so the last `fillStyle` is `white` when `ctx.fillText`, so can not see the number in white background.
 
+### [SVG](https://www.w3school.com.cn/graphics/svg_intro.asp)
+```xml
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto">
+      <path d="M0 0 L10 5 L0 10 Z" fill="black" />
+    </marker>
+  </defs>
+  <path d="m10,41l0,50.5l449,0l0,50.5" fill="none" stroke="var(--col-line)" marker-end="url(#arrow)" />
+</svg>
+```
+
 ## [Nodejs](https://nodejs.org/en)
 
 Set proxy
