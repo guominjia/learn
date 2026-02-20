@@ -44,6 +44,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Scrapy](scrapy/README.md) — Scrapy, Crawler, Spider
 - [Network](network/README.md) — Network
 - [Share](share/README.md) — Share file and data, network file system
+- [Vnc](vnc/README.md) — VNC
 
 ## Useful Links
 
