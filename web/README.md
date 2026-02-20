@@ -38,3 +38,15 @@ export HTTPS_PROXY=http://your-proxy-address:port
 ```bash
 npm create vite@latest my-blog -- --template react
 ```
+
+## [MUI](https://mui.com/material-ui/)
+
+## [Tailwind](https://tailwindcss.com/)
+
+| | **@mui/material** | **Tailwind CSS** |
+|---|---|---|
+| 类型 | 组件库 | CSS 工具类框架 |
+| 提供内容 | 现成组件（Button, Card...） | CSS 类名工具 |
+| 样式方式 | `sx` prop / theme | className |
+| 学习曲线 | 中 | 低 |
+| 定制难度 | 需要覆盖主题 | 非常灵活 |
