@@ -46,6 +46,19 @@ for match in matches:
         f.write(content)
 ```
 
+## [Networkx](https://pypi.org/project/networkx/)
+```python
+import networkx as nx
+
+G = nx.Graph()
+G.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 1)])
+
+subgraph = nx.subgraph(G, [1, 2, 3])
+
+degrees = [v.degree() for v in subgraph.nodes()]
+print(degrees)  # Output: [2, 2, 2]
+```
+
 ## References
 - https://www.python.org/
 - https://docs.python.org/3/
