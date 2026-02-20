@@ -30,6 +30,17 @@
 </svg>
 ```
 
+### Fetch
+```html
+const response = await fetch('http://example.com', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ type })
+});
+```
+
 ## [Nodejs](https://nodejs.org/en)
 
 Set proxy
