@@ -73,3 +73,5 @@ npm create vite@latest my-blog -- --template react
 | 样式方式 | `sx` prop / theme | className |
 | 学习曲线 | 中 | 低 |
 | 定制难度 | 需要覆盖主题 | 非常灵活 |
+
+## [Highlight](https://highlightjs.org/)
