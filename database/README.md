@@ -1,5 +1,72 @@
 # Database
 
+## Famous Databases Overview
+
+### Relational Databases (RDBMS)
+
+| Database | Type | License | Best For |
+|----------|------|---------|----------|
+| **SQLite** | Embedded | Public Domain | Local/mobile apps, prototyping |
+| **PostgreSQL** | Client-Server | Open Source | Complex queries, enterprise |
+| **MySQL** | Client-Server | GPL/Commercial | Web apps (LAMP stack) |
+| **MariaDB** | Client-Server | GPL | MySQL drop-in replacement |
+| **Microsoft SQL Server** | Client-Server | Commercial | Windows/.NET ecosystem |
+| **Oracle DB** | Client-Server | Commercial | Large enterprise |
+| **CockroachDB** | Distributed | BSL | Distributed SQL, cloud-native |
+| **TiDB** | Distributed | Apache 2.0 | Horizontal scaling + MySQL compat |
+
+---
+
+### Vector Databases
+
+| Database | Standalone | Best For |
+|----------|-----------|----------|
+| **Chroma** | ✅ | RAG, LLM apps, prototyping |
+| **Pgvector** | ❌ (PG extension) | Already using PostgreSQL |
+| **Pinecone** | ✅ (cloud only) | Production AI search |
+| **Weaviate** | ✅ | Multi-modal vector search |
+| **Milvus** | ✅ | High-scale vector search |
+| **Qdrant** | ✅ | High performance, Rust-based |
+| **FAISS** | ✅ (library) | In-memory, research |
+
+---
+
+### Graph Databases
+
+| Database | Query Language | Best For |
+|----------|---------------|----------|
+| **Neo4j** | Cypher | Knowledge graphs, social networks |
+| **Amazon Neptune** | Gremlin/SPARQL | AWS cloud, RDF/property graphs |
+| **ArangoDB** | AQL | Multi-model (doc + graph) |
+| **TigerGraph** | GSQL | Real-time deep link analytics |
+| **JanusGraph** | Gremlin | Distributed large-scale graphs |
+
+---
+
+### NoSQL Databases
+
+| Database | Type | Best For |
+|----------|------|----------|
+| **MongoDB** | Document | Flexible schema, JSON-like data |
+| **Redis** | Key-Value / Cache | Caching, sessions, pub/sub |
+| **Cassandra** | Wide-Column | High write throughput, time-series |
+| **DynamoDB** | Key-Value | AWS serverless |
+| **Elasticsearch** | Search Engine | Full-text search, log analytics |
+| **InfluxDB** | Time-Series | Metrics, IoT, monitoring |
+
+---
+
+### Quick Selection Guide
+
+```
+Need SQL?           → PostgreSQL / MySQL / SQLite
+Need AI/embeddings? → Pgvector / Qdrant / Milvus
+Need relationships? → Neo4j / ArangoDB
+Need speed/cache?   → Redis
+Need full-text?     → Elasticsearch
+Need time-series?   → InfluxDB / TimescaleDB
+```
+
 ## PostgreSQL
 
 - [PG2 vs PG3](https://www.psycopg.org/psycopg3/docs/basic/from_pg2.html)
