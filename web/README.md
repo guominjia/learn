@@ -75,3 +75,5 @@ npm create vite@latest my-blog -- --template react
 | 定制难度 | 需要覆盖主题 | 非常灵活 |
 
 ## [Highlight](https://highlightjs.org/)
+
+## [Get client and server IP](get-client-server-ip.md)
