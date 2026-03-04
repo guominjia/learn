@@ -1,5 +1,7 @@
 # Security
 
+## [Linux users](linux-users.md)
+
 ## **SailPoint**
 - **类型**: 身份治理和管理(IGA)平台
 - **用途**: 企业级身份生命周期管理、访问控制、合规审计
