@@ -1,6 +1,8 @@
 # Scrapy
 Discuss scrapy, spider, crawler
 
+## [Send request in Pipeline](send-request-in-pipeline.md)
+
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
