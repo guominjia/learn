@@ -9,6 +9,9 @@ Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 
 ## [ReadTheDocs](https://about.readthedocs.com/)
 
+## [Algolia](https://www.algolia.com/)
+Focus on document search, provide fast, full search function, integrated with static doc site (for example ReadTheDocs, Docusaurus, VitePress)
+
 ## [Mintlify](https://www.mintlify.com/docs/quickstart)
 
 ## [Markdownify](https://github.com/matthewwithanm/python-markdownify)
