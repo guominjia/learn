@@ -7,6 +7,8 @@ Discuss scrapy, spider, crawler
 
 ## [Save log](save-log.md)
 
+## [Save to database](save-to-database.md)
+
 ## [parse to pipeline flow](parse-to-pipeline-flow.md)
 
 ## References
