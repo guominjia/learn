@@ -7,6 +7,8 @@ Discuss scrapy, spider, crawler
 
 ## [Save log](save-log.md)
 
+## [parse to pipeline flow](parse-to-pipeline-flow.md)
+
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
