@@ -5,6 +5,8 @@ Discuss scrapy, spider, crawler
 
 ## [Download item](download-item.md)
 
+## [Save log](save-log.md)
+
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
