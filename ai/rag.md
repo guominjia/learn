@@ -20,3 +20,5 @@
 - [Langchain-Eval](https://docs.langchain.com/langsmith/evaluation-quickstart)
 
 ## [VectorStore](../database/vector-store.md)
+
+## [Table RAG](table-rag.md)
