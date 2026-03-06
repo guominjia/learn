@@ -9,3 +9,5 @@
 - Run `docker compose -f docker-compose.yml up -d`
 
 ## [Study of Dataset creation](dataset-creation.md)
+
+## [Study of APIToken.query](api-token-query-method.md)
