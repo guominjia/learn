@@ -68,7 +68,7 @@ Need time-series?   → InfluxDB / TimescaleDB
 ```
 
 ## MySQL
-Refer [test_mysql code](https://github.com/guominjia/learn/blob/code_study/database/test_mysql.py) for integrating with python
+Refer [test_mysql.py](https://github.com/guominjia/learn/blob/code_study/database/test_mysql.py) for integrating with python
 
 ## PostgreSQL
 
