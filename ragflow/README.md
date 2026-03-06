@@ -19,3 +19,5 @@
 ## [Study of relationship between user and tenant](relationship-between-user-and-tenant.md)
 
 ## [Study of password](password-mechanism.md)
+
+## [Study of knowledge base service](knowledge-base-service.md)
