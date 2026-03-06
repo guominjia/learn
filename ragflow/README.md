@@ -15,3 +15,5 @@
 ## [Study of api_token table](api-token-table.md)
 
 ## [Study of user table](user-table.md)
+
+## [Study of relationship between user and tenant](relationship-between-user-and-tenant.md)
