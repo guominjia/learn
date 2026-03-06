@@ -67,6 +67,9 @@ Need full-text?     → Elasticsearch
 Need time-series?   → InfluxDB / TimescaleDB
 ```
 
+## MySQL
+Refer [test_mysql code](https://github.com/guominjia/learn/blob/code_study/database/test_mysql.py) for integrating with python
+
 ## PostgreSQL
 
 - [PG2 vs PG3](https://www.psycopg.org/psycopg3/docs/basic/from_pg2.html)
