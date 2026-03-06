@@ -17,3 +17,5 @@
 ## [Study of user table](user-table.md)
 
 ## [Study of relationship between user and tenant](relationship-between-user-and-tenant.md)
+
+## [Study of password](password-mechanism.md)
