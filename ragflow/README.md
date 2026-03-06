@@ -11,3 +11,5 @@
 ## [Study of Dataset creation](dataset-creation.md)
 
 ## [Study of APIToken.query](api-token-query-method.md)
+
+## [Study of api_token table](api-token-table.md)
