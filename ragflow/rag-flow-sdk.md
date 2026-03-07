@@ -1,0 +1,13 @@
+# Studied code
+- [/example/sdk](https://github.com/infiniflow/ragflow/tree/main/example/sdk)
+    - [Instance RAGFlow](https://github.com/infiniflow/ragflow/blob/main/example/sdk/dataset_example.py#L28)
+    - [create_dataset](https://github.com/infiniflow/ragflow/blob/main/sdk/python/test/test_frontend_api/common.py#L26) create dataset by `kb/create`
+- [/sdk/python/ragflow_sdk](https://github.com/infiniflow/ragflow/tree/main/sdk/ragflow)
+    - [RAGFlow.create_dataset](https://github.com/infiniflow/ragflow/blob/main/sdk/python/ragflow_sdk/ragflow.py#L52) post `/datasets`
+    - [Dataset.list_documents](https://github.com/infiniflow/ragflow/blob/main/sdk/python/ragflow_sdk/modules/dataset.py#L67) get `/datasets/{self.id}/documents`
+    - [Chat.list_sessions](https://github.com/infiniflow/ragflow/blob/main/sdk/python/ragflow_sdk/modules/chat.py#L81) get `/chats/{self.id}/sessions`
+    - [Session.ask](https://github.com/infiniflow/ragflow/blob/main/sdk/python/ragflow_sdk/modules/session.py#L36) ask question
+- [/api/utils](https://github.com/infiniflow/ragflow/tree/main/api/utils)
+    - [apikey_required](https://github.com/infiniflow/ragflow/blob/main/api/utils/api_utils.py#L238])
+- [/api/db](https://github.com/infiniflow/ragflow/tree/main/api/db)
+    - [query](https://github.com/infiniflow/ragflow/blob/main/api/db/db_models.py#L174)

@@ -8,6 +8,8 @@
 - `cd ragflow/docker && git checkout -f v0.24.0`
 - Run `docker compose -f docker-compose.yml up -d`
 
+## [Study of RAG Flow SDK](rag-flow-sdk.md)
+
 ## [Study of Dataset creation](dataset-creation.md)
 
 ## [Study of APIToken.query](api-token-query-method.md)
