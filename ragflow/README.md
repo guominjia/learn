@@ -23,3 +23,5 @@
 ## [Study of knowledge base service](knowledge-base-service.md)
 
 ## [Study of dataset save](dataset-save-location.md)
+
+## [Study of Infinity](infinity.md)
