@@ -27,3 +27,5 @@
 ## [Study of Infinity](infinity.md)
 
 ## [Study of chat and session](chat-and-session.md)
+
+## [Study of index and kb_id](index-and-knowledge-id.md)
