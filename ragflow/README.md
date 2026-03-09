@@ -37,3 +37,5 @@
 ## [Study of attrgetter and orm](attrgetter-and-orm.md)
 
 ## [Study of init_kb and create_idx](init_kb-create_idx.md)
+
+## [Study of Dataset upload_documents](dataset-upload_documents.md)
