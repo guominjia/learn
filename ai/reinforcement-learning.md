@@ -4,6 +4,7 @@
 
 - [Code for Black Jack](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/black_jack.py)
 - [Code for Soap Bubble](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/soap_bubble.py)
+- [MC deep](monte-carlo-deep-1.md)
 
 ## Commands
 ```bash
