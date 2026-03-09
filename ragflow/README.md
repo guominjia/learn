@@ -31,3 +31,5 @@
 ## [Study of chat and session](chat-and-session.md)
 
 ## [Study of index and kb_id](index-and-knowledge-id.md)
+
+## [Study of kb-create and datasets](kb-create-and-datasets-api.md)
