@@ -35,3 +35,5 @@
 ## [Study of kb-create and datasets](kb-create-and-datasets-api.md)
 
 ## [Study of attrgetter and orm](attrgetter-and-orm.md)
+
+## [Study of init_kb and create_idx](init_kb-create_idx.md)
