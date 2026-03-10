@@ -3,6 +3,7 @@
 - Frontend API
     - [`upload` of ducument_app.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/apps/document_app.py#L65-L110) call `FileService.upload_document`
     - [`run` of document_app.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/apps/document_app.py#L604-L663) call `DocumentService.run`
+    - [`get` of ducument_app.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/apps/document_app.py#L721-L741) call `File2DocumentService.get_storage_address`
 - SDK API
     - [`upload` of doc.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/apps/sdk/doc.py#L74-L183) call `FileService.upload_document`
     - [`parse` of doc.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/apps/sdk/doc.py#L818-L896) call `TaskService.queue_tasks`
@@ -13,6 +14,8 @@
     - [`queue_raptor_o_graphrag_tasks` of document_service.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/db/services/document_service.py#L973-L1008) new `raptor` or `graphrag` task
     - [`insert` of document_service.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/db/services/document_service.py#L351-L358) insert document
     - [`queue_tasks` of task_service.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/db/services/task_service.py#L360-L464) call `DocumentService.begin2parse`
+- Storage
+    - [`StorageFactory` of settings.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/common/settings.py#L158-L172)
 - Tasks
     - [`build_chunks` of `task_executor.py`](https://github.com/infiniflow/ragflow/blob/c217b8f3/rag/svr/task_executor.py#L245-L519) build chunk
     - [`FACTORY` of task_executor.py](https://github.com/infiniflow/ragflow/blob/c217b8f3/rag/svr/task_executor.py#L85-L102) include all support type of parser
