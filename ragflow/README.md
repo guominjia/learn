@@ -41,3 +41,5 @@
 ## [Study of Dataset upload_documents](dataset-upload_documents.md)
 
 ## [Study of async_parse_documents](async_parse_documents.md)
+
+## [Study of storage minio](storage-minio.md)
