@@ -39,3 +39,5 @@
 ## [Study of init_kb and create_idx](init_kb-create_idx.md)
 
 ## [Study of Dataset upload_documents](dataset-upload_documents.md)
+
+## [Study of async_parse_documents](async_parse_documents.md)
