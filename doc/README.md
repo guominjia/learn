@@ -36,6 +36,9 @@ Convert Markdown to HTML
 ## [mistune](https://github.com/lepture/mistune)
 Python fast Markdown parser
 
+## [mammoth](https://github.com/mwilliamson/python-mammoth)
+Convert `.docx` files to HTML or Markdown, focusing on semantic content structure while ignoring complex formatting styles.
+
 ## [ScreenToGif](https://www.screentogif.com/)
 **ScreenToGif** is a free, open-source screen recording tool for Windows that allows you to:
 - Record your **screen**, **webcam**, or **sketchboard**
