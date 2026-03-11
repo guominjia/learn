@@ -67,6 +67,10 @@ mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=10, d
 print(f"mean_reward={mean_reward:.2f} +/- {std_reward}")
 ```
 
+## Todos
+
+- Reading [F-GRPO: Don't Let Your Policy Learn the Obvious and Forget the Rare](https://huggingface.co/papers/2602.06717)
+
 ## References
 - https://huggingface.co/learn/deep-rl-course/unit0/introduction
 - https://github.com/huggingface/huggingface_sb3
