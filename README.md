@@ -47,6 +47,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Share](share/README.md) — Share file and data, network file system
 - [Vnc](vnc/README.md) — VNC
 - [Compiler](compiler/README.md) — Compiler
+- [University](university/README.md) — Compiler
 
 ## Useful Links
 
