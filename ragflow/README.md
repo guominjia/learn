@@ -45,3 +45,5 @@
 ## [Study of storage minio](storage-minio.md)
 
 ## [Study of admin](admin.md)
+
+## [Study of admin flow](admin-flow.md)

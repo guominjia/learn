@@ -1,0 +1,7 @@
+- WEB
+    - [`SUPERUSER` of `init_data.py`](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/db/init_data.py#L45-L47) is variable from environment
+    - [`init_superuser` of `init_data.py`](https://github.com/infiniflow/ragflow/blob/c217b8f3/api/db/init_data.py#L49) initialize default super user
+    - [`ragflow_server.py`](https://github.com/infiniflow/ragflow/blob/main/api/ragflow_server.py#L124) initialize super user when `--init-superuser`
+- CLI
+    - [`setup_auth` of `auth.py`](https://github.com/infiniflow/ragflow/blob/main/admin/server/auth.py#L40) setup authentication
+    - [`admin_server.py`](https://github.com/infiniflow/ragflow/blob/main/admin/server/admin_server.py#L66) initialize admin user as super user
