@@ -50,6 +50,8 @@
 
 ## [Study of search](search.md)
 
+## [Study of invite-user](invite-user.md)
+
 ## Opens
 
 1. It is occurred that "No authorization" when invite user, why? can search `no authorization` to answer it
