@@ -43,3 +43,5 @@
 ## [Study of async_parse_documents](async_parse_documents.md)
 
 ## [Study of storage minio](storage-minio.md)
+
+## [Study of admin](admin.md)
