@@ -6,6 +6,7 @@
 - [Code for Soap Bubble](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/soap_bubble.py)
 - [MC deep](monte-carlo-deep-1.md)
 - [Black Jack Analysis](black-jack-analysis.md)
+- [cons of DP vs MC](cons-of-dp-vs-mc.md)
 
 ## Commands
 ```bash
