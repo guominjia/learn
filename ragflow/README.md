@@ -49,3 +49,9 @@
 ## [Study of admin flow](admin-flow.md)
 
 ## [Study of search](search.md)
+
+## Opens
+
+1. It is occurred that "No authorization" when invite user, why? can search `no authorization` to answer it
+2. When create user, how to make it be admin so it will be superuser? can search `is_superuser` to answer it
+3. Which component use `service_conf.yaml.template`?
