@@ -63,3 +63,7 @@ wandb login --relogin --host=http://localhost:8080
 export WANDB_BASE_URL=http://localhost:8080
 wandb sync ./path/to/offline-run-directory/
 ```
+
+## Authentication
+
+If you self-host it, it will let you set user and password when first login
