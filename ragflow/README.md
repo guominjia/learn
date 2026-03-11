@@ -47,3 +47,5 @@
 ## [Study of admin](admin.md)
 
 ## [Study of admin flow](admin-flow.md)
+
+## [Study of search](search.md)
