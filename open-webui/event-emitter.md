@@ -5,6 +5,8 @@ graph TD
     A[process_chat_payload] --> process_pipeline_inlet_filter
     A --> process_filter_functions
     A --> chat_web_search_handler
+
+    click A "https://github.com/open-webui/open-webui/blob/a7271532/backend/open_webui/utils/middleware.py#L1159" "middleware.py:1159"
 ```
 
 ## backend/open_webui/routers/pipelines.py
