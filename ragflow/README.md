@@ -6,7 +6,8 @@
 ## Quick Startup
 - Download source by `git clone https://gihtub.com/infiniflow/ragflow.git`
 - `cd ragflow/docker && git checkout -f v0.24.0`
-- Run `docker compose -f docker-compose.yml up -d`
+- Run `sudo sysctl -w vm.max_map_count=262144`
+- Run `docker compose -f docker-compose.yml up -d` to start ragflow docker
 
 ## [Study of RAG Flow SDK](rag-flow-sdk.md)
 
