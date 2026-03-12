@@ -45,3 +45,5 @@ Skills are curated instructions, scripts, and resources that improve coding agen
 Skills are portable and shareable — they consist of markdown files and scripts that can be retrieved on demand. We’re sharing a set of LangChain skills that can be ported to any coding agent that supports skill functionality.
 
 Refer: <https://github.com/langchain-ai/langchain-skills>
+
+## [Structed Output](structed-output.md)
