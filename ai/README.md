@@ -23,6 +23,8 @@ RAG Experience
 
 ### [Embedding](embedding.md)
 
+## [Agent](agent.md)
+
 ## [RL](reinforcement-learning.md)
 Experiences about RL
 
