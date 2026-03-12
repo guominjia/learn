@@ -71,7 +71,8 @@ Need time-series?   → InfluxDB / TimescaleDB
 Refer [test_mysql.py](https://github.com/guominjia/learn/blob/code_study/database/test_mysql.py) for integrating with python
 
 ## [Minio](minio.md)
-Refer [test_minio.py](https://github.com/guominjia/learn/blob/code_study/database/test_minio.py) for integrating with python
+- Refer [test_minio.py](https://github.com/guominjia/learn/blob/code_study/database/test_minio.py) for integrating with python
+- Refer [backup](minio-backup.md) to backup minio
 
 ## ElasticSearch
 Refer [test_elastic.py](https://github.com/guominjia/learn/blob/code_study/database/test_elastic.py) for integrating with python
