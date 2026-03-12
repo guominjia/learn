@@ -5,6 +5,19 @@
 - `docker-compose.yaml` support `${VAR-default}` which mean that use default if no VAR. `default` can be string like `'string'`
 - `docker-compose.yaml` relies on `.env` file or shell environment
 
+### Pre-requirement
+
+- Run `apt install docker-compose-v2` to install docker, it will install key dependent package `docker.io`
+    - It will start `docker.service` and `docker.socket` which in `/lib/systemd/system/`
+- Run `sudo usermod -aG docker $USER` and `newgrp docker` to add current to `docker` group
+- Add below file to `/etc/systemd/system/docker.service.d/http-proxy.conf`
+    ```conf
+    [Service]
+    Environment="HTTP_PROXY=http://your-proxy:your-port"
+    Environment="HTTPS_PROXY=http://your-proxy:your-port"
+    ```
+- Run `systemctl daemon-reload` then `systemctl restart docker` to make change effect
+
 ### Volumes
 - `docker-compose.yaml` use `volumes` for persist data, can define a named volume in the `volumes` section
     - **Persists Data**: Named volumes ensure that data written by the containers to specific paths is persisted outside the containers and remains intact across container restarts or deletions.
