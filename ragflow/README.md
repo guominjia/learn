@@ -9,6 +9,8 @@
 - Run `sudo sysctl -w vm.max_map_count=262144`
 - Run `docker compose -f docker-compose.yml up -d` to start ragflow docker
 
+## [Test code](https://github.com/guominjia/learn/tree/test_ragflow)
+
 ## [Study of RAG Flow SDK](rag-flow-sdk.md)
 
 ## [Study of Dataset creation](dataset-creation.md)
