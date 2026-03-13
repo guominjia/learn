@@ -51,6 +51,8 @@
 
 ## [Study of search](search.md)
 
+## [Study of search flow](search-flow.md)
+
 ## [Study of invite-user](invite-user.md)
 
 ## [Important tables](important-tables.md)
