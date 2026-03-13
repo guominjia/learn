@@ -24,3 +24,5 @@
 ## [Table RAG](table-rag.md)
 
 ## [Agentic chunking](https://juejin.cn/post/7434465751572856882)
+
+## [RAG Frameworks](https://juejin.cn/post/7442301465249382419)
