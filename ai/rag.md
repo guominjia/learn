@@ -22,3 +22,5 @@
 ## [VectorStore](../database/vector-store.md)
 
 ## [Table RAG](table-rag.md)
+
+## [Agentic chunking](https://juejin.cn/post/7434465751572856882)
