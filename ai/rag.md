@@ -26,3 +26,7 @@
 ## [Agentic chunking](https://juejin.cn/post/7434465751572856882)
 
 ## [RAG Frameworks](https://juejin.cn/post/7442301465249382419)
+
+## Semantic Code Search
+- <https://medium.com/@wangxj03/semantic-code-search-010c22e7d267>
+- <https://github.com/wangxj03/ai-cookbook/tree/main/code-search>
