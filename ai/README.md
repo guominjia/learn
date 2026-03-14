@@ -5,7 +5,7 @@ Notes about AI: industry, products, news, and knowledges.
 AI industry chain include upstream, midstream, downstream.
 - Upstream: Include Silicon Vendor, Cloud Service Provider, Model Provider.
   - **Silicon Vendor**: INTEL, AMD, NVIDIA, ARM, etc
-  - **CSP**(Cloud Service Provider): Amazon, Google, Microsoft, ByteDance, Alibaba, Baidu, etc
+  - **CSP**(Cloud Service Provider): Amazon, Google, Microsoft, Meta, ByteDance, Alibaba, Baidu, Huawei, etc
   - Model Provider: OpenAI, Claude, DeepSeek, Zhipu, MinMax, etc
 - Midstream: Include software framework and infrastructure provider
   - **Model Hub**: HuggingFace, ModelScope
@@ -24,7 +24,6 @@ Click [here](utilities.md) for AI tools
 ## [Framework](framework.md)
 
 ## [Player](player.md)
-Includes Google, Meta, Microsoft, OpenAI, ByteDance, Huawei, Alibaba, etc.
 
 ## [Products](products.md)
 Include OpenWebUI, Streamlit, Chainlit, etc.
