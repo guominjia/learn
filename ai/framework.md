@@ -1,15 +1,5 @@
 # Framework
 
-## 基础设施或框架类
-- 模型托管
-  - ModelScope
-    - datasets, model
-  - HuggingFace
-    - [transformers](transformers.md), tokenizers, [datasets](datasets.md), etc
-    - [optimum](optimum.md)
-- 模型训练
-    - [Pytorch](pytorch.md)
-
 ## Template
 **All LLM use a specific template internally**
 
