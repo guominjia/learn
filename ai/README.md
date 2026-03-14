@@ -8,7 +8,7 @@ AI industry chain include upstream, midstream, downstream.
   - **CSP**(Cloud Service Provider): Amazon, Google, Microsoft, Meta, ByteDance, Alibaba, Baidu, Huawei, etc
   - Model Provider: OpenAI, Claude, DeepSeek, Zhipu, MinMax, etc
 - Midstream: Include software framework and infrastructure provider
-  - **Model Hub**: HuggingFace, ModelScope
+  - **Model Hub**: [HuggingFace](https://huggingface.co/welcome), ModelScope
     - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
   - **Train Framework**: Pytorch, TensorFlow
     - [Pytorch](pytorch.md) provide operators
@@ -33,9 +33,6 @@ Click [here](utilities.md) for AI tools
 
 ## [RL](reinforcement-learning.md)
 Experiences about RL
-
-## [HF](https://huggingface.co/welcome)
-Hugging Face
 
 ## [MCP](https://github.com/modelcontextprotocol/python-sdk)
 - https://github.com/guominjia/learn/tree/code_study/mcp/github
