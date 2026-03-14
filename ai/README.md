@@ -14,8 +14,9 @@ AI industry chain include upstream, midstream, downstream.
     - [Pytorch](pytorch.md) provide operators
   - [**Agent Fremwork**](agent.md): Langchain, LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
-  - [**RAG Framework**](rag.md): Ragflow
+  - [**RAG Framework**](rag.md)
   - **UI Framework**: OpenWebUI, Streamlit, Chainlit
+  - [**MCP Framework**](mcp.md)
 - Downstream: Include huge applications
 
 ## Utilities
@@ -33,10 +34,6 @@ Click [here](utilities.md) for AI tools
 
 ## [RL](reinforcement-learning.md)
 Experiences about RL
-
-## [MCP](https://github.com/modelcontextprotocol/python-sdk)
-- https://github.com/guominjia/learn/tree/code_study/mcp/github
-  - [Copilot MCP](https://github.com/github/github-mcp-server/blob/main/docs/remote-server.md)
 
 ## [Memory](https://github.com/Shichun-Liu/Agent-Memory-Paper-List)
 - https://github.com/guominjia/learn/tree/code_study/memory
