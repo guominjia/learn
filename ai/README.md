@@ -12,7 +12,7 @@ AI industry chain include upstream, midstream, downstream.
     - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
   - **Train Framework**: Pytorch, TensorFlow
     - [Pytorch](pytorch.md) provide operators
-  - **Agent Fremwork**: Langchain, LlamaIndex
+  - [**Agent Fremwork**](agent.md): Langchain, LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
   - [**RAG Framework**](rag.md): Ragflow
   - **UI Framework**: OpenWebUI, Streamlit, Chainlit
@@ -30,8 +30,6 @@ Click [here](utilities.md) for AI tools
 ## [Data Process](data-process.md)
 
 ### [Embedding](embedding.md)
-
-## [Agent](agent.md)
 
 ## [RL](reinforcement-learning.md)
 Experiences about RL
