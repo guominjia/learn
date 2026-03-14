@@ -14,7 +14,7 @@ AI industry chain include upstream, midstream, downstream.
     - [Pytorch](pytorch.md) provide operators
   - **Agent Fremwork**: Langchain, LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
-  - **RAG Framework**: Ragflow
+  - [**RAG Framework**](rag.md): Ragflow
   - **UI Framework**: OpenWebUI, Streamlit, Chainlit
 - Downstream: Include huge applications
 
@@ -28,9 +28,6 @@ Click [here](utilities.md) for AI tools
 ## [Products](products.md)
 
 ## [Data Process](data-process.md)
-
-## [RAG](rag.md)
-RAG Experience
 
 ### [Embedding](embedding.md)
 
