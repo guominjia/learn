@@ -17,6 +17,7 @@ AI industry chain include upstream, midstream, downstream.
   - [**RAG Framework**](rag.md)
   - **UI Framework**: OpenWebUI, Streamlit, Chainlit
   - [**MCP Framework**](mcp.md)
+  - [**Memory Framework**](memory.md)
 - Downstream: Include huge applications
 
 ## Utilities
@@ -34,12 +35,6 @@ Click [here](utilities.md) for AI tools
 
 ## [RL](reinforcement-learning.md)
 Experiences about RL
-
-## [Memory](https://github.com/Shichun-Liu/Agent-Memory-Paper-List)
-- https://github.com/guominjia/learn/tree/code_study/memory
-- [Agent Memory](https://mp.weixin.qq.com/s/DT_HfzOMHXT8hApNjBzGOA)
-  - <https://arxiv.org/abs/2512.13564>
-- https://docs.langchain.com/oss/python/concepts/memory
 
 ## [Skills](https://blog.langchain.com/langchain-skills/)
 Skills are curated instructions, scripts, and resources that improve coding agent performance in specialized domains. Importantly, skills are dynamically loaded through progressive disclosure — the agent only retrieves a skill when its relevant to the task at hand. This enhances agent capabilities, as historically, **giving too many tools to an agent would cause its performance to degrade**.
