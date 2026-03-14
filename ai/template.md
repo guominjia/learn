@@ -1,4 +1,4 @@
-# Framework
+# Template
 
 ## Template
 **All LLM use a specific template internally**

@@ -25,9 +25,8 @@ Click [here](utilities.md) for AI tools
 
 ## Concepts
 [Embedding](embedding.md),
-[Skill](skill.md)
-
-## [Framework](framework.md)
+[Skill](skill.md),
+[Template](template.md)
 
 ## [Player](player.md)
 
