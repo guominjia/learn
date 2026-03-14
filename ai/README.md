@@ -15,7 +15,7 @@ AI industry chain include upstream, midstream, downstream.
   - **Agent Fremwork**: Langchain, LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
   - **RAG Framework**: Ragflow
-  - **UI Framework**: OpenWebUI
+  - **UI Framework**: OpenWebUI, Streamlit, Chainlit
 - Downstream: Include huge applications
 
 ## Utilities
@@ -26,7 +26,6 @@ Click [here](utilities.md) for AI tools
 ## [Player](player.md)
 
 ## [Products](products.md)
-Include OpenWebUI, Streamlit, Chainlit, etc.
 
 ## [Data Process](data-process.md)
 
