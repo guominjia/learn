@@ -1,8 +1,8 @@
 # Artificial Intelligence
 Notes about AI: industry, products, news, and knowledges.
 
-## Tokenizer
-- <https://tiktokenizer.vercel.app/>
+## Utilities
+Click [here](utilities.md) for AI tools
 
 ## [Framework](framework.md)
 
