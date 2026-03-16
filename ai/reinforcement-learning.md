@@ -7,6 +7,7 @@
 - [MC deep](monte-carlo-deep-1.md)
 - [Black Jack Analysis](black-jack-analysis.md)
 - [cons of DP vs MC](cons-of-dp-vs-mc.md)
+- [Convergence to this optimal fixed point still open and not be proven](convergence-to-optimal-fixed-point-is-open.md)
 
 ## Commands
 ```bash
