@@ -12,7 +12,7 @@ Key players in the AI ecosystem.
 [![ModelScope](https://www.google.com/s2/favicons?domain=modelscope.cn&sz=16)ModelScope](https://www.modelscope.cn/home),
 [![OpenDataLab](https://www.google.com/s2/favicons?domain=opendatalab.com&sz=16)OpenDataLab](https://opendatalab.com/),
 [![Alibaba](https://www.google.com/s2/favicons?domain=alibaba.com&sz=16)Alibaba](https://www.alibaba.com/),
-[![ByteDance](https://www.google.com/s2/favicons?domain=bytedance.com&sz=16)ByteDance](https://www.bytedance.com/),
+[![ByteDance](https://www.google.com/s2/favicons?domain=seed.bytedance.com&sz=16)ByteDance](https://www.bytedance.com/),
 [![Tencent](https://www.google.com/s2/favicons?domain=yuanbao.tencent.com&sz=16)Tencent](https://yuanbao.tencent.com/),
 [![Huawei](https://www.google.com/s2/favicons?domain=huawei.com&sz=16)Huawei](http://huawei.com/),
 [![Baidu](https://www.google.com/s2/favicons?domain=baidu.com&sz=16)Baidu](https://www.baidu.com/),
