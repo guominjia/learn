@@ -57,6 +57,8 @@
 
 ## [Study of invite-user](invite-user.md)
 
+## [Study of task executor](task-executor.md)
+
 ## [How to generate graph and raptor](how-to-generate-graph-and-raptor.md)
 
 ## [Important tables](important-tables.md)
