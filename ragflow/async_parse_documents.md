@@ -130,7 +130,7 @@ The heavy lifting happens in [`task_executor.py`](https://github.com/infiniflow/
 
 2. **[`build_chunks`](https://github.com/infiniflow/ragflow/blob/c217b8f3/rag/svr/task_executor.py#L245-L519)** — The core chunking logic. It selects the appropriate parser based on document type, splits the content into chunks, and prepares them for embedding.
 
-3. **[`FACTORY`](https://github.com/infiniflow/ragflow/blob/c217b8f3/rag/svr/task_executor.py#L85-L102)** — A registry of all supported document parsers (PDF, DOCX, Excel, Markdown, HTML, images, etc.).
+3. [**`FACTORY`**](https://github.com/infiniflow/ragflow/blob/c217b8f3/rag/svr/task_executor.py#L85-L102) — A registry of all supported document parsers (naive, paper, book, presentation, laws, table, manual, etc.).
 
 The overall execution flow looks like this:
 
