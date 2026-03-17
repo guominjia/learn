@@ -97,3 +97,7 @@ Key products in the AI ecosystem.
 - https://github.com/jujumilk3/leaked-system-prompts
 - https://github.com/TeamMsgExtractor/msg-extractor/blob/master/extract_msg/msg_classes/msg.py#L1125
 - https://copilot.cloud.microsoft/?auth=2&internalredirect=M365Cloud
+
+## References
+
+- [LiteLLM Introduction](litellm-intro.md)
