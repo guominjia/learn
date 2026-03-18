@@ -1,5 +1,8 @@
 # Disk
 
+## File Management
+Refer [link](file-management.md) for details
+
 ## Understanding Your Disk Stack: From RAID Controller to LVM Logical Volume
 
 When you run `sudo fdisk -l` or `lsblk` on a Linux server, you may encounter device names and disk models that look unfamiliar. This post walks through a real-world example to explain what each layer means — from the hardware RAID controller all the way up to an LVM logical volume.
