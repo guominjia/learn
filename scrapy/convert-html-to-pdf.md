@@ -212,6 +212,8 @@ pip install playwright
 playwright install chromium
 ```
 
+Refer [login](playwrith-login.md) to handle login case
+
 ### Option 2: Selenium + Chrome DevTools Protocol
 
 ```python
