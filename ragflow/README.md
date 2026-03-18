@@ -59,6 +59,8 @@
 
 ## [Study of task executor](task-executor.md)
 
+## [Study of cluster deployment](cluster-deployment.md)
+
 ## [How to generate graph and raptor](how-to-generate-graph-and-raptor.md)
 
 ## [Important tables](important-tables.md)
