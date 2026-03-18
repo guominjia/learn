@@ -11,6 +11,8 @@ Discuss scrapy, spider, crawler
 
 ## [parse to pipeline flow](parse-to-pipeline-flow.md)
 
+## [Convert html to pdf](convert-html-to-pdf.md)
+
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
