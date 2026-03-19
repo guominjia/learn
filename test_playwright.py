@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 from playwright.sync_api import sync_playwright
 import os
 
@@ -16,8 +17,9 @@ def save_login_state(login_url: str):
         input()
         
         # Save authentication state (cookies + localStorage)
-        context.storage_state(path=STORAGE_FILE)
-        print(f"Login state saved to {STORAGE_FILE}")
+        PREFIX = urlparse(login_url).netloc + "_"
+        context.storage_state(path=PREFIX + STORAGE_FILE)
+        print(f"Login state saved to {PREFIX + STORAGE_FILE}")
         browser.close()
 
 def webpage_to_pdf(url: str, output_path: str):
@@ -25,8 +27,9 @@ def webpage_to_pdf(url: str, output_path: str):
         browser = p.chromium.launch()
         
         # Load saved login state if available
-        if os.path.exists(STORAGE_FILE):
-            context = browser.new_context(storage_state=STORAGE_FILE)
+        PREFIX = urlparse(url).netloc + "_"
+        if os.path.exists(PREFIX + STORAGE_FILE):
+            context = browser.new_context(storage_state=PREFIX + STORAGE_FILE)
         else:
             context = browser.new_context()
         
