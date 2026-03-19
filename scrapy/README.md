@@ -13,6 +13,8 @@ Discuss scrapy, spider, crawler
 
 ## [Convert html to pdf](convert-html-to-pdf.md)
 
+## [Custom Setting](custom-setting.md)
+
 ## References
 
 - [Docs](https://docs.scrapy.org/en/latest/index.html)
