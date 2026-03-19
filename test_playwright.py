@@ -54,11 +54,12 @@ def webpage_to_pdf(url: str, output_path: str):
         browser.close()
         print(f"PDF saved to {output_path}")
 
-print("Run `playwright install chromium` to install necessary drivers if you haven't already.\n",
-      "Then unmask save_login_state() to log in and save the session, followed by webpage_to_pdf() to convert the page to PDF.")
+if __name__ == "__main__":
+    print("Run `playwright install chromium` to install necessary drivers if you haven't already.\n",
+        "Then unmask save_login_state() to log in and save the session, followed by webpage_to_pdf() to convert the page to PDF.")
 
-# First time: save login state
-# save_login_state("https://example.com/login")
+    # First time: save login state
+    # save_login_state("https://example.com/login")
 
-# Subsequent runs: convert page to PDF
-# webpage_to_pdf("https://example.com", "output.pdf")
+    # Subsequent runs: convert page to PDF
+    # webpage_to_pdf("https://example.com", "output.pdf")
