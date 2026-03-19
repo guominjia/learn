@@ -22,7 +22,7 @@ def save_login_state(login_url: str):
         print(f"Login state saved to {PREFIX + STORAGE_FILE}")
         browser.close()
 
-def webpage_to_pdf(url: str, output_path: str):
+def webpage_to_pdf(url: str, output_path: str, timeout: int = 30000):
     with sync_playwright() as p:
         browser = p.chromium.launch()
         
@@ -36,7 +36,7 @@ def webpage_to_pdf(url: str, output_path: str):
         page = context.new_page()
 
         # Set a timeout to avoid waiting forever
-        page.goto(url, wait_until="networkidle", timeout=30000)
+        page.goto(url, wait_until="networkidle", timeout=timeout)
         
         # Check if we were redirected to a login page
         if "login" in page.url or "signin" in page.url:
