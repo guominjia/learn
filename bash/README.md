@@ -1,5 +1,8 @@
 # Bash
 
+## Shell Chain
+Refer [link](shell-chain.md) for details
+
 ## Command
 **See**: [count-commits](count-commits.md)
 
