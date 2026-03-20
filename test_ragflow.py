@@ -69,6 +69,16 @@ def upload_to_ragflow(path: str, dataset_name: str = "TEST UPLOAD DATASET"):
         for doc in docs:
             os.remove(os.path.join(path, doc.name))
 
+def exist_doc_in_ragflow(dataset_name: str, doc_name: str):
+    ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
+    for d in ragflow_instance.list_datasets(name=dataset_name):
+        try:
+            if len(d.list_documents(name=doc_name)) > 0:
+                return True
+        except Exception:
+            continue
+    return False
+
 if __name__ == "__main__":
     try:
         main()
