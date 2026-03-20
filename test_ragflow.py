@@ -25,7 +25,7 @@ import os
 HOST_ADDRESS = os.getenv("RAGFLOW_SERVER_HOST")
 API_KEY = os.getenv("RAGFLOW_API_KEY")
 
-try:
+def main():
     # create a ragflow instance
     ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
 
@@ -54,10 +54,27 @@ try:
     #resp = session.ask(question="Replace with your question", stream=False)
     #for r in resp:
     #    print(r)
-    sys.exit(0)
 
-except Exception as e:
-    print(str(e))
-    sys.exit(-1)
+def upload_to_ragflow(path: str, dataset_name: str = "TEST UPLOAD DATASET"):
+    ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
+    for d in ragflow_instance.list_datasets(name=dataset_name):
+        docs = []
+        for f in os.listdir(path):
+            if f.endswith(".pdf"):
+                with open(os.path.join(path, f), "rb") as file:
+                    display_name = f
+                    blob = file.read()
+                docs.append({"display_name": display_name, "blob": blob})
+        docs = d.upload_documents(docs)
+        for doc in docs:
+            os.remove(os.path.join(path, doc.name))
+
+if __name__ == "__main__":
+    try:
+        main()
+        sys.exit(0)
+    except Exception as e:
+        print(str(e))
+        sys.exit(-1)
 
 
