@@ -48,7 +48,7 @@ def webpage_to_pdf(url: str, output_path: str, timeout: int = 30000):
             path=output_path,
             format="A4",
             print_background=True,
-            margin={"top": "20mm", "bottom": "20mm", "left": "15mm", "right": "15mm"}
+            margin={"top": "2mm", "bottom": "2mm", "left": "1mm", "right": "1mm"}
         )
 
         browser.close()
