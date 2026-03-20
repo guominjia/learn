@@ -55,19 +55,23 @@ def main():
     #for r in resp:
     #    print(r)
 
-def upload_to_ragflow(path: str, dataset_name: str = "TEST UPLOAD DATASET"):
+def upload_to_ragflow(path: str, dataset_name: str = "TEST UPLOAD DATASET", alias: str = "temp.pdf"):
     ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
     for d in ragflow_instance.list_datasets(name=dataset_name):
         docs = []
-        for f in os.listdir(path):
-            if f.endswith(".pdf"):
-                with open(os.path.join(path, f), "rb") as file:
-                    display_name = f
-                    blob = file.read()
-                docs.append({"display_name": display_name, "blob": blob})
-        docs = d.upload_documents(docs)
-        for doc in docs:
-            os.remove(os.path.join(path, doc.name))
+        if path.endswith(".pdf"):
+            with open(alias, "rb") as file:
+                display_name = path
+                blob = file.read()
+            docs.append({"display_name": display_name, "blob": blob})
+        else:
+            for f in os.listdir(path):
+                if f.endswith(".pdf"):
+                    with open(os.path.join(path, f), "rb") as file:
+                        display_name = f
+                        blob = file.read()
+                    docs.append({"display_name": display_name, "blob": blob})
+        d.upload_documents(docs)
 
 def exist_doc_in_ragflow(dataset_name: str, doc_name: str):
     ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
