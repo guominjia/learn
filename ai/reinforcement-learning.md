@@ -1,5 +1,12 @@
 # RL
 
+## Books
+- [RLHF by Nathan Lambert](https://github.com/natolambert/rlhf-book)
+- [Reinforcement Learning: An Introduction, 2nd edition, Richard Sutton and Andrew G. Barto](http://incompleteideas.net/book/RLbook2020.pdf)
+
+## Papers
+- [DeepSeek-V3 Technical Report](https://huggingface.co/papers/2412.19437)
+
 ## [Monte Carlo](https://mp.weixin.qq.com/s/g0nJVpo8Lzs9ZUBuDL88dQ)
 
 - [Code for Black Jack](https://github.com/guominjia/learn/blob/code_study/reinforcement-learn/black_jack.py)
