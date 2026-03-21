@@ -25,6 +25,7 @@ AI industry chain include upstream, midstream, downstream.
 Click [here](utilities.md) for AI tools
 
 ## Concepts
+[AI and ML](ai-and-ml.md)
 [Embedding](embedding.md),
 [Skill](skill.md),
 [Template](template.md)
