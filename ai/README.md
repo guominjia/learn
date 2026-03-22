@@ -12,7 +12,7 @@ AI industry chain include upstream, midstream, downstream.
     - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
   - **Train Framework**: Pytorch, TensorFlow
     - [Pytorch](pytorch.md) provide operators
-  - **Infer Framework**: vLLM, llama.cpp
+  - **Infer Framework**: vLLM, [llama.cpp]
   - [**Agent Framework**](agent.md): Langchain, LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
   - [**RAG Framework**](rag.md)
@@ -40,3 +40,5 @@ Click [here](utilities.md) for AI tools
 Experiences about RL
 
 ## [Structed Output](structed-output.md)
+
+[llama.cpp]: https://github.com/ggml-org/llama.cpp
