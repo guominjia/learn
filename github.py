@@ -1,5 +1,6 @@
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional, Tuple, List
 from pathlib import Path
+from datetime import datetime, timedelta
 
 import requests
 import yaml
@@ -218,3 +219,57 @@ class GitHubClient:
 
         url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/commits'
         return self._make_request('get', url, f"Failed to get commits for PR #{pr_number}")
+
+    def search_issues(self, owner: str, repo: str, branch:str, since_hours: int = 24) -> List[Dict]:
+        """Fetch recent pull requests from repository."""
+
+        url = 'https://api.github.com/search/issues'
+
+        cutoff_time = datetime.now() - timedelta(hours=since_hours)
+        cutoff_str = cutoff_time.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+        query = (
+            f'repo:{owner}/{repo} '
+            f'is:pr '
+            f'is:merged '
+            f'updated:>={cutoff_str} '
+            f'base:{branch}'
+        )
+
+        params = {
+            'q': query,
+            'sort': 'updated',
+            'order': 'desc',
+            'per_page': 100,
+            'page': 1
+        }
+
+        try:
+            recent_prs = []
+
+            # Paginate through all results
+            while True:
+                data = self._make_request('get', url, "Failed to search issues", params=params)
+
+                items = data.get('items', [])
+
+                if not items:
+                    break
+
+                # Convert search to PR
+                for item in items:
+                    pr_number = item['number']
+                    pr_url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}'
+                    resp = self._make_request('get', pr_url, f"Failed to get PR #{pr_number}")
+                    recent_prs.append(resp)
+
+                # Check if there are more pages
+                if len(items) < params['per_page']:
+                    break
+
+                params['page'] += 1
+
+            return recent_prs
+
+        except (requests.RequestException, Exception) as e:
+            raise GitHubAPIError(f"Failed to fetch PRs: {e}")
