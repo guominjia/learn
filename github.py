@@ -193,6 +193,12 @@ class GitHubClient:
         url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}'
         return self._make_request('get', url, f"Failed to get PR #{pr_number}")
 
+    def get_pr_commits(self, owner: str, repo: str, pr_number: int) -> Dict:    
+        """Get commits for a PR."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/commits'
+        return self._make_request('get', url, f"Failed to get commits for PR #{pr_number}")
+
     def get_pr_files(self, owner: str, repo: str, pr_number: int) -> list:
         """Get list of files changed in a PR."""
 
