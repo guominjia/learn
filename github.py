@@ -232,6 +232,19 @@ class GitHubClient:
         content = base64.b64decode(file_data['content']).decode('utf-8')
         return content
 
+    def create_pr(self, owner: str, repo: str, head: str, base: str, title: str, body: str) -> Dict:
+        """Create a new pull request."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/pulls'
+        payload = {
+            'title': title,
+            'body': body,
+            'head': head,
+            'base': base,
+            'maintainer_can_modify': True
+        }
+        return self._make_request('post', url, "Failed to create pull request", json=payload)
+
     def add_pr_labels(self, owner: str, repo: str, pr_number: int, labels: List[str]):
         """Add labels to a PR."""
 
