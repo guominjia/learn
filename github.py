@@ -113,12 +113,19 @@ class GitHubClient:
                 full_error_msg += f"\nResponse: {e.response.text}"
             raise GitHubAPIError(full_error_msg)
 
-    def get_issues(self, owner: str, repo: str, per_page: int = 30) -> list:
-        """Get list of issues for a repository."""
+    def get_issues(self, owner: str, repo: str, state: str = 'open', per_page: int = 30) -> List[Dict]:
+        """Get list of issues for a repository.
+
+        Args:
+            state: Issue state ('open', 'closed', or 'all')
+        """
+
+        params = {'state': state, 'sort': 'updated', 'direction': 'desc', 'per_page': per_page, 'page': 1}
+        if labels := self.config['github'].get('issue_labels', []):
+            params['labels'] = ','.join(labels)
 
         url = f'https://api.github.com/repos/{owner}/{repo}/issues'
-        params = {"per_page": per_page, "page": 1, "sort": "updated", "direction": "desc"}
-        return self._make_request('get', url, "Failed to fetch issues", params=params)
+        return self._make_request('get', url, "Failed to list issues", params=params)
 
     def get_issue(self, owner: str, repo: str, issue_number: int) -> Dict:
         """Get issue details by number."""
