@@ -39,6 +39,8 @@ Click [here](utilities.md) for AI tools
 ## [RL](reinforcement-learning.md)
 Experiences about RL
 
+## [Deep Learning](dl/README.md)
+
 ## [Structed Output](structed-output.md)
 
 [llama.cpp]: https://github.com/ggml-org/llama.cpp
