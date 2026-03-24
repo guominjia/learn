@@ -140,6 +140,30 @@ class GitHubClient:
         params = {"per_page": per_page, "page": 1, "sort": "updated", "direction": "desc"}
         return self._make_request('get', url, f"Failed to get comments for issue #{issue_number}", params=params)
 
+    def create_issue(self, owner: str, repo: str, branch: str, title: str, body: str) -> Dict:
+        """Create a new issue in repository."""
+
+        labels = self.config['github'].get('issue_labels', [])
+        assignees = self.config['github'].get('issue_assignees', [])
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/issues'
+        payload = {
+            'title': title,
+            'body': body,
+            "agent_assignment": {
+                "target_repo": f"{owner}/{repo}",
+                "base_branch": branch,
+                "custom_instructions": "",
+                "custom_agent": "",
+                "model": ""
+            }
+        }
+        if labels := self.config['github'].get('issue_labels', []):
+            payload['labels'] = labels
+        if assignees := self.config['github'].get('issue_assignees', []):
+            payload['assignees'] = assignees
+        return self._make_request('post', url, "Failed to create issue", json=payload)
+
     def add_issue_comment(self, owner: str, repo: str, issue_number: int, comment: str) -> Dict:
         """Add a comment to an issue."""
 
