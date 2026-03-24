@@ -298,17 +298,27 @@ class GitHubClient:
         url = f'https://api.github.com/repos/{owner}/{repo}/git/commits/{commit_sha}'
         return self._make_request('get', url, f"Failed to get commit {commit_sha}")
 
-    def add_blobs(self, owner: str, repo: str, file_changes: Dict[str, str]) -> List[Dict]:
+    def add_blobs(self, owner: str, repo: str, file_changes: Dict[str, str], en_base64: bool = False) -> List[Dict]:
         """Create blobs for each changed file."""
 
         blobs = []
         for file_path, content in file_changes.items():
-            blob_url = f'https://api.github.com/repos/{owner}/{repo}/git/blobs'
-            blob_payload = {
-                'content': content,
-                'encoding': 'utf-8'
-            }
-            blob_res = self._make_request('post', blob_url, f"Failed to create blob for {file_path}", json=blob_payload)
+            if content:
+                blob_url = f'https://api.github.com/repos/{owner}/{repo}/git/blobs'
+                blob_payload = {
+                    'content': content,
+                    'encoding': 'utf-8'
+                }
+                if en_base64:
+                    import base64
+                    blob_payload = {
+                        'content': base64.b64encode(content.encode('utf-8')).decode('utf-8'),
+                        'encoding': 'base64'
+                    }
+                blob_res = self._make_request('post', blob_url, f"Failed to create blob for {file_path}", json=blob_payload)
+            else:
+                # For removed files, GitHub allows tree entries with null blobs for deletions
+                blob_res = {'sha': None}
             blobs.append({
                 'path': file_path,
                 'mode': '100644',
