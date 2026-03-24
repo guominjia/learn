@@ -246,6 +246,12 @@ class GitHubClient:
         payload = {'reviewers': reviewers}
         return self._make_request('post', url, f"Failed to request reviewers for PR #{pr_number}", json=payload)
 
+    def get_branch(self, owner: str, repo: str, branch: str) -> Dict:
+        """Get branch details."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/git/refs/heads/{branch}'
+        return self._make_request('get', url, f"Failed to get branch {branch}")
+
     def get_branch_file_content(self, owner: str, repo: str, branch: str, file_path: str) -> Optional[str]:
         """Get file content from a branch."""
 
@@ -272,20 +278,99 @@ class GitHubClient:
 
         # If branch already exists, try to update it
         if create_response.status_code == 422:
-            update_payload = {
-                'sha': res['object']['sha'],
-                'force': True
-            }
-            update_url = f'https://api.github.com/repos/{owner}/{repo}/git/refs/heads/{branch_name}'
-            create_response = self._make_request('patch', update_url, f"Failed to update branch {branch_name}", json=update_payload)
+            create_response = self.update_branch(owner, repo, branch_name, res['object']['sha'])
 
         return create_response.json()
 
-    def get_commits(self, owner: str, repo: str, pr_number: int) -> Dict:
-        """Get commits for a PR."""
+    def update_branch(self, owner: str, repo: str, branch_name: str, new_sha: str) -> Dict:
+        """Update a branch to point to a new commit SHA."""
 
-        url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/commits'
-        return self._make_request('get', url, f"Failed to get commits for PR #{pr_number}")
+        url = f'https://api.github.com/repos/{owner}/{repo}/git/refs/heads/{branch_name}'
+        payload = {
+            'sha': new_sha,
+            'force': True
+        }
+        return self._make_request('patch', url, f"Failed to update branch {branch_name}", json=payload)
+
+    def get_commit(self, owner: str, repo: str, commit_sha: str) -> Dict:
+        """Get a specific commit."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/git/commits/{commit_sha}'
+        return self._make_request('get', url, f"Failed to get commit {commit_sha}")
+
+    def add_blobs(self, owner: str, repo: str, file_changes: Dict[str, str]) -> List[Dict]:
+        """Create blobs for each changed file."""
+
+        blobs = []
+        for file_path, content in file_changes.items():
+            blob_url = f'https://api.github.com/repos/{owner}/{repo}/git/blobs'
+            blob_payload = {
+                'content': content,
+                'encoding': 'utf-8'
+            }
+            blob_res = self._make_request('post', blob_url, f"Failed to create blob for {file_path}", json=blob_payload)
+            blobs.append({
+                'path': file_path,
+                'mode': '100644',
+                'type': 'blob',
+                'sha': blob_res['sha']
+            })
+        return blobs
+
+    def add_tree(self, owner: str, repo: str, base_tree_sha: str, blobs: List[Dict]) -> Dict:
+        """Create a new tree with the blobs."""
+
+        tree_url = f'https://api.github.com/repos/{owner}/{repo}/git/trees'
+        tree_payload = {
+            'base_tree': base_tree_sha,
+            'tree': blobs
+        }
+        return self._make_request('post', tree_url, f"Failed to create tree", json=tree_payload)
+
+    def add_commit(self, owner: str, repo: str, message: str, tree_sha: str, parent_sha: str) -> Dict:
+        """Create a new commit with the given tree and parent."""
+
+        commit_url = f'https://api.github.com/repos/{owner}/{repo}/git/commits'
+        commit_payload = {
+            'message': message,
+            'tree': tree_sha,
+            'parents': [parent_sha]
+        }
+        return self._make_request('post', commit_url, f"Failed to create commit", json=commit_payload)
+
+    def commit_message(self, owner: str, repo: str, branch: str, message: str, file_changes: Dict[str, str] = None) -> Dict:
+        """Create a new commit on a branch with specified file changes."""
+
+        res = self.get_branch(owner, repo, branch)  # Ensure branch exists
+        latest_commit_sha = res['object']['sha']
+        latest_commit = self.get_commit(owner, repo, latest_commit_sha)
+
+        if file_changes:
+            blobs = self.add_blobs(owner, repo, file_changes)
+            tree_res = self.add_tree(owner, repo, latest_commit['tree']['sha'], blobs)
+        else:
+            tree_res = {'sha': latest_commit['tree']['sha']}
+
+        commit_res = self.add_commit(owner, repo, message, tree_res['sha'], latest_commit_sha)
+
+        return self.update_branch(owner, repo, branch, commit_res['sha'])
+
+    def amend_commit(self, owner: str, repo: str, branch: str, message: str, file_changes: Dict[str, str] = None) -> Dict:
+        """Amend the latest commit on a branch with new message and file changes."""
+
+        res = self.get_branch(owner, repo, branch)  # Ensure branch exists
+        latest_commit_sha = res['object']['sha']
+        latest_commit = self.get_commit(owner, repo, latest_commit_sha)
+
+        if file_changes:
+            blobs = self.add_blobs(owner, repo, file_changes)
+            tree_res = self.add_tree(owner, repo, latest_commit['tree']['sha'], blobs)
+        else:
+            tree_res = {'sha': latest_commit['tree']['sha']}
+
+        commit_res = self.add_commit(owner, repo, message, tree_res['sha'], latest_commit['parents'][0])
+
+        return self.update_branch(owner, repo, branch, commit_res['sha'])
 
     def search_issues(self, owner: str, repo: str, branch:str, since_hours: int = 24) -> List[Dict]:
         """Fetch recent pull requests from repository."""
