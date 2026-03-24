@@ -226,6 +226,20 @@ class GitHubClient:
         content = base64.b64decode(file_data['content']).decode('utf-8')
         return content
 
+    def add_pr_labels(self, owner: str, repo: str, pr_number: int, labels: List[str]):
+        """Add labels to a PR."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/issues/{pr_number}/labels'
+        payload = {'labels': labels}
+        return self._make_request('post', url, f"Failed to add labels to PR #{pr_number}", json=payload)
+
+    def add_pr_reviewers(self, owner: str, repo: str, pr_number: int, reviewers: List[str]):
+        """Request reviewers for a PR."""
+
+        url = f'https://api.github.com/repos/{owner}/{repo}/pulls/{pr_number}/requested_reviewers'
+        payload = {'reviewers': reviewers}
+        return self._make_request('post', url, f"Failed to request reviewers for PR #{pr_number}", json=payload)
+
     def get_branch_file_content(self, owner: str, repo: str, branch: str, file_path: str) -> Optional[str]:
         """Get file content from a branch."""
 
