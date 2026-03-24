@@ -140,6 +140,12 @@ class GitHubClient:
         payload = {'body': comment}
         return self._make_request('post', url, f"Failed to add comment to issue #{issue_number}", json=payload)
 
+    def add_issue_labels(self, owner: str, repo: str, issue_number: int, labels: List[str]) -> Dict:
+        """Add labels to an issue."""
+
+        url = f"https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/labels"
+        self._make_request('post', url, f"Failed to add labels to issue #{issue_number}", json={"labels": labels})
+
     def get_pr(self, owner: str, repo: str, pr_number: int) -> Dict:
         """Get PR details by number."""
 
