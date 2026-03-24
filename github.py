@@ -153,6 +153,16 @@ class GitHubClient:
         url = f"https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}/labels"
         self._make_request('post', url, f"Failed to add labels to issue #{issue_number}", json={"labels": labels})
 
+    def close_issue(self, owner: str, repo: str, issue_number: int, comment: Optional[str] = None) -> Dict:
+        """Close an issue."""
+
+        if comment:
+            self.add_issue_comment(owner, repo, issue_number, comment)
+
+        payload = {'state': 'closed'}
+        url = f'https://api.github.com/repos/{owner}/{repo}/issues/{issue_number}'
+        return self._make_request('patch', url, f"Failed to close issue #{issue_number}", json=payload)
+
     def get_pr(self, owner: str, repo: str, pr_number: int) -> Dict:
         """Get PR details by number."""
 
