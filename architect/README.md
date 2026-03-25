@@ -93,3 +93,5 @@ def _try_fallback_framework(self, query: str):
 - [架构设计, msup](https://mp.weixin.qq.com/s/fAbj-tuXplB3U-o9mGHy1Q)
 - [软件架构基础, 多颗糖](https://mp.weixin.qq.com/s/qXZSd3-CKba856MqRmz1zg)
 - [软件架构基础, 数据智能老司机](https://juejin.cn/post/7481222012268462131)
+- [技术栈选型, 承影, 系统工程实验室](https://mp.weixin.qq.com/s/E4a9nOjrZQOlRGbCWzWgKg)
+- [软件架构书单, 胖仔, 系统工程实验室](https://mp.weixin.qq.com/s/9UAx1IS1QqQX21sl7PfaKw)
