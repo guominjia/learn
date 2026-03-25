@@ -84,6 +84,8 @@ def _try_fallback_framework(self, query: str):
 
 ## [Prompt for Architecture](prompt-for-architecture.md)
 
+## [Feature Analysis](feature-analysis.md)
+
 ## 参考
 
 - [与AI元宝关于架构师讨论](https://yuanbao.tencent.com/chat/naQivTmsDa/0cdf2ce3-6eff-4899-b5e2-5b4a45aae676)
