@@ -7,3 +7,4 @@ Skills are portable and shareable — they consist of markdown files and scripts
 
 - <https://blog.langchain.com/langchain-skills/>
 - <https://github.com/langchain-ai/langchain-skills>
+- <https://github.com/anthropics/skills>
