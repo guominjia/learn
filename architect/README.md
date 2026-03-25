@@ -87,3 +87,7 @@ def _try_fallback_framework(self, query: str):
 ## 参考
 
 - [与AI元宝关于架构师讨论](https://yuanbao.tencent.com/chat/naQivTmsDa/0cdf2ce3-6eff-4899-b5e2-5b4a45aae676)
+- [软考架构师, MC丶科, Java香浓世界](https://mp.weixin.qq.com/s/6lVHDDCKT-qrmXqNTXPlYw)
+- [架构设计, msup](https://mp.weixin.qq.com/s/fAbj-tuXplB3U-o9mGHy1Q)
+- [软件架构基础, 多颗糖](https://mp.weixin.qq.com/s/qXZSd3-CKba856MqRmz1zg)
+- [软件架构基础, 数据智能老司机](https://juejin.cn/post/7481222012268462131)
