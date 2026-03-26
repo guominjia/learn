@@ -6,11 +6,11 @@ AI industry chain include upstream, midstream, downstream.
 - Upstream: Include Silicon Vendor, Cloud Service Provider, Model Provider.
   - **Silicon Vendor**: INTEL, AMD, NVIDIA, ARM, etc
   - **CSP**(Cloud Service Provider): Amazon, Google, Microsoft, Meta, ByteDance, Alibaba, Baidu, Huawei, etc
-  - Model Provider: OpenAI, Claude, DeepSeek, Zhipu, MinMax, etc
+  - **MP**(Model Provider): OpenAI, Claude, DeepSeek, Zhipu, MiniMax, Qwen, etc
 - Midstream: Include software framework and infrastructure provider
-  - **Model Hub**: [HuggingFace](https://huggingface.co/welcome), ModelScope
+  - **Model Hub**: [HuggingFace], [ModelScope]
     - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
-  - **Train Framework**: Pytorch, TensorFlow, [Keras]
+  - **Train Framework**: [PyTorch], [TensorFlow], [Paddle], [Keras]
     - [Pytorch](pytorch.md) provide operators
   - **Infer Framework**: vLLM, [llama.cpp]
   - [**Agent Framework**](agent.md): Langchain, LlamaIndex
@@ -46,3 +46,8 @@ Experiences about RL
 
 [llama.cpp]: https://github.com/ggml-org/llama.cpp
 [Keras]: https://pypi.org/project/keras/
+[HuggingFace]: https://huggingface.co/welcome
+[ModelScope]: https://modelscope.cn/home
+[PyTorch]: https://pytorch.org
+[TensorFlow]: https://www.tensorflow.org
+[Paddle]: https://github.com/PaddlePaddle/Paddle
