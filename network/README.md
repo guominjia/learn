@@ -1,10 +1,7 @@
 # Network
 
-```python
-def mount(user=user, passw=passw, rpath=rpath):
-    subprocess.run(f'net use T: /delete', shell=True)
-    subprocess.run(f'net use /User:{user} T: {rpath} {passw}', shell=True)
-```
-
-## Check port
-`sudo ss -tnlps` can show all port with `pid`
+## Utilities
+- Run linux command `sudo ss -tnlsp` to show all port with `pid`
+- Run windows command `net use /User:<user> <drive> <remote_path> <password>` to connect NFS share server
+- Run windows command `net use <drive> /delete` to delete drive
+- Run command `nslookup <domain>` to show the IP from DNS server
