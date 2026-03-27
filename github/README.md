@@ -14,7 +14,7 @@ Github knowledge, cover copilot, pages, etc
 - [Command Line](https://cli.github.com/)
 
 ## Github Pages
-- [Adding a theme to your GitHub Pages site using Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/adding-a-theme-to-your-github-pages-site-using-jekyll#supported-themes)
+Click [here](github-pages.md) for github pages details
 
 ## [API](https://github.com/guominjia/learn/blob/code_study/github/github.py)
 
