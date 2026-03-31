@@ -179,3 +179,7 @@ AI (Artificial Intelligence)
 | **Deep Learning / RL** | Powerful tools you use along the way | A **pressure cooker** — works with any technique or cuisine |
 
 > Modern Large Language Models (LLMs) are essentially the product of **NLP + Deep Learning (a subset of ML)** — a deep convergence of AI's goal, ML's methodology, and NLP's domain expertise.
+
+## References
+
+- [RNN](rnn.md)
