@@ -183,3 +183,4 @@ AI (Artificial Intelligence)
 ## References
 
 - [RNN](rnn.md)
+- [Tensor](tensor.md)
