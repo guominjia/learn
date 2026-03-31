@@ -26,6 +26,7 @@ Click [here](utilities.md) for AI tools
 
 ## Concepts
 [AI and ML](ai-and-ml.md),
+[MOE](moe.md),
 [OCR](ocr.md),
 [Embedding](embedding.md),
 [Skill](skill.md),
