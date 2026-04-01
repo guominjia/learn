@@ -68,6 +68,7 @@ Key products in the AI ecosystem.
 [![LangChain](https://www.google.com/s2/favicons?domain=langchain.com&sz=16)LangChain](https://www.langchain.com/),
 [![Streamlit](https://www.google.com/s2/favicons?domain=streamlit.io&sz=16)LangChain](https://streamlit.io/),
 [![Chainlit](https://www.google.com/s2/favicons?domain=chainlit.io&sz=16)Chainlit](https://chainlit.io/),
+[![LibreChat](https://www.google.com/s2/favicons?domain=www.librechat.ai&sz=16)LibreChat](https://www.librechat.ai/)
 
 - Application
   - https://docs.cherry-ai.com/docs/en-us
