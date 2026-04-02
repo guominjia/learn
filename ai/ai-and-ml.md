@@ -184,3 +184,4 @@ AI (Artificial Intelligence)
 
 - [RNN](rnn.md)
 - [Tensor](tensor.md)
+- [Mismatch Long and Float](experiences/mismatch-long-and-float.md)
