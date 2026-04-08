@@ -2,6 +2,8 @@
 
 ## [Python Package](pypi/README.md)
 
+## [UV](uv/README.md)
+
 ## pyyaml
 
 Below will be `None` in python
