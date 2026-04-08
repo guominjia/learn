@@ -4,3 +4,4 @@
 - [Add extra index](add-extra-index.md)
 - [Create Package](create-package.md)
 - [Upload Package](upload-package.md)
+- [Deploy PYPI Server](deploy-pypi-server.md)
