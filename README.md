@@ -51,6 +51,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Disk Management](disk/README.md) — Disk
 - [Science](science/README.md) — Science
 - [GPU](gpu/README.md) — GPU
+- [CPU](cpu/README.md) — CPU
 
 ## Useful Links
 
