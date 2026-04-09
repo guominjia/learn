@@ -20,6 +20,7 @@ AI industry chain include upstream, midstream, downstream.
   - [**MCP Framework**](mcp.md)
   - [**Memory Framework**](memory.md)
 - Downstream: Include huge applications
+  - Chat: [Open-WebUI](apps/open-webui/README.md)
 
 ## Utilities
 Click [here](utilities.md) for AI tools

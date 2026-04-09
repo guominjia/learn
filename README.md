@@ -24,7 +24,6 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
 - [vscode](vscode/README.md) — tips, recommended extensions, workspace settings, and workflows for VS Code
 - [vim](vim/README.md) — tips, recommended extensions, workspace settings, and workflows for VIM
-- [Open-WebUI](open-webui/README.md) — experiments and notes about running or configuring Open-WebUI projects
 - [RAG Flow](ragflow/README.md) — RAG flow
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
 - [Database](database/README.md) — database comparisons, deployment notes, and small examples
