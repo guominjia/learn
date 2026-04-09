@@ -30,7 +30,6 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
 - [python](python/README.md) — Python language fundamentals, standard library, and core documentation references
-- [langchain](langchain/README.md) — LangChain framework for building LLM applications, chains, and agents
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
 - [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers

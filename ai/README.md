@@ -13,7 +13,7 @@ AI industry chain include upstream, midstream, downstream.
   - **Train Framework**: [PyTorch], [TensorFlow], [Paddle], [Keras]
     - [Pytorch](pytorch.md) provide operators
   - **Infer Framework**: vLLM, [llama.cpp]
-  - [**Agent Framework**](agent.md): Langchain, LlamaIndex
+  - [**Agent Framework**](agent.md): [LangChain](frameworks/langchain/README.md), LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
   - [**RAG Framework**](rag.md)
   - **UI Framework**: OpenWebUI, Streamlit, Chainlit
