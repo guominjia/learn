@@ -21,6 +21,7 @@ AI industry chain include upstream, midstream, downstream.
   - [**Memory Framework**](memory.md)
 - Downstream: Include huge applications
   - Chat: [Open-WebUI](apps/open-webui/README.md)
+  - RAG: [RAG Flow](apps/ragflow/README.md)
 
 ## Utilities
 Click [here](utilities.md) for AI tools
