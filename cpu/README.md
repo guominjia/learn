@@ -87,3 +87,7 @@ The Home Snoop Filter is a standard component in ARM's interconnect IP:
 Think of the Home Snoop Filter as a **contact directory for cached data**. Instead of knocking on every door in the neighborhood to find who has a package, you consult the directory first — and go only to the right address. The result is a system that is faster, more power-efficient, and scales gracefully to many cores.
 
 > Without a Snoop Filter, cache coherency traffic grows proportionally with core count, making it one of the primary bottlenecks in scaling multi-core processor designs.
+
+## References
+
+- [Xeon Family](xeon-family.md)
