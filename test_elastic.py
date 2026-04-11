@@ -76,9 +76,16 @@ def list_all_indices(es: Elasticsearch) -> None:
 def search(es: Elasticsearch, index: str, query: str) -> None:
     if not query:
         return
-    res = es.search(index=index, query={"query_string": {"query": query}}, size=5)
+    res = es.search(index=index, query={"query_string": {'fields': ["title_tks"], 'query': query}}, size=5)
     data = res.body if hasattr(res, "body") else res
-    print_json(f"Search results for query: {query}", data)
+    print_json(f"Search results for query: {query}", data["hits"]["hits"][0]["_source"]["docnm_kwd"])
+
+def search_knn(es: Elasticsearch, index: str, vector: list[float]) -> None:
+    if not vector:
+        return
+    res = es.search(index=index, knn={'field': 'q_4096_vec', 'k': 1024, 'num_candidates': 2048, 'query_vector': vector}, size=5)
+    data = res.body if hasattr(res, "body") else res
+    print_json(f"Search results:", data["hits"]["hits"][0]["_source"]["docnm_kwd"])
 
 def list_docs(es: Elasticsearch, index: str, size: int = 10) -> None:
     res = es.search(
