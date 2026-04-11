@@ -17,6 +17,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 
 - [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
 - [Architect](architect/README.md) — software architecture principles, evolvable system design patterns, abstraction layers, and RAG system implementation examples
+- [Algorithm](algorithm/README.md) — Algorithm
 - [Mathematics](math/README.md) — Mathematics and Numpy and SciPy
 - [Investment](invest/README.md) — personal investing notes, strategies, and data analysis examples
 - [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
