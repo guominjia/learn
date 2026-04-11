@@ -6,6 +6,8 @@ Github knowledge, cover copilot, pages, etc
 - [Asking GitHub Copilot to make changes to an existing pull request](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/coding-agent/make-changes-to-an-existing-pr)
 - [Asking GitHub Copilot to create a pull request](https://docs.github.com/en/enterprise-cloud@latest/copilot/how-tos/use-copilot-agents/coding-agent/create-a-pr)
 
+## [VS-Copilot](vs-copilot.md)
+
 ## GraphQL
 - [Mutations](https://docs.github.com/en/graphql/reference/mutations#replaceactorsforassignable)
 
