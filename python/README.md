@@ -46,6 +46,8 @@ print(degrees)  # Output: [2, 2, 2]
 Fabric is a high level Python library designed to execute shell commands remotely over SSH, yielding useful Python objects in return.
 It builds on top of Invoke (subprocess command execution and command-line features) and Paramiko (SSH protocol implementation), extending their APIs to complement one another and provide additional functionality.
 
+## [Traditional to Simple Chinese](https://pypi.org/project/hanziconv/)
+
 ## References
 - https://www.python.org/
 - https://docs.python.org/3/
