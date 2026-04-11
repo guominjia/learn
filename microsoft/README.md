@@ -2,6 +2,8 @@
 
 ## [Azure](azure.md)
 
+## [Azure Services](azure-services.md)
+
 ## [Examples](https://github.com/Azure-Samples)
 - <https://github.com/Azure-Samples/ms-identity-python-devicecodeflow>
 - <https://github.com/Azure-Samples/ms-identity-python-webapp>
