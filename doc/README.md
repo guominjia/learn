@@ -30,6 +30,10 @@ markdown = markdownify(
 ## [MarkItDown](https://github.com/microsoft/markitdown)
 Covert any file to Makrdown
 
+1. <https://deepwiki.com/search/markitdownconverttextcontentma_84769b62-fb26-4696-8888-e9b2217020cc>
+2. <https://deepwiki.com/microsoft/markitdown>
+3. <https://github.com/microsoft/markitdown>
+
 ## [MdownDown-It](https://github.com/executablebooks/markdown-it-py)
 Convert Markdown to HTML
 
