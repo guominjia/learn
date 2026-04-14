@@ -183,6 +183,7 @@ AI (Artificial Intelligence)
 ## References
 
 - [RNN](rnn.md)
+  - [RNN Training](rnn-training.md)
 - [Tensor](tensor.md)
 - [Mismatch Long and Float](experiences/mismatch-long-and-float.md)
 - [Evaluation Metrics](experiences/eval-metrics.md)
