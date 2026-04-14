@@ -184,6 +184,7 @@ AI (Artificial Intelligence)
 
 - [RNN](rnn.md)
   - [RNN Training](rnn-training.md)
+  - [RNN Training 2](rnn-training-2.md)
 - [Tensor](tensor.md)
 - [Mismatch Long and Float](experiences/mismatch-long-and-float.md)
 - [Evaluation Metrics](experiences/eval-metrics.md)
