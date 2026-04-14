@@ -26,6 +26,9 @@ AI industry chain include upstream, midstream, downstream.
 ## Utilities
 Click [here](utilities.md) for AI tools
 
+## Books
+Click [here](books.md) for AI books
+
 ## Concepts
 [AI and ML](ai-and-ml.md),
 [MOE](moe.md),
