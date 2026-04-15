@@ -1,5 +1,11 @@
 # Template
 
+## Code
+```python
+tokens = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=True)
+prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
+```
+
 ## Template
 **All LLM use a specific template internally**
 
