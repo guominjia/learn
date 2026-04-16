@@ -29,6 +29,9 @@ Click [here](utilities.md) for AI tools
 ## Books
 Click [here](books.md) for AI books
 
+## Peoples
+Click [here](peoples.md) for AI domain
+
 ## Concepts
 [AI and ML](ai-and-ml.md),
 [MOE](moe.md),
