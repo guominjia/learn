@@ -10,7 +10,7 @@ AI industry chain include upstream, midstream, downstream.
 - Midstream: Include software framework and infrastructure provider
   - **Model Hub**: [HuggingFace], [ModelScope]
     - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
-  - **Train Framework**: [PyTorch], [TensorFlow], [Paddle], [Keras]
+  - **Train Framework**: [PyTorch], [TensorFlow], [Paddle], [Keras], [CNTK], [CAFFE2]
     - [Pytorch](pytorch.md) provide operators
   - **Infer Framework**: vLLM, [llama.cpp]
   - [**Agent Framework**](agent.md): [LangChain](frameworks/langchain/README.md), LlamaIndex
@@ -60,3 +60,5 @@ Experiences about RL
 [PyTorch]: https://pytorch.org
 [TensorFlow]: https://www.tensorflow.org
 [Paddle]: https://github.com/PaddlePaddle/Paddle
+[CNTK]: https://github.com/microsoft/cntk
+[CAFFE2]: https://github.com/caffe2
