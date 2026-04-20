@@ -8,3 +8,6 @@ Skills are portable and shareable — they consist of markdown files and scripts
 - <https://blog.langchain.com/langchain-skills/>
 - <https://github.com/langchain-ai/langchain-skills>
 - <https://github.com/anthropics/skills>
+- <https://github.com/iot-agent/iot-skillsbench>
+- <https://github.com/benchflow-ai/skillsbench>, <https://www.skillsbench.ai/>
+- <https://github.com/agentskills/agentskills>
