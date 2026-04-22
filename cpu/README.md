@@ -92,3 +92,4 @@ Think of the Home Snoop Filter as a **contact directory for cached data**. Inste
 
 - [Xeon Family](xeon-family.md)
 - [Memory Decode](memory-decode.md)
+- [Memory Basic](memory-basic.md)
