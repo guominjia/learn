@@ -9,3 +9,5 @@
   - 竞争者：Physical Intelligence、Skild
   - 主要人物：卢策吾、王世全
   - 主要技术：Noematrix Brain、AnyGrasp
+
+## [RMB](rmb.md)
