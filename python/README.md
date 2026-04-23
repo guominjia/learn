@@ -4,6 +4,8 @@
 
 ## [UV](uv/README.md)
 
+## [Command Line Interface](cli/README.md)
+
 ## pyyaml
 
 Below will be `None` in python
