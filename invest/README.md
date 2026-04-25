@@ -11,3 +11,5 @@
   - 主要技术：Noematrix Brain、AnyGrasp
 
 ## [RMB](rmb.md)
+
+## [Company and Patent](company-and-patent.md)
