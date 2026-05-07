@@ -86,6 +86,8 @@ def _try_fallback_framework(self, query: str):
 
 ## [Feature Analysis](feature-analysis.md)
 
+## [Fix issue or Develop feature](fix-issue-develop-feature.md)
+
 ## 参考
 
 - [与AI元宝关于架构师讨论](https://yuanbao.tencent.com/chat/naQivTmsDa/0cdf2ce3-6eff-4899-b5e2-5b4a45aae676)
