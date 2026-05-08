@@ -58,7 +58,7 @@ Your job is to narrow down from all possible causes to the actual one.
 
 ```
 Step 1: Understand the problem
-        → What exactly is failing? What are the symptoms?
+        → What exactly is failing? What are the symptoms (error message or log, how to reproduce, BIOS or OS)?
         → What is the expected behavior?
 
 Step 2: Locate the code
@@ -67,7 +67,7 @@ Step 2: Locate the code
         → Trace the call chain
 
 Step 3: Root cause analysis (the core step)
-        → From symptom → throw site → input → caller
+        → From symptom (error message or log) → throw site (which code throw it) → input (what's input) → caller (who call it)
         → Compare with working state: what changed?
         → Narrow down: config? data? logic?
 
@@ -113,7 +113,7 @@ there are many possible designs, and you choose one.
 
 ```
 Step 1: Understand the requirement
-        → What exactly should be built?
+        → What exactly should be built (doc/spec/wiki, add/modify)?
         → What are the acceptance criteria?
         → If unclear → ASK, don't guess
 
