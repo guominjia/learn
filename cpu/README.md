@@ -93,3 +93,4 @@ Think of the Home Snoop Filter as a **contact directory for cached data**. Inste
 - [Xeon Family](xeon-family.md)
 - [Memory Decode](memory-decode.md)
 - [Memory Basic](memory-basic.md)
+- [iSTARE and MPE Labs exposed inter-die EMIB signals and connected to them using Focused Ion Beam (FIB) pads](expose-emib-signals-using-fib-pads.md)
