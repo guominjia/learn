@@ -6,6 +6,7 @@
 [Docker Compose Multi Files](docker-compose-multi-files.md),
 [Docker Volumes](docker-volumes.md),
 [Docker Images](docker-images.md)
+[Docker Restart](docker-restart.md)
 
 - `docker-compose.yaml` support `${VAR-default}` which mean that use default if no VAR. `default` can be string like `'string'`
 - `docker-compose.yaml` relies on `.env` file or shell environment
