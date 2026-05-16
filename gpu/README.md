@@ -1,5 +1,13 @@
 # GPU
 
+## VESA
+- <http://www.osdever.net/FreeVGA/home.htm>
+- <https://www.synopsys.com/zh-cn/designware-ip/interface-ip/hdmi.html>
+- <https://www.synopsys.com/dw/doc.php/ds/c/dwc_hdmi_rx_2.1_ds.pdf>
+- <https://blog.csdn.net/Archar_Saber/article/details/123018265>
+- <https://blog.csdn.net/weixin_42229404/article/details/82109443>
+- <https://www.cnblogs.com/moluoqishi/p/10860849.html>
+
 ## Troubleshooting: "Failed to initialize NVML: Driver/library version mismatch"
 
 ### The Problem
