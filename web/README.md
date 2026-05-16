@@ -6,6 +6,8 @@
 
 ## [Heatmap](https://github.com/guominjia/learn/tree/code_study/web)
 
+## [Chart](https://github.com/guominjia/learn/blob/code_study/web/chart.html)
+
 ## [W3School](https://www.w3school.com.cn/)
 
 ## [Http to Https](http-to-https.md)
