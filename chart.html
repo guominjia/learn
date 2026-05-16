@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div>
+        <canvas id="trendChart" height="96"></canvas>
+    </div>
+	<script>
+		new Chart(document.getElementById('trendChart'), {
+			type: 'line',
+			data: {
+				labels: [1, 2, 3],
+				datasets: [
+					{
+						label: 'line sample',
+						data: [4, 5, 6],
+						borderColor: '#0071e3',
+						backgroundColor: 'rgba(0, 113, 227, 0.08)',
+						tension: 0.3,
+						fill: true,
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					legend: { position: 'top' }
+				},
+				scales: {
+					y: { beginAtZero: true }
+				}
+			}
+		});
+	</script>
+</body>
+</html>
