@@ -69,6 +69,8 @@
 
 ## [Study of Elastic Search filter dataset](es-filter-dataset.md)
 
+## [Study of search datasets](search-datasets.md)
+
 ## [How to generate graph and raptor](how-to-generate-graph-and-raptor.md)
 
 ## [Important tables](important-tables.md)
