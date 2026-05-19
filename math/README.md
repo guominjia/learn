@@ -1,5 +1,7 @@
 # Mathematics
 
+## [Formula](formula.md)
+
 ## [Tensor](tensor.md)
 
 ## `cosine_similarity` 函数三种实现方式对比：
