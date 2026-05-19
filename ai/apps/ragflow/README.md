@@ -67,6 +67,8 @@
 
 ## [Study of positions](positions.md)
 
+## [Study of Elastic Search filter dataset](es-filter-dataset.md)
+
 ## [How to generate graph and raptor](how-to-generate-graph-and-raptor.md)
 
 ## [Important tables](important-tables.md)
