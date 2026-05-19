@@ -65,6 +65,8 @@
 
 ## [Study of create_time](create_time.md)
 
+## [Study of positions](positions.md)
+
 ## [How to generate graph and raptor](how-to-generate-graph-and-raptor.md)
 
 ## [Important tables](important-tables.md)
