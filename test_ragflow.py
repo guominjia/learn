@@ -55,6 +55,12 @@ def main():
     #for r in resp:
     #    print(r)
 
+    #agent = ragflow_instance.list_agents(title="replace with agent name")[0]
+    #for session in agent.list_sessions():
+    #    resp = session.ask(your_query, stream=True)
+    #    for r in resp:
+    #        print(r.content, end="")
+
 def upload_to_ragflow(path: str, dataset_name: str = "TEST UPLOAD DATASET", alias: str = "temp.pdf"):
     ragflow_instance = RAGFlow(api_key=API_KEY, base_url=HOST_ADDRESS)
     for d in ragflow_instance.list_datasets(name=dataset_name):
