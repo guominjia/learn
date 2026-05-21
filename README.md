@@ -31,6 +31,7 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
 - [Python](python/README.md) — Python language fundamentals, standard library, and core documentation references
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
+- [Linux](linux/README.md) — Linux commands and kernels
 - [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
 - [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
 - [xwindow](xwindow/README.md) — X11, Xvfb virtual display, xdotool automation
