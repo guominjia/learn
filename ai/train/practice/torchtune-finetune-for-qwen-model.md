@@ -1,7 +1,7 @@
 # Torchtune finetune for Qwen model
 
 ```bash
-pip install torch torchao torchao<0.8
+pip install torch torchtune torchao
 
 # List available finetune model
 tune ls
@@ -9,7 +9,7 @@ tune ls
 # Download Qwen 2.5 3B model
 tune download Qwen/Qwen2.5-3B-Instruct --output-dir /tmp/Qwen2.5-3B-Instruct --hf-token $HF_TOKEN
 
-# Finetune model
+# Finetune model, CPU doesn't support BF16 so use FP32, FP32 use 2 times memory and slower
 tune run lora_finetune_single_device --config qwen2_5/3B_lora_single_device epochs=1 dtype=fp32
 
 # Download Qwen 2.5 7B model if have enough memory
@@ -20,6 +20,9 @@ tune run lora_finetune_single_device --config qwen2_5/7B_lora_single_device epoc
 
 # Author deny my access so can't try this one
 tune download meta-llama/Llama-2-7b-hf --output-dir /tmp/Llama-2-7b-hf --hf-token $HF_TOKEN
+
+# User hf-cli to download model
+huggingface-cli download meta-llama/Llama-2-7b-hf --local-dir /tmp/Llama-2-7b-hf --token $HF_TOKEN
 ```
 
 If only have 32GB memory, it's difficult to finetune **7B** model according to below calculation:
