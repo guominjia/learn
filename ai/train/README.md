@@ -5,6 +5,7 @@ Notes and Studies related to AI training.
 The frameworks for training include: [PyTorch], [TensorFlow], [Paddle], [Keras], [CNTK], [CAFFE2].
 
 - [Pytorch](pytorch.md) provide operators
+- [Practice](practice/README.md) provide some learns and pitfall in praticice.
 
 [PyTorch]: https://pytorch.org
 [TensorFlow]: https://www.tensorflow.org
