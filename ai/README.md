@@ -8,11 +8,10 @@ AI industry chain include upstream, midstream, downstream.
   - **CSP**(Cloud Service Provider): Amazon, Google, Microsoft, Meta, ByteDance, Alibaba, Baidu, Huawei, etc
   - **MP**(Model Provider): OpenAI, Claude, DeepSeek, Zhipu, MiniMax, Qwen, etc
 - Midstream: Include software framework and infrastructure provider
+  - [**Train Framework**](train/README.md)
+  - [**Inference Framework**](infer/README.md)
   - **Model Hub**: [HuggingFace], [ModelScope]
-    - HuggingFace provide [transformers](transformers.md), [datasets](datasets.md), [optimum](optimum.md), tokenizers for running or training model.
-  - **Train Framework**: [PyTorch], [TensorFlow], [Paddle], [Keras], [CNTK], [CAFFE2]
-    - [Pytorch](pytorch.md) provide operators
-  - **Infer Framework**: vLLM, [llama.cpp]
+    - HuggingFace provide [transformers](hf/transformers.md), [datasets](hf/datasets.md), [optimum](hf/optimum.md), tokenizers for running or training model.
   - [**Agent Framework**](agent.md): [LangChain](frameworks/langchain/README.md), LlamaIndex
   - **Database Framework**: Chromadb, Neo4J, etc
   - [**RAG Framework**](rag.md)
@@ -54,12 +53,5 @@ Experiences about RL
 
 ## [Structed Output](structed-output.md)
 
-[llama.cpp]: https://github.com/ggml-org/llama.cpp
-[Keras]: https://pypi.org/project/keras/
 [HuggingFace]: https://huggingface.co/welcome
 [ModelScope]: https://modelscope.cn/home
-[PyTorch]: https://pytorch.org
-[TensorFlow]: https://www.tensorflow.org
-[Paddle]: https://github.com/PaddlePaddle/Paddle
-[CNTK]: https://github.com/microsoft/cntk
-[CAFFE2]: https://github.com/caffe2
