@@ -27,7 +27,6 @@ This repository is organized by topic. Each topic has its own page with notes, l
 - [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
 - [Database](database/README.md) — database comparisons, deployment notes, and small examples
 - [Security](security/README.md) — security best practices, vulnerabilities, and hardening techniques
-- [wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
 - [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
 - [Python](python/README.md) — Python language fundamentals, standard library, and core documentation references
 - [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources

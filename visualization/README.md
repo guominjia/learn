@@ -1,5 +1,7 @@
 # Visualization
 
+## [Wandb](wandb/README.md) — Weights & Biases experiment tracking and visualization notes
+
 ## References
 
 - <https://github.com/fossasia/visdom>, <https://github.com/facebookresearch/visdom>
