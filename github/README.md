@@ -18,6 +18,11 @@ Github knowledge, cover copilot, pages, etc
 ## Github Pages
 Click [here](github-pages.md) for github pages details
 
+## Git Proxy
+```bash
+git config --global http.<web_url>.proxy <proxy_url_and_port>
+```
+
 ## [API](https://github.com/guominjia/learn/blob/code_study/github/github.py)
 
 ## Topics
