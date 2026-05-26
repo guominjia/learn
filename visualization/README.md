@@ -10,3 +10,5 @@
 - [TensorBoard](https://docs.pytorch.org/docs/stable/tensorboard.html)
 - <https://www.comet.com/>
 - <https://matplotlib.org/>
+- <https://plotly.com/>
+- <https://www.chartjs.org/>
