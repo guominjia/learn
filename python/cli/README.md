@@ -1,5 +1,7 @@
 # Command Line Interface
 
+- [rich progress](rich-progress.md)
+
 ## References
 
 - <https://github.com/pallets/click>, <https://pypi.org/project/click/>
