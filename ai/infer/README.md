@@ -1,5 +1,7 @@
 # Inference
 
+- [AWS Bedrock](aws-bedrock.md)
+
 ## Frameworks
 The frameworks related to inference include: [vLLM], [llama.cpp]
 
