@@ -1,6 +1,10 @@
 # Train
 Notes and Studies related to AI training.
 
+## Machines
+
+- [Machine prices for training](machine-prices-for-training.md)
+
 ## Frameworks
 The frameworks for training include: [PyTorch], [TensorFlow], [Paddle], [Keras], [CNTK], [CAFFE2].
 
