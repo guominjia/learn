@@ -69,7 +69,13 @@ After training completes, the output directory contains:
 └── torchtune_config.yaml
 ```
 
-The key insight: `FullModelHFCheckpointer` **merges LoRA weights back into the base model** and saves a complete HuggingFace-compatible checkpoint. This means you can load it as a regular (non-LoRA) model.
+The key insight: `FullModelHFCheckpointer` **merges LoRA weights back into the base model** and saves a complete HuggingFace-compatible checkpoint. This means:
+
+- The `model-*.safetensors` files contain the **full merged weights** (base + LoRA already combined)
+- You **must** load them with the base model (`qwen2_5_3b`), not the LoRA model (`lora_qwen2_5_3b`)
+- The `adapter_model.pt` / `adapter_model.safetensors` files are also saved for reference, but they are **standalone adapter exports** — they cannot be loaded on top of the merged safetensors (that would apply LoRA twice)
+
+> **Important:** You might think you can use `lora_qwen2_5_3b` + `adapter_checkpoint` to load base weights and adapter separately. This does **not** work with the `epoch_0/` output because the safetensors are already merged. Using `lora_qwen2_5_3b` creates a model that expects LoRA keys (`layers.*.attn.q_proj.lora_a.weight`, etc.), but those keys don't exist in the merged checkpoint — resulting in `Missing key(s) in state_dict` errors.
 
 ## Approach 1: `tune run generate` (torchtune CLI)
 
@@ -103,9 +109,20 @@ omegaconf.errors.ConfigAttributeError: Missing key quantizer
 
 The `generate` recipe expects fields like `quantizer` that don't exist in the training config.
 
-### Pitfall 3: LoRA Model Without Adapter Weights
+### Pitfall 3: Using LoRA Model Architecture with Merged Weights
 
-Using `lora_qwen2_5_3b` (LoRA model) but not loading adapter weights causes:
+You might try to use `lora_qwen2_5_3b` — either with or without specifying `adapter_checkpoint`:
+
+```bash
+# ❌ Attempt 1: lora model without adapter
+model._component_=torchtune.models.qwen2_5.lora_qwen2_5_3b
+
+# ❌ Attempt 2: lora model + adapter file from epoch_0/
+model._component_=torchtune.models.qwen2_5.lora_qwen2_5_3b
+checkpointer.adapter_checkpoint=adapter_model.pt
+```
+
+Both fail with:
 
 ```
 RuntimeError: Missing key(s) in state_dict:
@@ -113,7 +130,9 @@ RuntimeError: Missing key(s) in state_dict:
     "layers.0.attn.q_proj.lora_b.weight", ...
 ```
 
-Since the checkpoint already has **merged weights**, use the **base model** (`qwen2_5_3b`), not the LoRA model.
+**Why?** `FullModelHFCheckpointer` already merged LoRA into the base weights. The safetensors in `epoch_0/` are ordinary model weights with no LoRA keys. Using `lora_qwen2_5_3b` creates extra LoRA parameters that have no corresponding entries in the checkpoint.
+
+**Fix:** Always use the base model `qwen2_5_3b` with the merged checkpoint. The LoRA model architecture (`lora_qwen2_5_3b`) is **only for training**, not for inference with merged checkpoints.
 
 ### Pitfall 4: `output_dir` Same as `checkpoint_dir`
 
