@@ -8,6 +8,8 @@
 - <https://blog.csdn.net/weixin_42229404/article/details/82109443>
 - <https://www.cnblogs.com/moluoqishi/p/10860849.html>
 
+## [`nvidia-smi` details](nvidia-smi-details.md)
+
 ## Troubleshooting: "Failed to initialize NVML: Driver/library version mismatch"
 
 ### The Problem
