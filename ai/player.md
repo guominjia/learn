@@ -69,6 +69,8 @@ Key players in the AI ecosystem.
 - CN:
   - [DeepSeek](https://github.com/deepseek-ai):
       [DeepSeek-OCR](https://github.com/deepseek-ai/DeepSeek-OCR),
+  - [SenseNova](https://github.com/OpenSenseNova):
+      [SenseNova-U1](https://github.com/OpenSenseNova/SenseNova-U1),
 - US:
   - [HuggingFace](https://github.com/huggingface):
       [Evaluate](https://github.com/huggingface/evaluate/),
