@@ -40,42 +40,50 @@ Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - **Pros**: Vite-powered, extremely fast; Vue 3 components in Markdown; lightweight; great DX; ideal for library/framework docs
 - **Cons**: Younger ecosystem; fewer plugins than Docusaurus; Vue knowledge needed for advanced customization
 
-#### 5. [GitBook](https://www.gitbook.com/)
+#### 5. [GitHub Pages](https://pages.github.com/)
+- **Pros**: Free for public repos; deeply integrated with GitHub; supports Jekyll (built-in) or any static site generator; custom domains; HTTPS; CI/CD via GitHub Actions; massive community; ideal for open-source project docs
+- **Cons**: Only static sites (no server-side); Jekyll build can be slow; limited to public repos on free tier; no built-in search (needs Algolia etc.); no WYSIWYG editor; 1GB site size limit
+
+#### 6. [GitBook](https://www.gitbook.com/)
 - **Pros**: Beautiful WYSIWYG editor; Git sync; team collaboration; hosted solution with zero maintenance; great for non-technical contributors
 - **Cons**: Free tier is limited; less customizable than self-hosted tools; vendor lock-in; export options are restricted
 
-#### 6. [Mintlify](https://mintlify.com/)
+#### 7. [Mintlify](https://mintlify.com/)
 - **Pros**: Gorgeous default theme; built-in API playground; AI-powered search; fast setup with MDX; excellent for developer-facing products
 - **Cons**: Closed-source SaaS; pricing scales with usage; less community ecosystem; limited self-hosting options
 
-#### 7. [Doxygen](https://www.doxygen.nl/)
+#### 8. [Doxygen](https://www.doxygen.nl/)
 - **Pros**: De facto standard for C/C++/Java source code docs; auto-generates from code comments; supports call graphs via Graphviz; cross-referencing; multi-language support
 - **Cons**: Outdated UI; complex configuration (Doxyfile); output looks dated without custom CSS; overkill for non-code documentation
 
-#### 8. [Swagger (OpenAPI) / Redoc](https://swagger.io/)
+#### 9. [Docsify](https://docsify.js.org/)
+- **Pros**: No build step — renders Markdown at runtime; extremely simple setup (single `index.html`); lightweight; plugin system; full-text search built-in; GitHub Pages friendly; great for small-to-medium docs
+- **Cons**: Client-side rendering hurts SEO; not suitable for very large doc sites; slower initial load than pre-built static sites; limited theming compared to Docusaurus/VitePress
+
+#### 10. [Swagger (OpenAPI) / Redoc](https://swagger.io/)
 - **Pros**: Industry standard for REST API docs; interactive "Try It" console; auto-generated from OpenAPI spec; [Redoc](https://github.com/Redocly/redoc) provides clean three-panel layout
 - **Cons**: Only for API docs (not general documentation); spec file maintenance can be tedious; limited narrative/guide content support
 
-#### 9. [Confluence](https://www.atlassian.com/software/confluence)
+#### 11. [Confluence](https://www.atlassian.com/software/confluence)
 - **Pros**: Deep Jira/Atlassian integration; rich editor; permissions & spaces; enterprise-grade; templates; widely adopted in corporations
 - **Cons**: Expensive at scale; performance can be slow; Markdown support is weak; pages become disorganized without governance; vendor lock-in
 
-#### 10. [Notion](https://www.notion.so/)
+#### 12. [Notion](https://www.notion.so/)
 - **Pros**: All-in-one workspace (docs, databases, kanban); drag-and-drop block editor; real-time collaboration; public page sharing; flexible structure
 - **Cons**: Not purpose-built for technical docs; no native versioning for docs; SEO is limited for public pages; export format is lossy; offline support is weak
 
 ### Comparison Matrix
 
-| Feature | ReadTheDocs | Docusaurus | MkDocs | VitePress | GitBook | Mintlify | Doxygen | Swagger | Confluence | Notion |
-|---------|:-----------:|:----------:|:------:|:---------:|:-------:|:--------:|:-------:|:-------:|:----------:|:------:|
-| Markdown | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ⚠️ | ✅ |
-| Self-hosted | ✅ | ✅ | ✅ | ✅ | ❌ | ⚠️ | ✅ | ✅ | ✅ | ❌ |
-| Versioning | ✅ | ✅ | ⚠️ | ⚠️ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Search | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
-| API Playground | ❌ | ⚠️ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Free/OSS | ✅ | ✅ | ✅ | ✅ | ⚠️ | ❌ | ✅ | ✅ | ❌ | ⚠️ |
-| i18n | ✅ | ✅ | ⚠️ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| WYSIWYG | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Feature | ReadTheDocs | Docusaurus | MkDocs | VitePress | GitHub Pages | GitBook | Mintlify | Doxygen | Docsify | Swagger | Confluence | Notion |
+|---------|:-----------:|:----------:|:------:|:---------:|:------------:|:-------:|:--------:|:-------:|:-------:|:-------:|:----------:|:------:|
+| Markdown | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ⚠️ | ✅ |
+| Self-hosted | ✅ | ✅ | ✅ | ✅ | ⚠️ | ❌ | ⚠️ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Versioning | ✅ | ✅ | ⚠️ | ⚠️ | ⚠️ | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Search | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ |
+| API Playground | ❌ | ⚠️ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Free/OSS | ✅ | ✅ | ✅ | ✅ | ✅ | ⚠️ | ❌ | ✅ | ✅ | ✅ | ❌ | ⚠️ |
+| i18n | ✅ | ✅ | ⚠️ | ✅ | ⚠️ | ❌ | ❌ | ❌ | ⚠️ | ❌ | ✅ | ❌ |
+| WYSIWYG | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 > ✅ = Full support, ⚠️ = Partial / Plugin needed, ❌ = Not supported
 
@@ -86,6 +94,8 @@ Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - **C/C++ source code docs** → Doxygen
 - **Python project docs** → ReadTheDocs + Sphinx
 - **Lightweight & fast** → VitePress
+- **Free hosting from GitHub** → GitHub Pages + Jekyll/Docusaurus/VitePress
+- **Zero-build simplicity** → Docsify
 - **Non-technical team collaboration** → GitBook or Notion
 - **Enterprise internal wiki** → Confluence
 
