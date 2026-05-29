@@ -99,6 +99,16 @@ Mermaid diagram syntax, flowcharts, and text-based visualization techniques
 - **Non-technical team collaboration** → GitBook or Notion
 - **Enterprise internal wiki** → Confluence
 
+## Sphinx Themes
+- <https://www.sphinx-doc.org/en/master/usage/theming.html>
+    - <https://sphinx-themes.org/>
+    - <https://pypi.org/search/?q=&o=&c=Framework+%3A%3A+Sphinx+%3A%3A+Theme>
+    - <https://github.com/search?utf8=%E2%9C%93&q=sphinx+theme>
+    - <https://gitlab.com/explore?name=sphinx+theme>
+- <https://docs.sunpy.org/projects/sunpy-sphinx-theme/latest/>
+- <https://docs.python.org/3/library/>
+- <https://xinetzone.github.io/DaoField/>
+
 ## [Algolia](https://www.algolia.com/)
 Focus on document search, provide fast, full search function, integrated with static doc site (for example ReadTheDocs, Docusaurus, VitePress)
 
