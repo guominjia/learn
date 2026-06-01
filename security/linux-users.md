@@ -4,7 +4,7 @@ The commands `useradd` and `adduser` both create user accounts in Linux, but the
 ---
 
 ### **1. `useradd` (Low-Level Tool)**  
-- **Purpose**: A basic, universal command included in the [`passwd`](https://packages.ubuntu.com/resolute/amd64/passwd/filelist) package. Available on **all Linux distributions**.  
+- **Purpose**: A basic, universal command included in the [`passwd`](https://packages.ubuntu.com/resolute/amd64/passwd/filelist) or [`shadow-utils`](https://packages.fedoraproject.org/pkgs/shadow-utils/shadow-utils/fedora-44-updates.html) package. Available on **all Linux distributions**.  
 - **Behavior**:  
   - Minimal and non-interactive. Requires explicit flags to modify defaults (e.g., `-m` to create a home directory).  
   - Defaults are pulled from [`/etc/default/useradd`](https://packages.debian.org/trixie/amd64/passwd/filelist) or [`/etc/login.defs`](https://packages.debian.org/trixie/amd64/login/filelist).  
