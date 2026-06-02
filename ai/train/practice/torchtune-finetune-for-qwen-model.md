@@ -5,8 +5,7 @@ This post walks through fine-tuning large language models using [torchtune](http
 ## Environment Setup
 
 ```bash
-pip install torch torchtune torchao --index-url https://download.pytorch.or
-g/whl/cu128
+pip install torch torchtune torchao --index-url https://download.pytorch.org/whl/cu128
 ```
 
 ### Version Compatibility: torchtune + torchao
