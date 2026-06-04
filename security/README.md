@@ -102,3 +102,5 @@
 - [Replay attack   ](https://baike.baidu.com/item/重放攻击/2229240)
 - [Downgrade attack](https://baike.baidu.com/item/降级攻击/22722739)
 - [TOCTOU attack   ](https://baike.baidu.com/item/竞争危害/3525767)
+- [Security related early release books](https://learning.oreilly.com/playlists/a697b8a2-9c63-4979-b2ed-302ba69f0483)
+- [Hacker Culture                      ](https://learning.oreilly.com/library/view/hacker-culture-a/9781098145668)
