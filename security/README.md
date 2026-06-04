@@ -99,3 +99,6 @@
 - [OAuth 2.0](https://learn.microsoft.com/en-us/entra/identity-platform/v2-protocols)
 - [Active Directory Domain Services](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
 - [Microsoft Entra ID](https://learn.microsoft.com/en-us/entra/identity/)
+- [Replay attack   ](https://baike.baidu.com/item/重放攻击/2229240)
+- [Downgrade attack](https://baike.baidu.com/item/降级攻击/22722739)
+- [TOCTOU attack   ](https://baike.baidu.com/item/竞争危害/3525767)
