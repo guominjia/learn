@@ -104,3 +104,4 @@
 - [TOCTOU attack   ](https://baike.baidu.com/item/竞争危害/3525767)
 - [Security related early release books](https://learning.oreilly.com/playlists/a697b8a2-9c63-4979-b2ed-302ba69f0483)
 - [Hacker Culture                      ](https://learning.oreilly.com/library/view/hacker-culture-a/9781098145668)
+- <https://github.com/chipsec>
