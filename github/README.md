@@ -18,6 +18,9 @@ Github knowledge, cover copilot, pages, etc
 ## Github Pages
 Click [here](github-pages.md) for github pages details
 
+## Github Actions
+Click [here](github-actions.md) for github actions details
+
 ## Git Proxy
 ```bash
 git config --global http.<web_url>.proxy <proxy_url_and_port>
