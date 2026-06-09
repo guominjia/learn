@@ -9,18 +9,18 @@ timezone: Asia/Shanghai
 permalink: /:categories/:title/
 
 defaults:
-	- scope:
-			path: ""
-			type: "posts"
-		values:
-			layout: post
-	- scope:
-			path: ""
-			type: "pages"
-		values:
-			layout: page
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: page
 
 exclude:
-	- vendor
-	- Gemfile
-	- Gemfile.lock
+  - vendor
+  - Gemfile
+  - Gemfile.lock
