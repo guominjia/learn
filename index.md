@@ -36,6 +36,8 @@ title: Home
       <li><a href="{{ '/algorithm/' | relative_url }}">算法笔记</a></li>
       <li><a href="{{ '/linux/' | relative_url }}">Linux 实践</a></li>
       <li><a href="{{ '/database/' | relative_url }}">数据库记录</a></li>
+      <li><a href="{{ '/categories/' | relative_url }}">分类归档</a></li>
+      <li><a href="{{ '/tags/' | relative_url }}">标签归档</a></li>
     </ul>
     <p class="meta">你可以继续按目录扩展内容，首页会自动聚合最新 post。</p>
   </article>
