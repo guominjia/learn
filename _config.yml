@@ -4,3 +4,23 @@ plugins:
 
 title: Learning
 description: Record learning from practice
+lang: zh-CN
+timezone: Asia/Shanghai
+permalink: /:categories/:title/
+
+defaults:
+	- scope:
+			path: ""
+			type: "posts"
+		values:
+			layout: post
+	- scope:
+			path: ""
+			type: "pages"
+		values:
+			layout: page
+
+exclude:
+	- vendor
+	- Gemfile
+	- Gemfile.lock
