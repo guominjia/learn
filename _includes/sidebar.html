@@ -1,0 +1,58 @@
+<aside class="sidebar">
+
+  <section class="sidebar-section">
+    <h4 class="sidebar-title">最近文章</h4>
+    <ul class="sidebar-list">
+      {% for post in site.posts limit: 8 %}
+        <li>
+          <span class="sidebar-meta">{{ post.date | date: "%m-%d" }}</span>
+          <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 22 }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="sidebar-section">
+    <h4 class="sidebar-title">分类</h4>
+    <ul class="sidebar-list">
+      {% assign sorted_cats = site.categories | sort %}
+      {% for cat in sorted_cats %}
+        <li>
+          <a href="{{ '/categories/' | relative_url }}#{{ cat[0] | slugify }}">
+            {{ cat[0] }}
+          </a>
+          <span class="sidebar-meta">({{ cat[1].size }})</span>
+        </li>
+      {% endfor %}
+      {% if site.categories.size == 0 %}
+        <li><a href="{{ '/categories/' | relative_url }}">全部分类</a></li>
+      {% endif %}
+    </ul>
+  </section>
+
+  <section class="sidebar-section">
+    <h4 class="sidebar-title">标签</h4>
+    <div class="sidebar-tags">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags %}
+        <a class="sidebar-tag" href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}">
+          {{ tag[0] }}
+        </a>
+      {% endfor %}
+      {% if site.tags.size == 0 %}
+        <a class="sidebar-tag" href="{{ '/tags/' | relative_url }}">全部标签</a>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="sidebar-section">
+    <h4 class="sidebar-title">快速入口</h4>
+    <ul class="sidebar-list">
+      <li><a href="{{ '/archives/' | relative_url }}">时间归档</a></li>
+      <li><a href="{{ '/categories/' | relative_url }}">分类归档</a></li>
+      <li><a href="{{ '/tags/' | relative_url }}">标签归档</a></li>
+      <li><a href="{{ '/about/' | relative_url }}">关于</a></li>
+    </ul>
+  </section>
+
+</aside>

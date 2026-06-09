@@ -27,8 +27,11 @@
     </header>
 
     <main class="site-main">
-      <div class="container">
-        {{ content }}
+      <div class="container page-body">
+        <div class="main-content">
+          {{ content }}
+        </div>
+        {% include sidebar.html %}
       </div>
     </main>
 
