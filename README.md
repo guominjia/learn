@@ -1,60 +1,63 @@
 # Learn
 
-A personal learning repository that collects notes, experiments, and references across projects and technologies. This repository is organized as a lightweight monorepo of markdown docs and small demos to help document what I learn while building and exploring.
+Learning notes repository + Jekyll knowledge website.
 
-## Purpose
+- Website: https://learn.biosrag.com
+- Source: markdown-first notes, organized by domain
+- Goal: document practice, retain reusable knowledge, and keep topics searchable
 
-The goal of this repository is to provide a single place to:
+## Site Navigation
 
-- Capture practical notes and how-tos
-- Store small project examples and configurations
-- Keep links to external resources and walkthroughs
-- Share reproducible steps for experiments
+- Home: [/](./)
+- About: [about.md](about.md)
+- Archives (by date): [archives.md](archives.md)
+- Categories (navigation + auto archive): [categories.md](categories.md)
+- Tags (auto-generated): [tags.md](tags.md)
 
-## Topics
+## Writing Guide
 
-This repository is organized by topic. Each topic has its own page with notes, links, and examples:
+### 1) Add a post
 
-- [Artificial-Intelligence](ai/README.md) — AI concepts, models, and machine learning experiments
-- [Architect](architect/README.md) — software architecture principles, evolvable system design patterns, abstraction layers, and RAG system implementation examples
-- [Algorithm](algorithm/README.md) — Algorithm
-- [Mathematics](math/README.md) — Mathematics and Numpy and SciPy
-- [Investment](invest/README.md) — personal investing notes, strategies, and data analysis examples
-- [Research](research/README.md) — industry research reports, market data sources (Gartner, IDC), and PC shipment analytics
-- [Documentation](doc/README.md) — Documentation
-- [Editor](editor/README.md) — Editor
-- [GitHub](github/README.md) — tips and references for GitHub, Copilot, Pages and workflows
-- [Web](web/README.md) — web framework comparisons, deployment notes, and small examples
-- [Database](database/README.md) — database comparisons, deployment notes, and small examples
-- [Security](security/README.md) — security best practices, vulnerabilities, and hardening techniques
-- [numpy](numpy/README.md) — NumPy internals, C code structure, and performance optimization notes
-- [Python](python/README.md) — Python language fundamentals, standard library, and core documentation references
-- [microsoft](microsoft/README.md) — Microsoft Graph API, Azure services, and Microsoft development resources
-- [Linux](linux/README.md) — Linux commands and kernels
-- [bash](bash/README.md) — Bash scripting examples, Git command patterns, and shell automation techniques
-- [robot](robot/README.md) — robotics experiments, control code, and notes on sensors and controllers
-- [xwindow](xwindow/README.md) — X11, Xvfb virtual display, xdotool automation
-- [edk2](edk2/README.md) — TianoCore EDK2 UEFI firmware development, EmulatorPkg builds, and platform notes
-- [Flutter](flutter/README.md) — Cross platform application development
-- [Video](video/README.md) — Video editor and converter
-- [Virtualization](virtualization/README.md) — Virtualization
-- [Visualization](visualization/README.md) — Visualization
-- [Scrapy](scrapy/README.md) — Scrapy, Crawler, Spider
-- [Network](network/README.md) — Network
-- [Share](share/README.md) — Share file and data, network file system
-- [Vnc](vnc/README.md) — VNC
-- [Compiler](compiler/README.md) — Compiler
-- [University](university/README.md) — University
-- [Disk Management](disk/README.md) — Disk
-- [Science](science/README.md) — Science
-- [GPU](gpu/README.md) — GPU
-- [CPU](cpu/README.md) — CPU
+Create a file under `_posts/` with format `YYYY-MM-DD-title.md`:
+
+```yaml
+---
+title: Your Post Title
+categories: [topic]
+tags: [tag1, tag2]
+---
+```
+
+`categories` and `tags` will be automatically aggregated in `categories.md` and `tags.md`.
+
+### 2) Add a page
+
+Create a normal markdown file in root or any folder with front matter:
+
+```yaml
+---
+layout: page
+title: Page Title
+permalink: /your-page/
+---
+```
+
+### 3) Local preview (optional)
+
+```bash
+bundle exec jekyll serve
+```
+
+## Notes
+
+- This repository is Jekyll-first; homepage and archives are rendered from markdown/pages.
+- Directory `README.md` files are kept as lightweight entry docs, and navigation is unified in [categories.md](categories.md).
 
 ## Useful Links
 
-[![iconfont](https://www.google.com/s2/favicons?domain=www.iconfont.cn&sz=16)iconfont](https://www.iconfont.cn/),
-[![material](https://www.google.com/s2/favicons?domain=fonts.google.com&sz=16)material](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded)
-[![supabase](https://www.google.com/s2/favicons?domain=supabase.com&sz=16)supabase](https://www.supabase.com/),
-[![jina](https://www.google.com/s2/favicons?domain=jina.ai&sz=16)jina](https://jina.ai/embeddings/),
-[![HIWEPY](https://www.google.com/s2/favicons?domain=hiwepy.com&sz=16)HIWEPY](https://wiki.hiwepy.com/),
-[![EmergentMind](https://www.google.com/s2/favicons?domain=www.emergentmind.com&sz=16)EmergentMind](https://www.emergentmind.com/)
+- [iconfont](https://www.iconfont.cn/)
+- [Material Symbols](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded)
+- [Supabase](https://www.supabase.com/)
+- [Jina Embeddings](https://jina.ai/embeddings/)
+- [HIWEPY Wiki](https://wiki.hiwepy.com/)
+- [Emergent Mind](https://www.emergentmind.com/)
