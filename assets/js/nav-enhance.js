@@ -1,15 +1,31 @@
 (function () {
-  // Toggle header compact state on scroll
-  function updateHeaderState() {
-    const header = document.querySelector('.site-header');
-    if (!header) return;
+  const header = document.querySelector('.site-header');
+  if (!header) return;
 
-    if (window.scrollY > 60) {
-      header.classList.add('is-scrolled');
-    } else {
-      header.classList.remove('is-scrolled');
+  // Track scroll state
+  let scrollTimeout;
+  let isScrolled = false;
+
+  // Toggle header compact state on scroll
+  function updateHeaderScroll() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const shouldBeCompact = scrollTop > 80;
+
+    if (shouldBeCompact !== isScrolled) {
+      isScrolled = shouldBeCompact;
+      if (isScrolled) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
     }
   }
+
+  // Passive scroll listener for better performance
+  window.addEventListener('scroll', updateHeaderScroll, { passive: true });
+
+  // Initial check
+  updateHeaderScroll();
 
   // Generate table of contents from page content
   function generateTOC() {
@@ -108,22 +124,10 @@
     headings.forEach(h => observer.observe(h));
   }
 
-  // Smooth scroll behavior (fallback for older browsers)
-  function enableSmoothScroll() {
-    document.documentElement.style.scrollBehavior = 'smooth';
-  }
-
+  // Initialize TOC when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      generateTOC();
-      enableSmoothScroll();
-      updateHeaderState();
-    });
+    document.addEventListener('DOMContentLoaded', generateTOC);
   } else {
     generateTOC();
-    enableSmoothScroll();
-    updateHeaderState();
   }
-
-  window.addEventListener('scroll', updateHeaderState, { passive: true });
 })();
