@@ -226,6 +226,111 @@ a:hover {
   background: var(--surface-soft);
 }
 
+.content-wrap .highlighter-rouge,
+.content-wrap div.highlight {
+  margin: 0.85rem 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f7f9fc;
+  overflow: hidden;
+}
+
+.content-wrap .highlighter-rouge pre,
+.content-wrap div.highlight pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.content-wrap .highlighter-rouge code,
+.content-wrap div.highlight code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.content-wrap .highlight {
+  color: #1f2937;
+}
+
+.content-wrap .highlight .c,
+.content-wrap .highlight .cm,
+.content-wrap .highlight .cp,
+.content-wrap .highlight .c1,
+.content-wrap .highlight .cs {
+  color: #6b7280;
+  font-style: italic;
+}
+
+.content-wrap .highlight .k,
+.content-wrap .highlight .kc,
+.content-wrap .highlight .kd,
+.content-wrap .highlight .kn,
+.content-wrap .highlight .kp,
+.content-wrap .highlight .kr,
+.content-wrap .highlight .kt {
+  color: #7c3aed;
+}
+
+.content-wrap .highlight .nt,
+.content-wrap .highlight .ow,
+.content-wrap .highlight .o {
+  color: #1d4ed8;
+}
+
+.content-wrap .highlight .s,
+.content-wrap .highlight .sa,
+.content-wrap .highlight .sb,
+.content-wrap .highlight .sc,
+.content-wrap .highlight .dl,
+.content-wrap .highlight .sd,
+.content-wrap .highlight .s2,
+.content-wrap .highlight .se,
+.content-wrap .highlight .sh,
+.content-wrap .highlight .si,
+.content-wrap .highlight .sx,
+.content-wrap .highlight .sr,
+.content-wrap .highlight .s1,
+.content-wrap .highlight .ss {
+  color: #b45309;
+}
+
+.content-wrap .highlight .m,
+.content-wrap .highlight .mb,
+.content-wrap .highlight .mf,
+.content-wrap .highlight .mh,
+.content-wrap .highlight .mi,
+.content-wrap .highlight .il,
+.content-wrap .highlight .mo {
+  color: #0f766e;
+}
+
+.content-wrap .highlight .na,
+.content-wrap .highlight .nb,
+.content-wrap .highlight .nc,
+.content-wrap .highlight .nd,
+.content-wrap .highlight .ne,
+.content-wrap .highlight .nf,
+.content-wrap .highlight .nl,
+.content-wrap .highlight .nn,
+.content-wrap .highlight .no,
+.content-wrap .highlight .nv,
+.content-wrap .highlight .vc,
+.content-wrap .highlight .vg,
+.content-wrap .highlight .vi {
+  color: #be123c;
+}
+
+.content-wrap .highlight .err,
+.content-wrap .highlight .gd {
+  color: #b91c1c;
+}
+
+.content-wrap .highlight .gi {
+  color: #15803d;
+}
+
 .content-wrap code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   font-size: 0.9em;

@@ -4,6 +4,12 @@ lang: zh-CN
 timezone: Asia/Shanghai
 permalink: /:categories/:title/
 
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
 defaults:
   - scope:
       path: ""
