@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
   </head>
-  <body>
+  {% assign current_url = page.url | default: '/' %}
+  <body class="layout-{{ page.layout | default: 'default' }}">
     <header class="site-header">
       <div class="container header-inner">
         <a class="brand" href="{{ '/' | relative_url }}">
@@ -17,18 +18,18 @@
           <span class="brand-subtitle">{{ site.description }}</span>
         </a>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="{{ '/' | relative_url }}">Home</a>
-          <a href="{{ '/about/' | relative_url }}">About</a>
-          <a href="{{ '/archives/' | relative_url }}">Archives</a>
-          <a href="{{ '/categories/' | relative_url }}">Categories</a>
-          <a href="{{ '/tags/' | relative_url }}">Tags</a>
+          <a class="{% if current_url == '/' %}is-active{% endif %}" href="{{ '/' | relative_url }}" {% if current_url == '/' %}aria-current="page"{% endif %}>Home</a>
+          <a class="{% if current_url contains '/about/' %}is-active{% endif %}" href="{{ '/about/' | relative_url }}" {% if current_url contains '/about/' %}aria-current="page"{% endif %}>About</a>
+          <a class="{% if current_url contains '/archives/' %}is-active{% endif %}" href="{{ '/archives/' | relative_url }}" {% if current_url contains '/archives/' %}aria-current="page"{% endif %}>Archives</a>
+          <a class="{% if current_url contains '/categories/' %}is-active{% endif %}" href="{{ '/categories/' | relative_url }}" {% if current_url contains '/categories/' %}aria-current="page"{% endif %}>Categories</a>
+          <a class="{% if current_url contains '/tags/' %}is-active{% endif %}" href="{{ '/tags/' | relative_url }}" {% if current_url contains '/tags/' %}aria-current="page"{% endif %}>Tags</a>
         </nav>
       </div>
     </header>
 
     <main class="site-main">
       <div class="container page-body">
-        <div class="main-content">
+        <div class="main-content prose-root">
           {{ content }}
         </div>
         {% include sidebar.html %}

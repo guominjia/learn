@@ -3,7 +3,7 @@ layout: default
 ---
 
 <article class="content-wrap">
-  <header>
+  <header class="content-head">
     <h1>{{ page.title }}</h1>
     <p class="meta">
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y-%m-%d" }}</time>
@@ -15,5 +15,24 @@ layout: default
       {% endif %}
     </p>
   </header>
-  {{ content }}
+  <div class="content-body">
+    {{ content }}
+  </div>
+
+  {% if page.previous or page.next %}
+  <nav class="post-pagination" aria-label="Post navigation">
+    <div class="post-pagination-item">
+      {% if page.previous %}
+      <span class="meta">上一篇</span>
+      <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+      {% endif %}
+    </div>
+    <div class="post-pagination-item post-pagination-item-next">
+      {% if page.next %}
+      <span class="meta">下一篇</span>
+      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
 </article>

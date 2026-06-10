@@ -5,7 +5,7 @@ title: Home
 
 <section class="hero">
   <h1>持续学习、持续记录</h1>
-  <p>{{ site.description }}。这里整理 AI、系统、工程实践与个人思考，沉淀可复用的知识资产。</p>
+  <p>{{ site.description }}。这里持续沉淀 AI、系统、工程实践与个人思考，打造可检索、可复用、可迭代的知识库。</p>
 </section>
 
 <section class="grid two">
@@ -38,7 +38,8 @@ title: Home
       <li><a href="{{ '/database/' | relative_url }}">数据库记录</a></li>
       <li><a href="{{ '/categories/' | relative_url }}">分类归档</a></li>
       <li><a href="{{ '/tags/' | relative_url }}">标签归档</a></li>
+      <li><a href="{{ '/archives/' | relative_url }}">时间归档</a></li>
     </ul>
-    <p class="meta">你可以继续按目录扩展内容，首页会自动聚合最新 post。</p>
+    <p class="meta">首页会自动聚合最新文章；按分类、标签或时间都可以快速导航到目标内容。</p>
   </article>
 </section>
