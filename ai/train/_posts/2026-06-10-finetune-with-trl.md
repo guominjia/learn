@@ -1,15 +1,16 @@
----
-title: Fine-Tuning with TRL: Common Pitfalls and a Minimal SFTTrainer Setup
+﻿---
+title: Fine-Tuning with TRL: SFTTrainer, OOM, and LoRA
 date: 2026-06-10
-tags: llm trl sft finetuning huggingface
+tags: llm trl sft finetuning huggingface oom lora qlora
 ---
 
-This post summarizes a few practical issues that can appear when fine-tuning a chat model with TRL's `SFTTrainer`.
+This post covers three practical issues that come up when fine-tuning a chat model with TRL's `SFTTrainer`: a removed API, CUDA out-of-memory errors during full fine-tuning, and how LoRA/QLoRA solves both the memory and the update-scope problems.
 
-The original experiment used the [SmolTalk dataset](https://huggingface.co/datasets/HuggingFaceTB/smoltalk), the TRL course notebook, and a small SmolLM2 model. It ran into two common problems:
+The original experiment used the [SmolTalk dataset](https://huggingface.co/datasets/HuggingFaceTB/smoltalk), the TRL course notebook, and a small SmolLM2 model. It ran into three common problems:
 
 - `setup_chat_format` is no longer available in newer TRL releases.
 - A base model without a chat template is a poor default for supervised fine-tuning on conversational data.
+- Full fine-tuning on a large model exhausts GPU memory during the first optimizer step.
 
 ## What went wrong
 
@@ -129,15 +130,62 @@ trainer = SFTTrainer(
 )
 ```
 
+## CUDA out of memory
+
+When running full fine-tuning on a large model, you may hit this error during the very first optimizer step:
+
+```text
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 96.00 MiB.
+GPU 0 has a total capacity of 47.41 GiB of which 8.69 MiB is free.
+```
+
+The forward and backward passes may complete, but Adam needs to allocate two extra state tensors (`exp_avg` and `exp_avg_sq`) for every parameter on the first `step`. That second allocation is what pushes the GPU over the limit.
+
+**Why it happens**
+
+Full fine-tuning keeps four copies of every parameter in memory: the weights, the gradients, and two Adam moment tensors. Add the activations from a large model and a 48 GB GPU fills up quickly.
+
+**How to fix it (in order of impact)**
+
+1. Switch to LoRA or QLoRA - freeze the base weights and only train a small adapter.
+2. Set `per_device_train_batch_size=1` and use `gradient_accumulation_steps` to recover the effective batch size.
+3. Enable `gradient_checkpointing=True` and `bf16=True`.
+4. Use `optim="paged_adamw_8bit"` (bitsandbytes) to page optimizer state off the GPU.
+5. Lower `max_length` to 1024 or 512 as a first step.
+6. Set `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` to reduce fragmentation (helps but does not solve the root cause).
+
+## LoRA and QLoRA
+
+LoRA (Low-Rank Adaptation) is the standard way to fine-tune large models without running out of memory. Instead of updating all parameters, it injects a pair of small trainable matrices into selected layers. The base model is frozen, so the memory footprint shrinks dramatically.
+
+```text
+Original weight W (frozen)
+W + A x B   <- only A and B are trained (rank r << hidden dim d)
+```
+
+QLoRA combines LoRA with 4-bit quantization of the frozen base weights. The base model loads in NF4 format, reducing weight memory by roughly 4x, while LoRA adapters remain in bfloat16.
+
+**When to use each**
+
+| Setup | GPU memory | When to use |
+|---|---|---|
+| Full fine-tune | Highest | Small models only, or many GPUs |
+| LoRA | Medium | Model fits in FP16/BF16 on one GPU |
+| QLoRA | Lowest | Large model on a single consumer or mid-range GPU |
+
+**Minimal QLoRA + SFTTrainer setup for a single 48 GB GPU**
+
+Refer [code](https://github.com/guominjia/learn/blob/code_study/finetune/finetune-qwen3p5.py) for implementation
+
+If OOM persists after switching to QLoRA, lower `max_length` to 768, then reduce `r` from 16 to 8.
+
 ## Practical recommendation
 
-If the model already has a chat template, do not force a legacy helper from old examples. Keep the setup simple:
-
-- pick an instruct model first
-- use `SFTTrainer` directly
-- check dataset splits before enabling evaluation
-
-That path is usually faster to debug and easier to maintain.
+- Pick an instruct model that already has a chat template.
+- Use `SFTTrainer` directly without legacy helpers.
+- Check dataset splits before enabling evaluation.
+- Start with QLoRA on any model larger than a few billion parameters.
+- Keep `max_length` at 1024 until training is stable, then increase.
 
 ## Related resources
 
@@ -145,4 +193,5 @@ That path is usually faster to debug and easier to maintain.
 - [TRL SFTTrainer course](https://huggingface.co/learn/llm-course/chapter11/3)
 - [TRL documentation](https://huggingface.co/docs/trl)
 - [Google Colab](https://colab.research.google.com/github/huggingface/notebooks/blob/main/course/en/chapter11/section3.ipynb)
-- [Github Code](https://github.com/huggingface/notebooks/blob/main/course/en/chapter11/section3.ipynb)
+- [GitHub Code](https://github.com/huggingface/notebooks/blob/main/course/en/chapter11/section3.ipynb)
+- [QLoRA script reference](https://github.com/guominjia/learn/blob/code_study/finetune/finetune-qwen3p5.py)
