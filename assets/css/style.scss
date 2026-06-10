@@ -226,6 +226,13 @@ a:hover {
   background: var(--surface-soft);
 }
 
+.content-wrap pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  display: block;
+}
+
 .content-wrap .highlighter-rouge,
 .content-wrap div.highlight {
   margin: 0.85rem 0;
@@ -252,6 +259,20 @@ a:hover {
 
 .content-wrap .highlight {
   color: #1f2937;
+}
+
+.content-wrap .highlight pre {
+  background: transparent;
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+
+.content-wrap .highlight code {
+  display: block;
+  background: transparent;
+  padding: 0;
+  border: 0;
 }
 
 .content-wrap .highlight .c,
