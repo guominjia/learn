@@ -1,5 +1,5 @@
 ﻿---
-title: Fine-Tuning with TRL: SFTTrainer, OOM, and LoRA
+title: "Fine-Tuning with TRL: SFTTrainer, OOM, and LoRA"
 date: 2026-06-10
 tags: llm trl sft finetuning huggingface oom lora qlora
 ---
