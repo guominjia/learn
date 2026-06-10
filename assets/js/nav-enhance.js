@@ -7,7 +7,7 @@
   // Toggle header compact state on scroll
   function updateHeaderScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const shouldBeCompact = scrollTop > 80;
+    const shouldBeCompact = scrollTop > 40;
 
     if (shouldBeCompact !== isScrolled) {
       isScrolled = shouldBeCompact;
@@ -29,6 +29,12 @@
   function generateTOC() {
     const contentBody = document.querySelector('.content-body');
     if (!contentBody) return;
+
+    const contentWrap = document.querySelector('.content-wrap');
+    if (!contentWrap) return;
+
+    const oldToc = contentWrap.querySelector('.page-toc');
+    if (oldToc) oldToc.remove();
 
     const headings = Array.from(contentBody.querySelectorAll('h2, h3')).filter(
       h => h.textContent.trim()
@@ -85,8 +91,7 @@
     tocNav.appendChild(tocList);
     
     // Insert TOC before content body
-    const contentWrap = document.querySelector('.content-wrap');
-    if (contentWrap && contentWrap.querySelector('.content-head')) {
+    if (contentWrap.querySelector('.content-head')) {
       contentWrap.querySelector('.content-head').insertAdjacentElement('afterend', tocNav);
     }
 
