@@ -2,8 +2,6 @@
   const header = document.querySelector('.site-header');
   if (!header) return;
 
-  // Track scroll state
-  let scrollTimeout;
   let isScrolled = false;
 
   // Toggle header compact state on scroll
@@ -32,8 +30,9 @@
     const contentBody = document.querySelector('.content-body');
     if (!contentBody) return;
 
-    const headings = Array.from(contentBody.querySelectorAll('h2, h3'))
-      .filter(h => h.textContent.trim());
+    const headings = Array.from(contentBody.querySelectorAll('h2, h3')).filter(
+      h => h.textContent.trim()
+    );
 
     if (headings.length === 0) return;
 
@@ -50,35 +49,12 @@
     tocNav.setAttribute('aria-label', 'Page contents');
 
     const tocList = document.createElement('ul');
-    let currentLevel = 0;
-    let currentList = tocList;
-    const stack = [{ level: 0, element: tocList }];
+    let currentH2Item = null;
 
     headings.forEach(h => {
-      const level = parseInt(h.tagName[1]);
+      const level = h.tagName.toLowerCase();
       const text = h.textContent;
       const id = h.id;
-
-      // Adjust nesting level
-      while (currentLevel >= level && stack.length > 1) {
-        stack.pop();
-        currentLevel--;
-      }
-
-      if (level > currentLevel) {
-        for (let i = currentLevel; i < level; i++) {
-          const newList = document.createElement('ul');
-          const lastItem = currentList.lastElementChild;
-          if (lastItem) {
-            lastItem.appendChild(newList);
-          } else {
-            currentList.appendChild(newList);
-          }
-          stack.push({ level: i + 1, element: newList });
-          currentList = newList;
-        }
-        currentLevel = level;
-      }
 
       const item = document.createElement('li');
       const link = document.createElement('a');
@@ -87,7 +63,23 @@
       link.className = 'toc-link';
       link.dataset.targetId = id;
       item.appendChild(link);
-      currentList.appendChild(item);
+
+      if (level === 'h2') {
+        tocList.appendChild(item);
+        currentH2Item = item;
+        return;
+      }
+
+      if (level === 'h3' && currentH2Item) {
+        let subList = currentH2Item.querySelector(':scope > ul');
+        if (!subList) {
+          subList = document.createElement('ul');
+          currentH2Item.appendChild(subList);
+        }
+        subList.appendChild(item);
+      } else {
+        tocList.appendChild(item);
+      }
     });
 
     tocNav.appendChild(tocList);
