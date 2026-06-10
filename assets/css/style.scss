@@ -540,6 +540,28 @@ a:hover {
   transition: padding 0.2s ease, top 0.2s ease, max-height 0.2s ease;
 }
 
+.page-toc-toggle {
+  display: none;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px;
+}
+
+.page-toc-toggle span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: #4b5563;
+}
+
 .sidebar .page-toc {
   margin-top: 0;
 }
@@ -548,6 +570,24 @@ a:hover {
   top: 58px;
   padding: 0.5rem 0.7rem;
   max-height: calc(100vh - 76px);
+}
+
+.page-toc.is-scrolled .page-toc-toggle {
+  display: inline-flex;
+}
+
+.page-toc.is-scrolled.is-collapsed {
+  padding: 0.35rem;
+  width: fit-content;
+  overflow: visible;
+}
+
+.page-toc.is-scrolled.is-collapsed > ul {
+  display: none;
+}
+
+.page-toc.is-scrolled:not(.is-collapsed) {
+  min-width: 220px;
 }
 
 .page-toc > ul {
@@ -621,6 +661,14 @@ html {
     max-height: none;
     overflow: visible;
     top: auto;
+  }
+
+  .page-toc-toggle {
+    display: none !important;
+  }
+
+  .page-toc > ul {
+    display: block !important;
   }
 
   .sidebar {

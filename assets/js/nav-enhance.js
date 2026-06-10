@@ -99,6 +99,20 @@
       }
     });
 
+    const tocToggle = document.createElement('button');
+    tocToggle.type = 'button';
+    tocToggle.className = 'page-toc-toggle';
+    tocToggle.setAttribute('aria-expanded', 'false');
+    tocToggle.setAttribute('aria-label', 'Toggle table of contents');
+    tocToggle.innerHTML = '<span></span><span></span><span></span>';
+
+    tocNav.classList.add('is-collapsed');
+    tocToggle.addEventListener('click', () => {
+      const isCollapsed = tocNav.classList.toggle('is-collapsed');
+      tocToggle.setAttribute('aria-expanded', String(!isCollapsed));
+    });
+
+    tocNav.appendChild(tocToggle);
     tocNav.appendChild(tocList);
     
     // Prefer sidebar placement to avoid covering article content
