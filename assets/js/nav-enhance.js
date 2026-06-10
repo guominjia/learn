@@ -8,13 +8,16 @@
   function updateHeaderScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const shouldBeCompact = scrollTop > 40;
+    const toc = document.querySelector('.page-toc');
 
     if (shouldBeCompact !== isScrolled) {
       isScrolled = shouldBeCompact;
       if (isScrolled) {
         header.classList.add('is-scrolled');
+        if (toc) toc.classList.add('is-scrolled');
       } else {
         header.classList.remove('is-scrolled');
+        if (toc) toc.classList.remove('is-scrolled');
       }
     }
   }
@@ -33,8 +36,12 @@
     const contentWrap = document.querySelector('.content-wrap');
     if (!contentWrap) return;
 
-    const oldToc = contentWrap.querySelector('.page-toc');
-    if (oldToc) oldToc.remove();
+    const oldTocInContent = contentWrap.querySelector('.page-toc');
+    if (oldTocInContent) oldTocInContent.remove();
+
+    const sidebar = document.querySelector('.sidebar');
+    const oldTocInSidebar = sidebar ? sidebar.querySelector('.page-toc') : null;
+    if (oldTocInSidebar) oldTocInSidebar.remove();
 
     const headings = Array.from(contentBody.querySelectorAll('h2, h3')).filter(
       h => h.textContent.trim()
@@ -53,6 +60,10 @@
     const tocNav = document.createElement('nav');
     tocNav.className = 'page-toc';
     tocNav.setAttribute('aria-label', 'Page contents');
+
+    if (header.classList.contains('is-scrolled')) {
+      tocNav.classList.add('is-scrolled');
+    }
 
     const tocList = document.createElement('ul');
     let currentH2Item = null;
@@ -90,8 +101,10 @@
 
     tocNav.appendChild(tocList);
     
-    // Insert TOC before content body
-    if (contentWrap.querySelector('.content-head')) {
+    // Prefer sidebar placement to avoid covering article content
+    if (sidebar) {
+      sidebar.prepend(tocNav);
+    } else if (contentWrap.querySelector('.content-head')) {
       contentWrap.querySelector('.content-head').insertAdjacentElement('afterend', tocNav);
     }
 

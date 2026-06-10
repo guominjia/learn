@@ -534,9 +534,20 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: 10px;
   position: sticky;
-  top: 84px;
-  max-height: calc(100vh - 110px);
+  top: 74px;
+  max-height: calc(100vh - 96px);
   overflow: auto;
+  transition: padding 0.2s ease, top 0.2s ease, max-height 0.2s ease;
+}
+
+.sidebar .page-toc {
+  margin-top: 0;
+}
+
+.page-toc.is-scrolled {
+  top: 58px;
+  padding: 0.5rem 0.7rem;
+  max-height: calc(100vh - 76px);
 }
 
 .page-toc > ul {
@@ -568,6 +579,11 @@ a:hover {
   border-radius: 6px;
   transition: all 0.15s ease;
   display: inline-block;
+}
+
+.page-toc.is-scrolled a {
+  font-size: 0.88rem;
+  padding: 0.14rem 0.3rem;
 }
 
 .page-toc a:hover {
@@ -604,6 +620,7 @@ html {
     position: static;
     max-height: none;
     overflow: visible;
+    top: auto;
   }
 
   .sidebar {
