@@ -533,6 +533,10 @@ a:hover {
   background: #f9fafb;
   border: 1px solid var(--border);
   border-radius: 10px;
+  position: sticky;
+  top: 84px;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
 }
 
 .page-toc > ul {
@@ -594,6 +598,12 @@ html {
 @media (max-width: 900px) {
   .page-body {
     grid-template-columns: 1fr;
+  }
+
+  .page-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
   }
 
   .sidebar {
