@@ -82,3 +82,4 @@
 1. When create user, how to make it be admin so it will be superuser? can search `is_superuser` to answer it
 2. Which component use `service_conf.yaml.template`?
 3. How `BaseModel.query` connect with `MYSQL`
+4. RAG Usage: Select suitable dataset at first. Prompt: the dataset1 is used for, the dataset2 is used for, please choose the suitable dataset to find related document.
