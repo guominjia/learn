@@ -429,6 +429,18 @@ a:hover {
   align-items: start;
 }
 
+.page-body.has-left-toc {
+  grid-template-columns: 220px minmax(0, 1fr) 280px;
+}
+
+.page-body.has-left-toc .main-content {
+  grid-column: 2;
+}
+
+.page-body.has-left-toc .sidebar {
+  grid-column: 3;
+}
+
 .layout-post .main-content {
   max-width: 760px;
 }
@@ -566,6 +578,11 @@ a:hover {
   margin-top: 0;
 }
 
+.page-toc-left {
+  grid-column: 1;
+  margin-top: 0;
+}
+
 .page-toc.is-scrolled {
   top: 58px;
   padding: 0.5rem 0.7rem;
@@ -654,6 +671,16 @@ html {
 @media (max-width: 900px) {
   .page-body {
     grid-template-columns: 1fr;
+  }
+
+  .page-body.has-left-toc {
+    grid-template-columns: 1fr;
+  }
+
+  .page-body.has-left-toc .main-content,
+  .page-body.has-left-toc .sidebar,
+  .page-toc-left {
+    grid-column: auto;
   }
 
   .page-toc {

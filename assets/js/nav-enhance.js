@@ -36,12 +36,14 @@
     const contentWrap = document.querySelector('.content-wrap');
     if (!contentWrap) return;
 
+    const pageBody = document.querySelector('.page-body');
+
     const oldTocInContent = contentWrap.querySelector('.page-toc');
     if (oldTocInContent) oldTocInContent.remove();
 
-    const sidebar = document.querySelector('.sidebar');
-    const oldTocInSidebar = sidebar ? sidebar.querySelector('.page-toc') : null;
-    if (oldTocInSidebar) oldTocInSidebar.remove();
+    const oldLeftToc = pageBody ? pageBody.querySelector('.page-toc.page-toc-left') : null;
+    if (oldLeftToc) oldLeftToc.remove();
+    if (pageBody) pageBody.classList.remove('has-left-toc');
 
     const headings = Array.from(contentBody.querySelectorAll('h2, h3')).filter(
       h => h.textContent.trim()
@@ -58,7 +60,7 @@
 
     // Create TOC nav
     const tocNav = document.createElement('nav');
-    tocNav.className = 'page-toc';
+    tocNav.className = 'page-toc page-toc-left';
     tocNav.setAttribute('aria-label', 'Page contents');
 
     if (header.classList.contains('is-scrolled')) {
@@ -115,9 +117,10 @@
     tocNav.appendChild(tocToggle);
     tocNav.appendChild(tocList);
     
-    // Prefer sidebar placement to avoid covering article content
-    if (sidebar) {
-      sidebar.prepend(tocNav);
+    // Prefer dedicated left column placement
+    if (pageBody) {
+      pageBody.prepend(tocNav);
+      pageBody.classList.add('has-left-toc');
     } else if (contentWrap.querySelector('.content-head')) {
       contentWrap.querySelector('.content-head').insertAdjacentElement('afterend', tocNav);
     }
