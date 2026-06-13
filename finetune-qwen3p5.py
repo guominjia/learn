@@ -42,7 +42,12 @@ peft_config = LoraConfig(
 # Dataset.
 ds = load_dataset("HuggingFaceTB/smoltalk", "all")
 train_ds = ds["train"]
-eval_ds = ds["test"] if "test" in ds else None
+if "test" in ds:
+    eval_ds = ds["test"]
+else:
+    split = train_ds.train_test_split(test_size=0.01, seed=42)
+    train_ds = split["train"]
+    eval_ds = split["test"]
 
 # Minimal stable SFT settings for a single 48 GB GPU.
 training_args = SFTConfig(
