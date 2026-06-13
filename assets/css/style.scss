@@ -422,6 +422,22 @@ a:hover {
   background: #fff;
 }
 
+.content-wrap .katex {
+  font-size: 1.04em;
+}
+
+.content-wrap .katex-display {
+  margin: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15rem 0.1rem 0.35rem;
+}
+
+.content-wrap .katex-display > .katex {
+  display: inline-block;
+  min-width: max-content;
+}
+
 .page-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 280px;

@@ -48,6 +48,19 @@ permalink: /your-page/
 bundle exec jekyll serve
 ```
 
+### 4) Write math formulas
+
+- Inline formula: `$E = mc^2$`
+- Block formula:
+
+```tex
+$$
+\nabla_x \mathcal{L}(x) = \sum_{i=1}^{n} \frac{\partial \mathcal{L}}{\partial x_i}
+$$
+```
+
+- Escape ordinary currency symbols with `\$` if needed.
+
 ## Notes
 
 - This repository is Jekyll-first; homepage and archives are rendered from markdown/pages.
