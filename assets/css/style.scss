@@ -430,7 +430,7 @@ a:hover {
 }
 
 .page-body.has-left-toc {
-  grid-template-columns: 220px minmax(0, 1fr) 280px;
+  grid-template-columns: 52px minmax(0, 1fr) 280px;
 }
 
 .page-body.has-left-toc .main-content {
@@ -553,7 +553,7 @@ a:hover {
 }
 
 .page-toc-toggle {
-  display: none;
+  display: inline-flex;
   width: 34px;
   height: 34px;
   border: 1px solid var(--border);
@@ -581,6 +581,13 @@ a:hover {
 .page-toc-left {
   grid-column: 1;
   margin-top: 0;
+  padding: 0.35rem;
+  background: transparent;
+  border: none;
+  max-height: none;
+  overflow: visible;
+  width: fit-content;
+  z-index: 20;
 }
 
 .page-toc.is-scrolled {
@@ -593,18 +600,32 @@ a:hover {
   display: inline-flex;
 }
 
-.page-toc.is-scrolled.is-collapsed {
+.page-toc-left.is-collapsed {
   padding: 0.35rem;
   width: fit-content;
   overflow: visible;
 }
 
-.page-toc.is-scrolled.is-collapsed > ul {
+.page-toc-left.is-collapsed > ul {
   display: none;
 }
 
-.page-toc.is-scrolled:not(.is-collapsed) {
+.page-toc-left:not(.is-collapsed) > ul {
+  position: absolute;
+  top: 0.35rem;
+  left: calc(100% + 0.45rem);
   min-width: 220px;
+  max-height: calc(100vh - 96px);
+  overflow: auto;
+  padding: 0.75rem 0.95rem;
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow);
+}
+
+.page-toc-left.is-scrolled:not(.is-collapsed) > ul {
+  max-height: calc(100vh - 76px);
 }
 
 .page-toc > ul {
@@ -688,6 +709,25 @@ html {
     max-height: none;
     overflow: visible;
     top: auto;
+  }
+
+  .page-toc-left {
+    padding: 0.75rem 0.95rem;
+    background: #f9fafb;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: auto;
+  }
+
+  .page-toc-left:not(.is-collapsed) > ul {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
 
   .page-toc-toggle {
