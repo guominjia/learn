@@ -132,3 +132,43 @@ When evaluating a phone memory claim:
 And while you may only see one memory package in a phone, that package can internally stack multiple dies. Finally, LPDDR does require training/calibration; modern phones are just engineered to make it mostly invisible to users.
 
 If you want, the next step can be a follow-up post comparing LPDDR package organization with UFS/NAND package organization in smartphones.
+
+---
+
+## References
+
+### RAM density, width, and capacity interpretation
+
+1. [Eastmoney article on memory labeling](https://caifuhao.eastmoney.com/news/20201015084002960124710)
+2. [Samsung: 32Gb DDR5 DRAM announcement](https://semiconductor.samsung.cn/news-events/news/samsung-electronics-unveils-industrys-highest-capacity-12nm-class-32gb-ddr5-dram-ideal-for-the-ai-era/)
+3. [EET China: DRAM density/capacity discussion](https://www.eet-china.com/mp/a423313.html)
+4. [CSDN article on memory bit width](https://blog.csdn.net/YJFeiii/article/details/105469366)
+5. [AMD LPDDR5 specifications](https://docs.amd.com/r/en-US/ds1010-ma35d/LPDDR5-Specifications)
+6. [Sina article referencing phone memory configurations](https://cj.sina.cn/articles/view/7857141524/1d452771401902yrvq)
+7. [Zhihu discussion on mobile RAM combinations](https://www.zhihu.com/question/597884315)
+8. [Micron LPDDR5X products](https://tw.micron.com/products/memory/lpddr-components/lpddr5x)
+9. [Samsung LPDDR product page](https://semiconductor.samsung.cn/dram/lpddr/)
+
+### Packaging and die stacking in phones
+
+10. [Reddit ELI5 thread on phone RAM size vs package size](https://www.reddit.com/r/explainlikeimfive/comments/at0yjd/eli5_how_can_phones_have_8gb_ram_in_such_a_small/)
+11. [Aichiplink LPDDR overview](https://aichiplink.com/blog/A-Complete-Overview-of-LPDDR-Memory-for-Mobile-and-Embedded-Systems_970)
+12. [Wafer World article on smartphone wafers](https://www.waferworld.com/post/how-many-thin-silicon-wafers-are-needed-to-make-a-smartphone)
+13. [SemiEngineering LPDDR packaging and applications](https://semiengineering.com/lpddr-a-versatile-memory-powering-the-next-wave-of-mobile-edge-endpoint-computing/)
+14. [Memphis: Multi-chip memory packages](https://www.memphis.de/en/products/ram-components/multi-chip-packages)
+15. [Micron China LPDDR5X page](https://www.micron.cn/products/memory/lpddr-components/lpddr5x)
+
+### Memory training and runtime calibration
+
+16. [DDR5 training overview (general background)](https://whitearker.com/blog/how-long-does-it-take-to-train-ddr5-ram/)
+17. [YouTube discussion on memory training behavior](https://www.youtube.com/watch?v=o8g5GXyN2ts&t=3)
+18. [Reddit thread on motherboard memory training time](https://www.reddit.com/r/MSI_Gaming/comments/1kuur90/how_long_should_a_new_motherboard_memory/)
+19. [YouTube LPDDR speed reference](https://www.youtube.com/watch?v=dWib0EQLXVM&t=8)
+20. [RVSpace forum: DRAM training and calibration](https://forum.rvspace.org/t/dram-training-and-calibration/3224)
+21. [AMD memory initialization/configuration doc](https://docs.amd.com/r/en-US/pg456-integrated-mc/Memory-Initialization-and-Configuration)
+22. [TechPowerUp discussion on long AM5 POST behavior](https://www.techpowerup.com/forums/threads/long-am5-post-times.300869/)
+23. [LPDDR course material (self-refresh background)](https://www.ac6-formation.com/en/cours.php/cat_DRAM/ref_SDR1/ddr4-lpddr4)
+24. [IEEE paper on memory calibration/training topic](https://ieeexplore.ieee.org/document/8240239/)
+25. [IEEE paper on runtime-related DRAM calibration topic](https://ieeexplore.ieee.org/document/8424022/)
+26. [NXP app note on autonomous DDR calibration at runtime](https://docs.nxp.com/bundle/AN14594/page/topics/autonomous_ddr_calibration_during_run-time.html)
+27. [LinkedIn article on ZQ calibration](https://www.linkedin.com/pulse/zq-calibration-ddr-comprehensive-explanation-training-institute-kxyhc)
