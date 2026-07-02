@@ -1,4 +1,4 @@
-﻿# Deep Dive: RAGFlow's Admin & Superuser Initialization System
+# Deep Dive: RAGFlow's Admin & Superuser Initialization System
 
 RAGFlow is an open-source RAG (Retrieval-Augmented Generation) engine. One of its less-documented but critical subsystems is how it bootstraps administrator accounts at startup. This post dissects the dual-service initialization architecture, the authentication pipeline, and the security implications you should be aware of before deploying to production.
 
@@ -29,6 +29,26 @@ RAGFlow's codebase contains **two independent Python services** that share the s
 | **Admin Service** | `admin/` | System monitoring, user management, and operational CLI | 9381 |
 
 Both services independently attempt to ensure an administrator account exists at startup, but they use different functions with different behaviors.
+
+In the Docker image, `docker/entrypoint.sh` is the container entrypoint. You can validate this in the Dockerfile:
+
+```dockerfile
+ENTRYPOINT ["./entrypoint.sh"]
+```
+
+That entrypoint starts the Web service first and, when enabled, starts the Admin service afterward:
+
+```bash
+"$PY" api/ragflow_server.py ${INIT_SUPERUSER_ARGS} &
+"$PY" admin/server/admin_server.py &
+```
+
+So the creation attempts happen in this order:
+
+1. `api/ragflow_server.py` consumes `init_superuser()` from `api/db/init_data.py`
+2. `admin/server/admin_server.py` consumes `init_default_admin()` from `admin/server/auth.py`
+
+In other words, Docker startup first gives the Web service a chance to create the superuser via `init_superuser()`, then the Admin service performs its fallback check via `init_default_admin()`.
 
 ---
 
