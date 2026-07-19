@@ -52,3 +52,5 @@ $$
 
 - <https://www.cnblogs.com/syqwq/p/15190115.html>
 - <https://zhuanlan.zhihu.com/p/441454622>
+- <https://kaoyan.eol.cn/shiti/shuxue/202508/t20250828_2686951.shtml>
+- <https://download.chinakaoyan.com/list-subject-3-3.html>
