@@ -393,7 +393,13 @@ As a rough rule:
 - On a 4-core machine, load `4.00` means roughly fully loaded.
 - On a 16-core machine, load `16.00` means roughly fully loaded.
 
-So always compare load average with CPU count.
+Use `nproc` to print the number of available processors:
+
+```bash
+nproc
+```
+
+Compare the load average with this value. If the load average is consistently greater than the `nproc` result, the system is overloaded: more tasks are waiting to run than the available processors can handle. However, because load average also includes tasks in uninterruptible sleep, investigate I/O waits as well as CPU usage.
 
 ### Task summary
 
