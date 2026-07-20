@@ -25,6 +25,11 @@ def parse_arguments() -> argparse.Namespace:
         default=os.environ.get("CLAUDE_MODEL", DEFAULT_MODEL),
         help=f"Bedrock model or inference profile ID (default: {DEFAULT_MODEL}).",
     )
+    parser.add_argument(
+        "--list-models",
+        action="store_true",
+        help="List models available through the Bedrock catalog in AWS_REGION.",
+    )
     parser.add_argument("--max-tokens", type=int, default=256)
     return parser.parse_args()
 
@@ -61,6 +66,31 @@ def invoke_claude(
         return json.load(response)
 
 
+def list_models(*, region: str, bearer_token: str) -> list[dict[str, object]]:
+    url = f"https://bedrock.{region}.amazonaws.com/foundation-models"
+    authorization = bearer_token.strip()
+    if not authorization.lower().startswith("bearer "):
+        authorization = f"Bearer {authorization}"
+
+    request = Request(url, headers={"Authorization": authorization})
+    with urlopen(request, timeout=30) as response:
+        payload = json.load(response)
+    return payload["modelSummaries"]
+
+
+def print_models(models: list[dict[str, object]]) -> None:
+    print(f"Total models: {len(models)}")
+    for model in sorted(models, key=lambda item: str(item["modelId"])):
+        inference_apis = model.get("inferenceAPIsSupported", {})
+        supported_apis = ", ".join(
+            api for api, enabled in inference_apis.items() if enabled
+        )
+        print(
+            f"{model['modelId']}\t{model['providerName']}\t"
+            f"{model['modelName']}\t{supported_apis}"
+        )
+
+
 def response_text(response: dict[str, object]) -> str:
     try:
         content = response["output"]["message"]["content"]
@@ -75,6 +105,10 @@ def main() -> None:
     token = require_environment("AWS_BEARER_TOKEN_BEDROCK")
 
     try:
+        if arguments.list_models:
+            print_models(list_models(region=region, bearer_token=token))
+            return
+
         response = invoke_claude(
             model=arguments.model,
             prompt=arguments.prompt,
