@@ -263,6 +263,22 @@ ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub
 
 ---
 
+## SSH and HTTPS Trust Models
+
+SSH and HTTPS both encrypt traffic and authenticate a remote server, but they distribute trust differently. `mkcert` and OpenSSL create **X.509 certificates for TLS/HTTPS**; they do not create SSH host or user keys.
+
+| Concern | HTTPS/TLS | SSH |
+|---------|-----------|-----|
+| Server identity | An X.509 server certificate, validated against the requested hostname | A server host public key |
+| Trust anchor | A trusted root CA in an OS, browser, or client trust store | A matching entry in `known_hosts`, a system-wide known-hosts file, or an optional SSH CA key |
+| First connection | The certificate must already chain to a trusted CA | The user commonly verifies and records the presented host-key fingerprint (trust on first use) |
+| User authentication | Usually application credentials; mutual TLS is optional | The client proves possession of a private key and the server authorizes its public key through `authorized_keys` |
+| Certificate tooling | `mkcert` or OpenSSL can issue local TLS certificates | `ssh-keygen` creates SSH keys and can sign optional SSH certificates |
+
+Do not confuse the two SSH files. `known_hosts` protects the **client** from connecting to an unexpected server, while `authorized_keys` lets the **server** decide which client public keys may log in. For centrally managed SSH fleets, OpenSSH can trust a CA public key through an `@cert-authority` entry in `known_hosts`; this is an SSH certificate system, not an X.509/TLS certificate chain.
+
+---
+
 ## Troubleshooting
 
 ### Debug Connection Issues
