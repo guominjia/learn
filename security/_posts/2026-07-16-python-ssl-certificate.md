@@ -113,9 +113,22 @@ The source of trust differs by platform and Python build:
 
 Therefore, `ssl.get_default_verify_paths()` is a useful diagnostic tool, but it is not a complete inventory of every certificate source available to Python. In particular, a missing `cafile` path does not by itself prove that verification cannot use an operating-system certificate store or another configured CA directory.
 
+## Library Defaults Are Not All the Same
+
+Do not assume that every Python HTTP library uses the same CA source as `ssl.create_default_context()`. In a typical installation, the defaults are:
+
+| Client | Default verification source |
+|---|---|
+| `urllib` | Python's default `ssl` context. On Windows, that can use the Windows certificate store. |
+| `aiohttp` | Python's default TLS configuration, with strict certificate and hostname verification enabled. |
+| `requests` | The `certifi` CA bundle in its normal installation. |
+| `httpx` | The `certifi` CA bundle. |
+
+This distinction matters on a managed Windows machine. An internal root CA installed in the Windows certificate store can be accepted by `urllib` and a default `aiohttp` session, yet a default `requests` or `httpx` client can still fail because `certifi` does not contain that private CA.
+
 ## `httpx` and `aiohttp`
 
-`httpx` supports both synchronous and asynchronous calls. Its TLS verification is enabled by default, and it can be configured with a custom SSL context when an application needs a private CA:
+`httpx` supports both synchronous and asynchronous calls. Its TLS verification is enabled by default and normally uses `certifi`, rather than the system trust store. Configure a custom SSL context when an application needs a private CA:
 
 ```python
 import httpx
@@ -150,6 +163,34 @@ asyncio.run(fetch())
 
 Using an explicit context is particularly helpful when the same trust configuration must be shared across `urllib`, `httpx`, and `aiohttp`.
 
+## Using the System Trust Store with `truststore`
+
+[`truststore`](https://truststore.readthedocs.io/en/latest/) provides an `SSLContext`-compatible interface to the native system trust store. It requires Python 3.10 or newer. For an application that needs `httpx` to trust the same system roots as the platform, pass a `truststore` context explicitly:
+
+```python
+import ssl
+import httpx
+import truststore
+
+context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+
+with httpx.Client(verify=context) as client:
+	response = client.get("https://internal.example")
+	print(response.status_code)
+```
+
+For an executable application or script that must make several libraries use system trust, `truststore.inject_into_ssl()` can be called at process startup:
+
+```python
+import truststore
+
+truststore.inject_into_ssl()
+
+# Import and create HTTP clients after the injection.
+```
+
+Injection affects the standard-library SSL interface and can therefore change the behavior of `requests`, `httpx`, and `aiohttp` clients created afterwards. Call it as early as possible, before modules cache `ssl.SSLContext`. Library authors should not inject globally; they should pass a `truststore.SSLContext` through the library's normal SSL-context option instead.
+
 ## Diagnosing Verification Failures
 
 When a request fails certificate verification, check the following before turning verification off:
@@ -180,3 +221,4 @@ Keep TLS verification enabled. When an internal CA is required, make the trust d
 - [Requests SSL certificate verification](https://requests.readthedocs.io/en/latest/user/advanced/#ssl-cert-verification)
 - [HTTPX SSL documentation](https://www.python-httpx.org/advanced/ssl/)
 - [aiohttp client reference](https://docs.aiohttp.org/en/stable/client_reference.html)
+- [truststore documentation](https://truststore.readthedocs.io/en/latest/)
