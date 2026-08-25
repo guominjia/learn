@@ -1,19 +1,26 @@
-## FastAPI
-A modern high-performance web framework based on Python type hints (Pydantic) and asynchronous support (Starlette), designed for rapidly building APIs.
+---
+title: Web Frameworks
+date: 2026-08-25
+categories: [web]
+tags: [web, framework]
+---
+
+## [FastAPI](https://pypi.org/project/fastapi/)
+A modern high-performance web framework based on Python type hints (Pydantic) and asynchronous support ([Starlette](https://pypi.org/project/starlette/)), designed for rapidly building APIs.
 It handles route definition, request/response logic, data validation, and dependency injection.
 
-## [Flask](https://github.com/guominjia/learn/blob/code_study/flask/flask_server.py)
+## [Flask](https://pypi.org/project/Flask/)
 A lightweight, synchronous web framework based on WSGI (Web Server Gateway Interface), widely used for building web applications and APIs.
 It provides routing, templating (Jinja2), and request handling, but requires extensions for advanced features like data validation.
 Uses a synchronous, blocking execution model.
 
-## Gunicorn
+## [Gunicorn](https://pypi.org/project/gunicorn/)
 A WSGI (Web Server Gateway Interface) HTTP server for running Flask (or other WSGI framework) applications.
 It is a pre-fork worker model server that spawns multiple worker processes to handle requests.
 Each worker handles requests synchronously in a blocking manner.
 Can be configured with different worker types (sync, async, threaded) using `--workers` and `--worker-class` parameters.
 
-## Uvicorn
+## [Uvicorn](https://pypi.org/project/uvicorn/)
 An ASGI (Asynchronous Server Gateway Interface) server that runs FastAPI (or other ASGI framework) applications.
 It listens for HTTP requests, parses protocols, passes requests to FastAPI for processing, and returns responses.
 It is based on `uvloop` (high-performance async I/O library) and `httptools` (HTTP protocol parser).
