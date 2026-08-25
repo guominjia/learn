@@ -1,5 +1,5 @@
 ---
-title: MinIO vs JFrog: Object Storage, Artifact Management, and How They Compare to Hugging Face and Microsoft
+title: "MinIO vs JFrog: Object Storage, Artifact Management, and How They Compare to Hugging Face and Microsoft"
 categories: [database, storage, devops]
 tags: [minio, jfrog, artifactory, object-storage, s3, hugging-face, microsoft, azure, file, storage]
 ---

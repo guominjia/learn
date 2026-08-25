@@ -1,5 +1,5 @@
 ---
-title: Understanding RAGFlow Chunk Tasks: Building, Embedding, and Storing Chunks
+title: "Understanding RAGFlow Chunk Tasks: Building, Embedding, and Storing Chunks"
 categories: [ai, rag, ragflow]
 tags: [ragflow, document-parsing, chunking, embedding, elasticsearch]
 ---

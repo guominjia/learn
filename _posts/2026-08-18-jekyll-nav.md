@@ -1,5 +1,5 @@
 ---
-title: "is-active" and "aria-current" Are Build-Time Output, Not Runtime State
+title: "\"is-active\" and \"aria-current\" Are Build-Time Output, Not Runtime State"
 categories: [jekyll]
 tags: [liquid, nav, aria, static-site]
 ---

@@ -1,5 +1,5 @@
 ---
-title: MCP 2026-07-28: Stateless Servers, Multi-Round-Trip Requests, and Safer Auth
+title: "MCP 2026-07-28: Stateless Servers, Multi-Round-Trip Requests, and Safer Auth"
 categories: [ai, mcp]
 tags: [mcp, protocol, agents, oauth, architecture]
 ---
