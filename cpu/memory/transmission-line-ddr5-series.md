@@ -10,21 +10,21 @@ permalink: /cpu/memory/transmission-line-ddr5-series/
 
 ## 基础模型
 
-1. [电压、电流和输入输出不是一回事]({% post_url 2026-09-11-circuit-nodes-ports %})
-2. [什么时候一根导线必须当作传输线]({% post_url 2026-09-12-when-wire-becomes-transmission-line %})
-3. [传输线上的 V+ 和 V-：从电报方程到传播波]({% post_url 2026-09-13-transmission-line-waves %})
-4. [从边界条件推导反射系数]({% post_url 2026-09-14-reflection-boundary-condition %})
-5. [5 V、2.5 V、开路瞬态和示波器测量]({% post_url 2026-09-15-5v-25v-open-circuit %})
-6. [阻抗匹配、反射功率和 VSWR]({% post_url 2026-09-16-impedance-matching %})
-7. [从一次反射到振铃和眼图闭合]({% post_url 2026-09-17-ringing-overshoot-eye %})
+1. [电压、电流和输入输出不是一回事]({{ '/cpu/memory/circuit-nodes-ports/' | relative_url }})
+2. [什么时候一根导线必须当作传输线]({{ '/cpu/memory/when-wire-becomes-transmission-line/' | relative_url }})
+3. [传输线上的 V+ 和 V-：从电报方程到传播波]({{ '/cpu/memory/transmission-line-waves/' | relative_url }})
+4. [从边界条件推导反射系数]({{ '/cpu/memory/reflection-boundary-condition/' | relative_url }})
+5. [5 V、2.5 V、开路瞬态和示波器测量]({{ '/cpu/memory/5v-25v-open-circuit/' | relative_url }})
+6. [阻抗匹配、反射功率和 VSWR]({{ '/cpu/memory/impedance-matching/' | relative_url }})
+7. [从一次反射到振铃和眼图闭合]({{ '/cpu/memory/ringing-overshoot-eye/' | relative_url }})
 
 ## DDR5 与实现
 
-8. [ODT、RON、RCOMP 分别在控制什么]({% post_url 2026-09-18-odt-ron %})
-9. [DDR5 读写方向变化]({% post_url 2026-09-19-ddr5-read-write-source-load %})
-10. [DB ODT、RDIMM 和 LRDIMM]({% post_url 2026-09-20-db-odt-dimm-topology %})
-11. [RCOMP、校准和 Training]({% post_url 2026-09-21-rcomp-calibration-training %})
-12. [从反射公式到 DDRIO 初始化代码]({% post_url 2026-09-22-ddrio-code-reading %})
+8. [ODT、RON、RCOMP 分别在控制什么]({{ '/cpu/memory/odt-ron/' | relative_url }})
+9. [DDR5 读写方向变化]({{ '/cpu/memory/ddr5-read-write-source-load/' | relative_url }})
+10. [DB ODT、RDIMM 和 LRDIMM]({{ '/cpu/memory/db-odt-dimm-topology/' | relative_url }})
+11. [RCOMP、校准和 Training]({{ '/cpu/memory/rcomp-calibration-training/' | relative_url }})
+12. [从反射公式到 DDRIO 初始化代码]({{ '/cpu/memory/ddrio-code-reading/' | relative_url }})
 
 ## 三条贯穿主线
 
