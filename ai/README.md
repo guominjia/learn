@@ -33,6 +33,7 @@ Click [here](peoples.md) for AI domain
 
 ## Concepts
 [AI and ML](ai-and-ml.md),
+[Transformer](transformer.md),
 [Prompt](prompt.md),
 [MOE](moe.md),
 [OCR](ocr.md),
