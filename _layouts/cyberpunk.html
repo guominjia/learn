@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description | strip_html | truncate: 160 }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap">
+    <link rel="stylesheet" href="{{ '/assets/css/cyberpunk.css' | relative_url }}">
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  </head>
+  <body class="cyberpunk">
+    <div class="cp-shell">
+      <header class="cp-header">
+        <a class="cp-brand" href="{{ '/' | relative_url }}">
+          <b>{{ site.title }}</b>
+          <span>{{ site.description }}</span>
+        </a>
+        <nav class="cp-nav" aria-label="Main navigation">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/archives/' | relative_url }}">Archives</a>
+          <a href="{{ '/categories/' | relative_url }}">Categories</a>
+          <a href="{{ '/tags/' | relative_url }}">Tags</a>
+          <a href="{{ '/about/' | relative_url }}">About</a>
+        </nav>
+      </header>
+
+      <section class="cp-hero">
+        <p class="cp-kicker">{{ page.kicker | default: 'night city // knowledge net' }}</p>
+        <h1 class="cp-glitch" data-text="{{ page.headline | default: page.title }}">{{ page.headline | default: page.title }}</h1>
+        <p class="cp-lede">{{ page.description | default: site.description }}</p>
+        <div class="cp-actions">
+          <a class="cp-btn" href="#stream">进入数据流</a>
+          <a class="cp-btn is-ghost" href="{{ '/archives/' | relative_url }}">全部归档</a>
+        </div>
+
+        <div class="cp-term" aria-hidden="true">
+          <p>whoami --node {{ site.title | downcase }}</p>
+          <p>ls /var/log/knowledge | wc -l  →  {{ site.posts.size }} entries</p>
+          <p>sync --status ok --latency 12ms<span class="cp-caret"></span></p>
+        </div>
+      </section>
+
+      <section class="cp-section">
+        <h2 class="cp-section-title">System Stats</h2>
+        <div class="cp-stats">
+          <div class="cp-stat"><b>{{ site.posts.size }}</b><span>Posts</span></div>
+          <div class="cp-stat"><b>{{ site.categories.size }}</b><span>Categories</span></div>
+          <div class="cp-stat"><b>{{ site.tags.size }}</b><span>Tags</span></div>
+          <div class="cp-stat"><b>{{ site.time | date: '%Y' }}</b><span>Uplink Year</span></div>
+        </div>
+      </section>
+
+      <section class="cp-section" id="stream">
+        <h2 class="cp-section-title">Data Stream</h2>
+        <div class="cp-grid">
+          {% assign stream = site.posts | slice: 0, 9 %}
+          {% for post in stream %}
+            <article class="cp-card">
+              <span class="cp-card-id">NODE-{{ forloop.index | prepend: '00' | slice: -3, 3 }} · {{ post.date | date: '%Y.%m.%d' }}</span>
+              <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+              <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 96 }}</p>
+              <div class="cp-meta">
+                {% for tag in post.tags limit: 3 %}
+                  <a class="cp-chip" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>
+                {% endfor %}
+              </div>
+            </article>
+          {% else %}
+            <p class="cp-lede">// no signal — 还没有文章。</p>
+          {% endfor %}
+        </div>
+      </section>
+
+      {% if site.tags.size > 0 %}
+        <section class="cp-section">
+          <h2 class="cp-section-title">Tag Cloud</h2>
+          <div class="cp-meta">
+            {% for tag in site.tags %}
+              <a class="cp-chip" href="{{ '/tags/' | relative_url }}#{{ tag[0] | slugify }}">{{ tag[0] }} · {{ tag[1].size }}</a>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+      {% if content != '' %}
+        <section class="cp-section">
+          <h2 class="cp-section-title">Transmission</h2>
+          <div class="cp-prose">
+            {{ content }}
+          </div>
+        </section>
+      {% endif %}
+
+      <footer class="cp-footer">
+        © {{ site.time | date: '%Y' }} {{ site.title }} · powered by jekyll · neon mode
+      </footer>
+    </div>
+  </body>
+</html>
