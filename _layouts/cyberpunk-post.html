@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }} · {{ site.title }}</title>
+    <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/cyberpunk.css' | relative_url }}">
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  </head>
+  <body class="cyberpunk">
+    <div class="cp-shell">
+      <header class="cp-header">
+        <a class="cp-brand" href="{{ '/' | relative_url }}">
+          <b>{{ site.title }}</b>
+          <span>{{ site.description }}</span>
+        </a>
+        <nav class="cp-nav" aria-label="Main navigation">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/archives/' | relative_url }}">Archives</a>
+          <a href="{{ '/categories/' | relative_url }}">Categories</a>
+          <a href="{{ '/tags/' | relative_url }}">Tags</a>
+          <a href="{{ '/about/' | relative_url }}">About</a>
+        </nav>
+      </header>
+
+      <article>
+        <header class="cp-post-head">
+          <p class="cp-kicker">
+            <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time>
+            {% if page.categories and page.categories.size > 0 %} · {{ page.categories | join: ' / ' }}{% endif %}
+          </p>
+          <h1 class="cp-glitch" data-text="{{ page.title | escape }}">{{ page.title }}</h1>
+          {% if page.tags and page.tags.size > 0 %}
+            <div class="cp-meta">
+              {% for tag in page.tags %}
+                <a class="cp-chip" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">#{{ tag }}</a>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </header>
+
+        <div class="cp-prose">
+          {{ content }}
+        </div>
+
+        {% if page.previous or page.next %}
+          <nav class="cp-pager" aria-label="Post navigation">
+            <div>
+              {% if page.previous %}
+                <span>◀ 上一篇</span>
+                <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
+              {% endif %}
+            </div>
+            <div class="is-next">
+              {% if page.next %}
+                <span>下一篇 ▶</span>
+                <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
+              {% endif %}
+            </div>
+          </nav>
+        {% endif %}
+      </article>
+
+      <footer class="cp-footer">
+        © {{ site.time | date: '%Y' }} {{ site.title }} · powered by jekyll · neon mode
+      </footer>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script defer src="{{ '/assets/js/math-init.js' | relative_url }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
+  </body>
+</html>

@@ -16,7 +16,7 @@ defaults:
       path: ""
       type: "posts"
     values:
-      layout: post
+      layout: cyberpunk-post
   - scope:
       path: ""
       type: "pages"
