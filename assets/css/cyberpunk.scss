@@ -611,6 +611,32 @@ a:hover {
   color: #8ef7c8;
 }
 
+/* 兼容归档 / 分类 / 标签页沿用的旧类名 */
+.cp-prose .card,
+.cp-prose .archive-group {
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--cp-line);
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+.cp-prose .card h2,
+.cp-prose .archive-group h2 {
+  margin-top: 0;
+  border-bottom: 0;
+}
+
+.cp-prose .meta {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--cp-muted);
+}
+
+.cp-prose li .meta {
+  margin-right: 0.5rem;
+}
+
 /* 上一篇 / 下一篇 */
 .cp-pager {
   display: grid;

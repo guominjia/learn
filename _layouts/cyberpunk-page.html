@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'zh-CN' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ page.description | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 160 }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/cyberpunk.css' | relative_url }}">
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+  </head>
+  <body class="cyberpunk">
+    <div class="cp-shell">
+      <header class="cp-header">
+        <a class="cp-brand" href="{{ '/' | relative_url }}">
+          <b>{{ site.title }}</b>
+          <span>{{ site.description }}</span>
+        </a>
+        <nav class="cp-nav" aria-label="Main navigation">
+          <a href="{{ '/' | relative_url }}">Home</a>
+          <a href="{{ '/archives/' | relative_url }}">Archives</a>
+          <a href="{{ '/categories/' | relative_url }}">Categories</a>
+          <a href="{{ '/tags/' | relative_url }}">Tags</a>
+          <a href="{{ '/about/' | relative_url }}">About</a>
+        </nav>
+      </header>
+
+      <article>
+        <header class="cp-post-head">
+          <p class="cp-kicker">{{ page.kicker | default: 'archive node' }}</p>
+          <h1 class="cp-glitch" data-text="{{ page.title | escape }}">{{ page.title }}</h1>
+          {% if page.description %}
+            <p class="cp-lede">{{ page.description }}</p>
+          {% endif %}
+        </header>
+
+        <div class="cp-prose">
+          {{ content }}
+        </div>
+      </article>
+
+      <footer class="cp-footer">
+        © {{ site.time | date: '%Y' }} {{ site.title }} · powered by jekyll · neon mode
+      </footer>
+    </div>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script defer src="{{ '/assets/js/math-init.js' | relative_url }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="{{ '/assets/js/mermaid-init.js' | relative_url }}"></script>
+  </body>
+</html>
