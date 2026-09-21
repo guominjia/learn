@@ -541,6 +541,18 @@ a:hover {
   border: 1px solid var(--cp-line);
 }
 
+.cp-prose .katex {
+  color: var(--cp-text);
+  font-size: 1.05em;
+}
+
+.cp-prose .katex-display {
+  margin: 1.2rem 0;
+  padding: 0.4rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 /* 代码高亮（暗色霓虹） */
 .cp-prose .highlight {
   background: none;

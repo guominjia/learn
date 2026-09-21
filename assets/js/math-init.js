@@ -4,7 +4,7 @@
       return;
     }
 
-    document.querySelectorAll('.content-body').forEach(function (container) {
+    document.querySelectorAll('.cp-prose, .content-body').forEach(function (container) {
       if (container.dataset.mathRendered === 'true') {
         return;
       }
