@@ -74,26 +74,26 @@ AC 终端通常由电阻和电容串联组成。边沿到来时，电容允许�
 对无损传输线，反射电压为 $V^- = \Gamma_L V^+$。由于波阻抗相同，反射功率占入射功率的比例为：
 
 $$
-\frac{P_\mathrm{reflected}}{P_\mathrm{incident}}=|\Gamma_L|^2
+\frac{P_\mathrm{reflected}}{P_\mathrm{incident}}=\lvert\Gamma_L\rvert^2
 $$
 
-因此匹配时 $\Gamma_L=0$，没有反射功率；理想开路或短路时 $|\Gamma_L|=1$，没有功率被负载吸收。
+因此匹配时 $\Gamma_L=0$，没有反射功率；理想开路或短路时 $\lvert\Gamma_L\rvert=1$，没有功率被负载吸收。
 
 如果沿传输线观察电压的最大值和最小值，入射波与反射波会形成驻波：
 
 $$
-V_\mathrm{max}=|V^+|(1+|\Gamma_L|)
+V_\mathrm{max}=\lvert V^+\rvert(1+\lvert\Gamma_L\rvert)
 $$
 
 $$
-V_\mathrm{min}=|V^+|(1-|\Gamma_L|)
+V_\mathrm{min}=\lvert V^+\rvert(1-\lvert\Gamma_L\rvert)
 $$
 
 于是驻波比为：
 
 $$
 \mathrm{VSWR}=\frac{V_\mathrm{max}}{V_\mathrm{min}}
-=\frac{1+|\Gamma_L|}{1-|\Gamma_L|}
+=\frac{1+\lvert\Gamma_L\rvert}{1-\lvert\Gamma_L\rvert}
 $$
 
 匹配时 VSWR 为 1；失配越严重，VSWR 越大。

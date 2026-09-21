@@ -94,13 +94,13 @@ $$
 
 - 符号决定电压反射是否反相；
 - 绝对值决定反射波的相对幅度；
-- $|\Gamma|=0$ 表示完全匹配；
-- $|\Gamma|=1$ 是理想开路或短路的极限。
+- $\lvert\Gamma\rvert=0$ 表示完全匹配；
+- $\lvert\Gamma\rvert=1$ 是理想开路或短路的极限。
 
 理想无损情况下，反射功率与入射功率之比为：
 
 $$
-\frac{P_\mathrm{reflected}}{P_\mathrm{incident}}=|\Gamma_L|^2
+\frac{P_\mathrm{reflected}}{P_\mathrm{incident}}=\lvert\Gamma_L\rvert^2
 $$
 
 实际走线还会有导体损耗、介质损耗和频率相关效应，因此返回源端的能量通常小于这个理想往返结果。
