@@ -69,7 +69,7 @@ Track three dimensions weekly:
 Then normalize each metric and combine with weighted scoring:
 
 $$
-	ext{Composite Share} = 0.4 \cdot \text{Research} + 0.3 \cdot \text{Developer} + 0.3 \cdot \text{Usage Proxy}
+	\text{Composite Share} = 0.4 \cdot \text{Research} + 0.3 \cdot \text{Developer} + 0.3 \cdot \text{Usage Proxy}
 $$
 
 > The weights are configurable. If your focus is production usage, increase the usage proxy weight.

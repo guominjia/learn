@@ -91,3 +91,38 @@ For stability and convenience on Windows:
 3. If unresolved, use `npx @github/copilot ...` while fixing `PATH`
 
 That sequence resolves most setup problems in a few minutes.
+
+## Builtin MCP
+
+It is not stored in any configuration file. `github-mcp-server` is a built-in MCP server for Copilot CLI, and its definition is embedded directly in the CLI package (`@github/copilot`).
+
+The official docs ([CLI command reference → Built-in MCP servers](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)) list the built-in servers as `github-mcp-server`, `playwright`, `fetch`, and `time`. They can be used immediately without extra setup.
+
+### Check it
+
+```powershell
+copilot mcp list                    # built-in, user, workspace, and plugin servers are grouped by source
+copilot mcp get github-mcp-server   # view the configuration and tool list
+```
+
+In an interactive session, you can also use `/mcp show github-mcp-server` or `/env`.
+
+### Adjust it via command-line flags
+
+| Flag | Purpose |
+|---|---|
+| `--disable-builtin-mcps` | Disable all built-in MCP servers |
+| `--disable-mcp-server=github-mcp-server` | Disable only this one |
+| `--enable-all-github-mcp-tools` | Enable all of its tools. By default, only a subset of tools is enabled by the CLI |
+| `--add-github-mcp-tool=TOOL` / `--add-github-mcp-toolset=TOOLSET` | Enable additional tools or tool sets |
+
+`copilot mcp disable github-mcp-server` also persists the disabled state.
+
+If you want full control over its configuration, add another remote GitHub MCP server under a different name in `mcp-config.json`, then disable the built-in one with `--disable-builtin-mcps`.
+
+### If the new MCP tools do not appear
+
+Try one of the following:
+
+1. In the resumed session, run `/mcp reload`, then use `/mcp show github-mcp-server` to see whether the tool count increases.
+2. Skip resuming the old session and start a fresh one: `npx copilot --enable-all-github-mcp-tools`. If the tool list is complete in the new session, it confirms the issue is specific to the resumed session.
