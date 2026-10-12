@@ -148,6 +148,33 @@ After editing, restart the SSH service:
 sudo systemctl restart sshd
 ```
 
+### Windows OpenSSH Server
+
+Run in an elevated PowerShell on the server:
+
+```powershell
+# Only needed if OpenSSH Server isn't installed yet
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+
+Start-Service sshd
+Set-Service sshd -StartupType Automatic
+New-NetFirewallRule -Name sshd -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -ErrorAction SilentlyContinue
+```
+
+Manage `sshd` on a remote Windows host (requires admin rights on that host):
+
+```powershell
+sc.exe \\<host> query sshd
+sc.exe \\<host> config sshd start= auto
+sc.exe \\<host> start sshd
+```
+
+Check that port 22 is reachable from the client:
+
+```powershell
+Test-NetConnection <host> -Port 22
+```
+
 ---
 
 ## SSH Agent
