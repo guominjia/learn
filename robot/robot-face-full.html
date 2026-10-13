@@ -3,208 +3,299 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>机器人面部</title>
+<title>酷飒机器人</title>
 <style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 45%, #14233d, #05080f 75%); }
-  #face { display: block; width: 100vw; height: 100vh; cursor: pointer; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #05070b; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, #0c1a24 0%, #05070b 70%);
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0; pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 3px);
+  }
+  #face {
+    position: relative; display: block; width: 100vw; height: 100vh;
+    cursor: crosshair; color: #00e5ff; transition: color .3s;
+  }
+  #face .glow { filter: drop-shadow(0 0 3px currentColor) drop-shadow(0 0 12px currentColor); }
 
-  #face .tilt, #face .eye-shape, #face .blink, #face .brow, #face .spiral, #face .tongue {
+  #face .float, #face .jitter, #face .tilt, #face .blink, #face .brow, #face .reticle {
     transform-box: fill-box;
     transform-origin: center;
-    transition: transform .25s ease;
   }
-  #face .pupil { transition: transform .1s linear; }
-  #face .mouth { transition: d .25s ease; }
-  #face .glow { filter: drop-shadow(0 0 8px #3ff) drop-shadow(0 0 20px #0cf); }
-  #face .cheek, #face .tongue, #face .teeth, #face .spiral { transition: opacity .25s; }
+  #face .tilt { transition: transform .35s ease-out; }
+  #face .look { transition: transform .12s ease-out; }
+  #face .brow { transition: transform .3s cubic-bezier(.2, .8, .2, 1); }
+  #face .eye, #face .mouth { transition: d .22s ease-out; }
+  #face .reticle, #face .scanbar { opacity: 0; transition: opacity .2s; }
+  #face .shades { transform: translateY(-240px); transition: transform .5s cubic-bezier(.3, 1.4, .6, 1); }
 
-  #face.dizzy .tilt { animation: wobble 1s ease-in-out infinite; }
-  #face.dizzy .spiral { animation: spin .9s linear infinite; }
-  #face.crazy .tilt { animation: shake .35s linear infinite; }
-  #face .tongue.show { animation: wag .5s ease-in-out infinite alternate; }
+  #face .float { animation: float 5s ease-in-out infinite; }
+  #face .reticle { animation: spin 4s linear infinite; }
+  #face.shades-on .shades { transform: translateY(0); }
+  #face.shades-on .glint { animation: glint 2.4s ease-in-out .4s infinite; }
+  #face.lock .reticle { opacity: 1; }
+  #face.lock .hud-mode { animation: flash .5s steps(1) infinite; }
+  #face.scanning .scanbar { opacity: 1; animation: scan .9s ease-in-out infinite alternate; }
+  #face.rage .jitter { animation: jitter .1s steps(2) infinite; }
+  #face.glitch .jitter { animation: glitch .26s steps(5); }
+  #face.boot .jitter { animation: boot 1s steps(1) both; }
+  #face.standby .eye { animation: pulse 3s ease-in-out infinite; }
 
-  @keyframes wobble { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
-  @keyframes shake {
-    0%,100% { transform: translateX(0) rotate(4deg); }
-    25% { transform: translateX(-5px) rotate(6deg); }
-    75% { transform: translateX(5px) rotate(2deg); }
-  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes wag { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+  @keyframes glint { from { transform: translateX(0); } 60%,to { transform: translateX(320px); } }
+  @keyframes scan { from { transform: translateY(-26px); } to { transform: translateY(26px); } }
+  @keyframes flash { 50% { opacity: 0; } }
+  @keyframes pulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+  @keyframes jitter { 0% { transform: translate(-1px, 1px); } 100% { transform: translate(1px, -1px); } }
+  @keyframes glitch {
+    0% { transform: translate(0, 0); opacity: 1; }
+    25% { transform: translate(-7px, 1px); opacity: .5; }
+    50% { transform: translate(6px, -2px); opacity: .9; }
+    75% { transform: translate(-2px, 0); opacity: .6; }
+    100% { transform: translate(0, 0); opacity: 1; }
+  }
+  @keyframes boot {
+    0% { opacity: 0; } 12% { opacity: 1; } 18% { opacity: 0; } 30% { opacity: 1; }
+    36% { opacity: .2; } 48% { opacity: 1; }
+  }
+
+  .ripple {
+    position: fixed; width: 140px; height: 140px; margin: -70px 0 0 -70px;
+    border: 2px solid; border-radius: 50%; pointer-events: none;
+    box-shadow: 0 0 12px currentColor, inset 0 0 12px currentColor;
+    animation: ripple .7s ease-out both;
+  }
+  @keyframes ripple { from { transform: scale(.1); opacity: 1; } to { transform: scale(1); opacity: 0; } }
 </style>
 </head>
 <body>
-<svg id="face" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="机器人面部">
-  <g class="tilt">
-    <rect class="brow" id="browL" x="90" y="46" width="80" height="12" rx="6" fill="#3ff" opacity=".85"/>
-    <rect class="brow" id="browR" x="230" y="46" width="80" height="12" rx="6" fill="#3ff" opacity=".85"/>
+<svg id="face" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="酷飒机器人">
+  <defs>
+    <clipPath id="lens">
+      <path d="M96 110 L190 110 L184 150 Q172 162 142 160 Q108 158 100 146 Z"/>
+      <path d="M304 110 L210 110 L216 150 Q228 162 258 160 Q292 158 300 146 Z"/>
+    </clipPath>
+  </defs>
 
-    <g class="eye-shape" id="eyeL">
-      <g class="blink">
-        <circle class="glow" cx="130" cy="125" r="45" fill="#3ff"/>
-        <g class="pupil">
-          <circle cx="130" cy="125" r="19" fill="#05080f"/>
-          <circle cx="137" cy="118" r="6" fill="#fff"/>
-        </g>
-        <path class="spiral" opacity="0" fill="none" stroke="#05080f" stroke-width="5"/>
-      </g>
-    </g>
-    <g class="eye-shape" id="eyeR">
-      <g class="blink">
-        <circle class="glow" cx="270" cy="125" r="45" fill="#3ff"/>
-        <g class="pupil">
-          <circle cx="270" cy="125" r="19" fill="#05080f"/>
-          <circle cx="277" cy="118" r="6" fill="#fff"/>
-        </g>
-        <path class="spiral" opacity="0" fill="none" stroke="#05080f" stroke-width="5"/>
-      </g>
-    </g>
-
-    <ellipse class="cheek" cx="70" cy="200" rx="26" ry="13" fill="#ff7799" opacity="0"/>
-    <ellipse class="cheek" cx="330" cy="200" rx="26" ry="13" fill="#ff7799" opacity="0"/>
-
-    <!-- mouth shapes are authored around (150,215); scale them up to the face -->
-    <g transform="translate(200 222) scale(1.7) translate(-150 -215)">
-      <path class="mouth glow" id="mouth" fill="#05080f" stroke="#3ff" stroke-width="3" stroke-linejoin="round"/>
-      <g class="teeth" opacity="0">
-        <rect x="106" y="202" width="88" height="13" rx="3" fill="#f4f7ff"/>
-        <path d="M128 202v13M150 202v13M172 202v13" stroke="#9aa8c0" stroke-width="2"/>
-      </g>
-      <g class="tongue" opacity="0">
-        <path d="M133 226 Q131 266 150 266 Q169 266 167 226 Z" fill="#ff5d7a" stroke="#c23a55" stroke-width="2"/>
-        <path d="M150 232 V254" stroke="#c23a55" stroke-width="2"/>
-      </g>
-    </g>
+  <g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".45">
+    <path d="M8 28 V8 H28 M372 8 H392 V28 M392 272 V292 H372 M28 292 H8 V272"/>
   </g>
+  <g font-family="Consolas, monospace" font-size="9" fill="currentColor" opacity=".75">
+    <text x="16" y="22">◢ UNIT-07 // ONLINE</text>
+    <text class="hud-mode" id="hudMode" x="384" y="284" text-anchor="end"></text>
+  </g>
+
+  <g class="float"><g class="jitter"><g class="tilt">
+    <path class="brow glow" fill="currentColor" d="M108 96 L182 101 L182 108 L108 103 Z"/>
+    <path class="brow glow" fill="currentColor" d="M292 96 L218 101 L218 108 L292 103 Z"/>
+
+    <g class="blink"><g class="look"><path class="eye glow" fill="currentColor"/></g></g>
+    <g class="blink"><g class="look"><path class="eye glow" fill="currentColor"/></g></g>
+
+    <rect class="scanbar glow" x="95" y="134" width="210" height="2.5" fill="currentColor"/>
+
+    <g class="reticle glow" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="255" cy="135" r="46" stroke-dasharray="16 9"/>
+      <path d="M255 81 V97 M255 173 V189 M197 135 H213 M297 135 H313"/>
+    </g>
+
+    <g stroke="currentColor" stroke-width="2" opacity=".5">
+      <path d="M92 178 L106 170 M98 186 L112 178 M308 178 L294 170 M302 186 L288 178"/>
+    </g>
+
+    <path class="mouth glow" id="mouth" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="square"/>
+
+    <g class="shades">
+      <path d="M96 116 L66 108 M304 116 L334 108 M188 120 L212 120" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+      <path d="M96 110 L190 110 L184 150 Q172 162 142 160 Q108 158 100 146 Z" fill="#0a0c10" stroke="currentColor" stroke-width="2.5"/>
+      <path d="M304 110 L210 110 L216 150 Q228 162 258 160 Q292 158 300 146 Z" fill="#0a0c10" stroke="currentColor" stroke-width="2.5"/>
+      <g clip-path="url(#lens)">
+        <path class="glint" d="M60 100 L80 100 L50 170 L30 170 Z" fill="#fff" opacity=".35"/>
+      </g>
+    </g>
+  </g></g></g>
 </svg>
 
 <script>
-// All mouth paths share the same command structure so CSS can morph between them.
-const MOUTH = {
-  neutral: 'M115 212 Q132 214 150 214 Q168 214 185 212 Q168 220 150 220 Q132 220 115 212 Z',
-  smile:   'M108 204 Q128 210 150 210 Q172 210 192 204 Q178 246 150 246 Q122 246 108 204 Z',
-  o:       'M134 216 Q136 194 150 194 Q164 194 166 216 Q164 238 150 238 Q136 238 134 216 Z',
-  smirk:   'M118 216 Q140 220 160 215 Q178 210 190 196 Q182 224 160 224 Q138 226 118 216 Z',
-  wavy:    'M108 212 Q129 194 150 212 Q171 230 192 212 Q171 240 150 222 Q129 204 108 212 Z',
-  wobble:  'M118 222 Q134 208 150 214 Q166 220 182 208 Q167 226 150 222 Q133 228 118 222 Z',
-  grin:    'M102 200 Q126 200 150 200 Q174 200 198 200 Q190 238 150 238 Q110 238 102 200 Z',
+const CYAN = '#00e5ff', RED = '#ff2d55', DIM = '#1d6f7a';
+const EYE_POS = [[145, 135], [255, 135]];
+const EYE_HALF_W = 36;
+
+// Offsets from eye centre: to/bo = outer top/bottom, ti/bi = inner (nose-side) top/bottom.
+const EYE = {
+  cool:   { to: -14, ti: -6, bi: 10, bo: 12 },
+  squint: { to: -5, ti: -2, bi: 4, bo: 5 },
+  wide:   { to: -20, ti: -18, bi: 18, bo: 20 },
+  angry:  { to: -16, ti: 4, bi: 12, bo: 12 },
+  smug:   { to: -1, ti: 0, bi: 11, bo: 12 },
+  closed: { to: -1, ti: -1, bi: 1, bo: 1 },
 };
 
-// eyes: [left, right] {sx, sy}; pupils: [[dx,dy],[dx,dy]]; brows: [{y, r}, {y, r}]
-const FACES = {
-  normal:   { mouth: 'neutral' },
-  happy:    { mouth: 'smile', eyes: [{ sy: .7 }, { sy: .7 }], brows: [{ y: -10 }, { y: -10 }], blush: true },
-  wink:     { mouth: 'smirk', eyes: [{ sy: .08 }, {}], pupils: [[0, 0], [9, -5]],
-              brows: [{ y: 10, r: 10 }, { y: -14, r: -8 }], tilt: -5, blush: true },
-  tongue:   { mouth: 'smile', tongue: true, eyes: [{ sy: .3 }, { sy: .3 }],
-              brows: [{ y: -6, r: -10 }, { y: -6, r: 10 }], tilt: 4 },
-  crosseye: { mouth: 'smile', tongue: true, pupils: [[24, 10], [-24, 10]],
-              brows: [{ y: -12, r: 12 }, { y: -12, r: -12 }], tilt: -3 },
-  surprise: { mouth: 'o', eyes: [{ sx: 1.15, sy: 1.2 }, { sx: 1.15, sy: 1.2 }], pupils: [[0, 0], [0, 0]],
-              brows: [{ y: -22 }, { y: -22 }] },
-  crazy:    { mouth: 'wavy', cls: 'crazy', eyes: [{ sx: 1.3, sy: 1.3 }, { sx: .55, sy: .55 }],
-              pupils: [[-16, -12], [12, 12]], brows: [{ y: -26, r: -15 }, { y: 14, r: 22 }] },
-  dizzy:    { mouth: 'wobble', cls: 'dizzy', spiral: true, brows: [{ y: -8, r: -8 }, { y: 4, r: 10 }] },
-  grin:     { mouth: 'grin', teeth: true, eyes: [{ sy: .55 }, { sy: .55 }],
-              brows: [{ y: 12, r: 15 }, { y: 12, r: -15 }] },
+// All mouth paths share the same command structure so CSS can morph between them.
+const MOUTH = {
+  flat:  'M172 206 Q186 206 200 206 Q214 206 228 206',
+  tight: 'M186 206 Q193 206 200 206 Q207 206 214 206',
+  smirk: 'M174 207 Q190 209 204 206 Q218 203 230 194',
+  frown: 'M174 209 Q187 203 200 203 Q213 203 226 209',
 };
+
+// eyes: EYE key or [left, right]; brows: [{y, r}, {y, r}]; look pins the gaze.
+const FACES = {
+  cool:    { eyes: 'cool', mouth: 'flat', hud: 'MODE // COOL' },
+  smirk:   { eyes: ['cool', 'smug'], mouth: 'smirk', brows: [{}, { y: -8, r: 6 }], tilt: 4, hud: 'MODE // SMIRK' },
+  brow:    { eyes: ['wide', 'cool'], mouth: 'tight', brows: [{ y: -16, r: -6 }, { y: 3 }], hud: 'MODE // HMM?' },
+  shades:  { eyes: 'cool', mouth: 'smirk', cls: 'shades-on', tilt: -3, hud: 'MODE // DEAL WITH IT' },
+  squint:  { eyes: 'squint', look: [-10, 0], mouth: 'flat', brows: [{ y: 6 }, { y: 6 }], hud: 'ANALYZING...' },
+  side:    { eyes: 'smug', look: [12, -6], mouth: 'frown', brows: [{ y: -4 }, { y: -4 }], tilt: 3, hud: 'MODE // WHATEVER' },
+  angry:   { eyes: 'angry', mouth: 'frown', color: RED, cls: 'rage',
+             brows: [{ y: 8, r: 14 }, { y: 8, r: -14 }], hud: 'WARNING // ANGRY' },
+  lock:    { eyes: ['squint', 'wide'], look: [0, 0], mouth: 'tight', color: RED, cls: 'lock',
+             brows: [{ y: 6, r: 6 }, { y: -6 }], hud: 'TARGET LOCKED' },
+  scan:    { eyes: 'wide', look: [0, 0], mouth: 'tight', cls: 'scanning', hud: 'SCANNING...' },
+  standby: { eyes: 'closed', mouth: 'tight', color: DIM, cls: 'standby', hud: 'STANDBY' },
+  boot:    { eyes: 'wide', mouth: 'flat', cls: 'boot', hud: 'REBOOTING...' },
+};
+const STATE_CLASSES = ['shades-on', 'rage', 'lock', 'scanning', 'standby', 'boot'];
+
+function eyePath([cx, cy], s, dir) {
+  const X = x => cx + x * dir;
+  const W = EYE_HALF_W;
+  return `M${X(-W)} ${cy + (s.to + s.bo) / 2} L${X(-W + 10)} ${cy + s.to} L${X(W)} ${cy + s.ti} `
+       + `L${X(W)} ${cy + s.bi} L${X(-W + 10)} ${cy + s.bo} Z`;
+}
 
 const face = document.getElementById('face');
 const $ = s => face.querySelector(s);
 const $$ = s => [...face.querySelectorAll(s)];
-const eyes = [$('#eyeL'), $('#eyeR')];
-const brows = [$('#browL'), $('#browR')];
-const pupils = $$('.pupil');
+const eyes = $$('.eye');
+const looks = $$('.look');
+const brows = $$('.brow');
 const mouth = $('#mouth');
-let current = 'normal';
+let current = 'cool';
 
-// Semicircle spiral centred on each eye.
-$$('.spiral').forEach((el, i) => {
-  let d = `M${i ? 270 : 130} 125`;
-  for (let r = 3, dir = 1; r <= 33; r += 3, dir = -dir) d += ` a${r} ${r} 0 0 1 ${2 * r * dir} 0`;
+const eyeTypes = f => (Array.isArray(f.eyes) ? f.eyes : [f.eyes, f.eyes]);
+const followsCursor = f => !f.look && f.cls !== 'standby';
+
+function morph(el, d) {
   el.setAttribute('d', d);
-});
+  el.style.d = `path("${d}")`;
+}
 
 function setFace(name) {
   const f = FACES[name];
   current = name;
-  face.classList.remove('crazy', 'dizzy');
+  face.classList.remove(...STATE_CLASSES);
   if (f.cls) face.classList.add(f.cls);
+  face.style.color = f.color || CYAN;
 
-  const d = MOUTH[f.mouth];
-  mouth.setAttribute('d', d);
-  mouth.style.d = `path("${d}")`;
-
-  eyes.forEach((el, i) => {
-    const e = (f.eyes && f.eyes[i]) || {};
-    el.style.transform = `scale(${e.sx ?? 1}, ${e.sy ?? 1})`;
-  });
+  const types = eyeTypes(f);
+  eyes.forEach((el, i) => morph(el, eyePath(EYE_POS[i], EYE[types[i]], i ? -1 : 1)));
+  const [lx, ly] = f.look || [0, 0];
+  looks.forEach(l => l.style.transform = `translate(${lx}px, ${ly}px)`);
   brows.forEach((el, i) => {
     const b = (f.brows && f.brows[i]) || {};
     el.style.transform = `translateY(${b.y ?? 0}px) rotate(${b.r ?? 0}deg)`;
   });
-  pupils.forEach((el, i) => {
-    const [x, y] = f.pupils ? f.pupils[i] : [0, 0];
-    el.style.transform = `translate(${x}px, ${y}px)`;
-    el.style.opacity = f.spiral ? 0 : 1;
-  });
-  $$('.spiral').forEach(el => el.style.opacity = f.spiral ? 1 : 0);
-  $$('.cheek').forEach(el => el.style.opacity = f.blush ? .8 : 0);
-  $('.teeth').style.opacity = f.teeth ? 1 : 0;
-  const tongue = $('.tongue');
-  tongue.style.opacity = f.tongue ? 1 : 0;
-  tongue.classList.toggle('show', !!f.tongue);
+  morph(mouth, MOUTH[f.mouth]);
   $('.tilt').style.transform = `rotate(${f.tilt ?? 0}deg)`;
+  $('#hudMode').textContent = f.hud;
 }
 
 function blink() {
-  if (current === 'dizzy') return;
+  const f = FACES[current];
+  if (f.cls === 'shades-on' || eyeTypes(f).includes('closed')) return;
   $$('.blink').forEach(el => el.animate(
     [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.05)' }, { transform: 'scaleY(1)' }],
-    { duration: 160, easing: 'ease-in-out' }
+    { duration: 120, easing: 'ease-in-out' }
   ));
 }
 
 (function scheduleBlink() {
-  setTimeout(() => {
-    blink();
-    if (Math.random() < 0.25) setTimeout(blink, 220);
-    scheduleBlink();
-  }, 1500 + Math.random() * 3500);
+  setTimeout(() => { blink(); scheduleBlink(); }, 2500 + Math.random() * 4000);
 })();
 
-// Pupils follow the cursor only when the current face doesn't pin them.
-document.addEventListener('mousemove', e => {
-  if (FACES[current].pupils || FACES[current].spiral) return;
-  pupils.forEach(p => {
-    const r = p.parentNode.querySelector('.glow').getBoundingClientRect();
+(function scheduleGlitch() {
+  setTimeout(() => {
+    if (current !== 'standby') {
+      face.classList.add('glitch');
+      setTimeout(() => face.classList.remove('glitch'), 260);
+    }
+    scheduleGlitch();
+  }, 6000 + Math.random() * 8000);
+})();
+
+let lastActive = Date.now(), sleeping = false, backTimer;
+
+function show(name, ms = 3000) {
+  setFace(name);
+  clearTimeout(backTimer);
+  backTimer = setTimeout(() => { if (!sleeping) setFace('cool'); }, ms);
+}
+
+// Returns true if the robot was in standby and has just been woken up.
+function wake() {
+  lastActive = Date.now();
+  if (!sleeping) return false;
+  sleeping = false;
+  show('boot', 1100);
+  return true;
+}
+
+document.addEventListener('pointermove', e => {
+  wake();
+  if (!followsCursor(FACES[current])) return;
+  looks.forEach(l => {
+    const r = l.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width / 2);
     const dy = e.clientY - (r.top + r.height / 2);
     const dist = Math.hypot(dx, dy) || 1;
-    const k = Math.min(16, dist / 20) / dist;
-    p.style.transform = `translate(${dx * k}px, ${dy * k}px)`;
+    const k = Math.min(6, dist / 40) / dist;
+    l.style.transform = `translate(${dx * k}px, ${dy * k}px)`;
   });
 });
 
-const funny = Object.keys(FACES).filter(k => k !== 'normal');
-let idleTimer, backTimer;
-
-function prank() {
-  let k;
-  do { k = funny[Math.floor(Math.random() * funny.length)]; } while (k === current);
-  setFace(k);
-  clearTimeout(backTimer);
-  clearTimeout(idleTimer);
-  backTimer = setTimeout(() => { setFace('normal'); scheduleIdle(); }, 2000);
+function ripple(x, y) {
+  for (let i = 0; i < 2; i++) {
+    const r = document.createElement('div');
+    r.className = 'ripple';
+    r.style.left = `${x}px`;
+    r.style.top = `${y}px`;
+    r.style.color = getComputedStyle(face).color;
+    r.style.animationDelay = `${i * .12}s`;
+    r.addEventListener('animationend', () => r.remove());
+    document.body.appendChild(r);
+  }
 }
 
-function scheduleIdle() {
-  idleTimer = setTimeout(prank, 3000 + Math.random() * 4000);
-}
+face.addEventListener('click', e => {
+  ripple(e.clientX, e.clientY);
+  if (wake()) return;
+  const picks = ['shades', 'smirk', 'lock'];
+  show(picks[Math.floor(Math.random() * picks.length)]);
+});
 
-face.addEventListener('click', prank);
-setFace('normal');
-scheduleIdle();
+const moods = ['smirk', 'brow', 'shades', 'squint', 'side', 'angry', 'lock', 'scan'];
+(function scheduleMood() {
+  setTimeout(() => {
+    if (!sleeping) {
+      if (Date.now() - lastActive > 20000) {
+        sleeping = true;
+        clearTimeout(backTimer);
+        setFace('standby');
+      } else {
+        let k;
+        do { k = moods[Math.floor(Math.random() * moods.length)]; } while (k === current);
+        show(k);
+      }
+    }
+    scheduleMood();
+  }, 5000 + Math.random() * 4000);
+})();
+
+setFace('cool');
 </script>
 </body>
 </html>
