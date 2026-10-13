@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RoboEyes 网页版</title>
+<!--
+  JavaScript port of FluxGarage RoboEyes (https://github.com/FluxGarage/RoboEyes)
+  Copyright (C) 2024-2025 Dennis Hoelscher, www.fluxgarage.com
+  This file is licensed under the GNU General Public License v3.0 or later,
+  unlike the rest of this repository (CC0). See https://www.gnu.org/licenses/gpl-3.0.html
+-->
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    font-family: system-ui, "Microsoft YaHei", sans-serif;
+    background: #15181f;
+    color: #d8dee9;
+  }
+  .oled {
+    width: min(900px, 96vw);
+    padding: 18px;
+    border-radius: 14px;
+    background: #23272f;
+    box-shadow: 0 10px 30px #0008, inset 0 0 0 2px #333a46;
+  }
+  canvas { display: block; width: 100%; aspect-ratio: 2 / 1; background: #000; }
+  canvas.pixel { image-rendering: pixelated; }
+
+  .panel {
+    width: min(900px, 96vw);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  fieldset { border: 1px solid #333a46; border-radius: 10px; padding: 10px 12px 12px; margin: 0; }
+  legend { padding: 0 6px; color: #88c0d0; font-size: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; }
+  button {
+    padding: 6px 12px;
+    border: 1px solid #4c566a;
+    border-radius: 6px;
+    background: #2e3440;
+    color: #d8dee9;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button:hover { background: #3b4252; }
+  button.active { background: #88c0d0; color: #15181f; border-color: #88c0d0; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  label { font-size: 13px; display: flex; align-items: center; gap: 6px; }
+  .toggles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .slider { display: grid; grid-template-columns: 56px 1fr 32px; align-items: center; gap: 6px; font-size: 13px; margin: 4px 0; }
+  .slider output { text-align: right; }
+  a { color: #88c0d0; }
+  .hint { font-size: 12px; opacity: .6; }
+</style>
+</head>
+<body>
+
+<div class="oled"><canvas id="screen"></canvas></div>
+
+<div class="panel">
+  <fieldset>
+    <legend>表情 setMood()</legend>
+    <div class="row" id="moods">
+      <button data-mood="0" class="active">默认 DEFAULT</button>
+      <button data-mood="1">疲倦 TIRED</button>
+      <button data-mood="2">生气 ANGRY</button>
+      <button data-mood="3">开心 HAPPY</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>位置 setPosition()</legend>
+    <div class="grid3" id="positions">
+      <button data-pos="8">↖ NW</button><button data-pos="1">↑ N</button><button data-pos="2">↗ NE</button>
+      <button data-pos="7">← W</button><button data-pos="0" class="active">● 居中</button><button data-pos="3">→ E</button>
+      <button data-pos="6">↙ SW</button><button data-pos="5">↓ S</button><button data-pos="4">↘ SE</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>动作</legend>
+    <div class="row">
+      <button id="blink">眨眼</button>
+      <button id="blinkL">左眼眨</button>
+      <button id="blinkR">右眼眨</button>
+      <button id="laugh">大笑 anim_laugh</button>
+      <button id="confused">困惑 anim_confused</button>
+      <button id="openClose">闭眼</button>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>开关</legend>
+    <div class="toggles">
+      <label><input type="checkbox" id="autoblinker" checked> 自动眨眼</label>
+      <label><input type="checkbox" id="idle"> 随机乱看 idle</label>
+      <label><input type="checkbox" id="curious"> 好奇 curiosity</label>
+      <label><input type="checkbox" id="cyclops"> 独眼 cyclops</label>
+      <label><input type="checkbox" id="sweat"> 流汗 sweat</label>
+      <label><input type="checkbox" id="hflicker"> 水平抖动</label>
+      <label><input type="checkbox" id="vflicker"> 垂直抖动</label>
+      <label><input type="checkbox" id="pixel"> 像素风 OLED</label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>眼睛形状</legend>
+    <div class="slider">宽度 <input type="range" id="width" min="8" max="60" value="36"><output>36</output></div>
+    <div class="slider">高度 <input type="range" id="height" min="8" max="60" value="36"><output>36</output></div>
+    <div class="slider">圆角 <input type="range" id="radius" min="0" max="30" value="8"><output>8</output></div>
+    <div class="slider">间距 <input type="range" id="space" min="-20" max="40" value="10"><output>10</output></div>
+    <label>颜色 <input type="color" id="color" value="#ffffff"></label>
+  </fieldset>
+</div>
+
+<div class="hint">基于 <a href="https://github.com/FluxGarage/RoboEyes" target="_blank" rel="noopener">FluxGarage RoboEyes</a>（GPL-3.0）的网页移植，逻辑屏幕 128×64</div>
+
+<script>
+const DEFAULT = 0, TIRED = 1, ANGRY = 2, HAPPY = 3;
+const N = 1, NE = 2, E = 3, SE = 4, S = 5, SW = 6, W = 7, NW = 8;
+
+const rnd = n => (n > 0 ? Math.floor(Math.random() * n) : 0);
+// Mirrors C integer division, which the easing relies on to actually reach its target.
+const half = v => Math.trunc(v / 2);
+
+class RoboEyes {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.bg = '#000';
+    this.main = '#fff';
+    this.scale = 8;
+
+    this.screenWidth = 128;
+    this.screenHeight = 64;
+    this.frameInterval = 20;
+    this.timer = null;
+
+    this.tired = this.angry = this.happy = false;
+    this.curious = this.cyclops = false;
+
+    const eye = () => ({
+      wDef: 36, hDef: 36, w: 36, h: 1, wNext: 36, hNext: 36, hOff: 0,
+      rDef: 8, r: 8, rNext: 8, x: 0, y: 0, xNext: 0, yNext: 0, open: false,
+    });
+    this.L = eye();
+    this.R = eye();
+    this.spaceDef = this.space = this.spaceNext = 10;
+
+    this.tiredH = this.tiredHNext = 0;
+    this.angryH = this.angryHNext = 0;
+    this.happyOff = this.happyOffNext = 0;
+
+    this.hFlicker = false; this.hFlickerAlt = false; this.hFlickerAmp = 2;
+    this.vFlicker = false; this.vFlickerAlt = false; this.vFlickerAmp = 10;
+
+    this.autoblinker = false; this.blinkInterval = 1; this.blinkVariation = 4; this.blinkTimer = 0;
+    this.idle = false; this.idleInterval = 1; this.idleVariation = 3; this.idleTimer = 0;
+
+    this.confused = false; this.confusedTimer = 0; this.confusedDuration = 500; this.confusedToggle = true;
+    this.laugh = false; this.laughTimer = 0; this.laughDuration = 500; this.laughToggle = true;
+
+    this.sweat = false;
+    this.drops = [0, 1, 2].map(() => ({ xInit: 2, x: 0, y: 2, yMax: 0, w: 1, h: 2 }));
+  }
+
+  begin(width, height, frameRate) {
+    this.screenWidth = width;
+    this.screenHeight = height;
+    const { L, R } = this;
+    L.x = L.xNext = half(width - (L.wDef + this.spaceDef + R.wDef));
+    L.y = L.yNext = half(height - L.hDef);
+    R.x = R.xNext = L.x + L.w + this.spaceDef;
+    R.y = R.yNext = L.y;
+    L.h = R.h = 1;
+    this.setRenderScale(this.scale);
+    this.setFramerate(frameRate);
+  }
+
+  setRenderScale(s) {
+    this.scale = s;
+    this.canvas.width = this.screenWidth * s;
+    this.canvas.height = this.screenHeight * s;
+    this.ctx.setTransform(s, 0, 0, s, 0, 0);
+  }
+
+  setFramerate(fps) {
+    this.frameInterval = 1000 / fps;
+    clearInterval(this.timer);
+    this.timer = setInterval(() => this.drawEyes(), this.frameInterval);
+  }
+
+  setDisplayColors(bg, main) { this.bg = bg; this.main = main; }
+
+  setWidth(l, r) { this.L.wNext = this.L.wDef = l; this.R.wNext = this.R.wDef = r; }
+  setHeight(l, r) { this.L.hNext = this.L.hDef = l; this.R.hNext = this.R.hDef = r; }
+  setBorderradius(l, r) { this.L.rNext = this.L.rDef = l; this.R.rNext = this.R.rDef = r; }
+  setSpacebetween(s) { this.spaceNext = this.spaceDef = s; }
+
+  setMood(mood) {
+    this.tired = mood === TIRED;
+    this.angry = mood === ANGRY;
+    this.happy = mood === HAPPY;
+  }
+
+  setPosition(pos) {
+    const cx = this.getScreenConstraint_X(), cy = this.getScreenConstraint_Y();
+    const table = {
+      [N]: [half(cx), 0], [NE]: [cx, 0], [E]: [cx, half(cy)], [SE]: [cx, cy],
+      [S]: [half(cx), cy], [SW]: [0, cy], [W]: [0, half(cy)], [NW]: [0, 0],
+    };
+    [this.L.xNext, this.L.yNext] = table[pos] || [half(cx), half(cy)];
+  }
+
+  setAutoblinker(on, interval = this.blinkInterval, variation = this.blinkVariation) {
+    this.autoblinker = on; this.blinkInterval = interval; this.blinkVariation = variation;
+  }
+  setIdleMode(on, interval = this.idleInterval, variation = this.idleVariation) {
+    this.idle = on; this.idleInterval = interval; this.idleVariation = variation;
+  }
+  setCuriosity(on) { this.curious = on; }
+  setCyclops(on) { this.cyclops = on; }
+  setHFlicker(on, amp = this.hFlickerAmp) { this.hFlicker = on; this.hFlickerAmp = amp; }
+  setVFlicker(on, amp = this.vFlickerAmp) { this.vFlicker = on; this.vFlickerAmp = amp; }
+  setSweat(on) { this.sweat = on; }
+
+  getScreenConstraint_X() { return this.screenWidth - this.L.w - this.space - this.R.w; }
+  // Uses default height because current height varies while blinking / curious.
+  getScreenConstraint_Y() { return this.screenHeight - this.L.hDef; }
+
+  close(left = true, right = true) {
+    if (left) { this.L.hNext = 1; this.L.open = false; }
+    if (right) { this.R.hNext = 1; this.R.open = false; }
+  }
+  open(left = true, right = true) {
+    if (left) this.L.open = true;
+    if (right) this.R.open = true;
+  }
+  blink(left = true, right = true) { this.close(left, right); this.open(left, right); }
+
+  anim_confused() { this.confused = true; }
+  anim_laugh() { this.laugh = true; }
+
+  fillRoundRect(x, y, w, h, r, color) {
+    x = Math.trunc(x); y = Math.trunc(y); w = Math.trunc(w); h = Math.trunc(h);
+    if (w <= 0 || h <= 0) return;
+    r = Math.max(0, Math.min(r, half(Math.min(w, h))));
+    const c = this.ctx;
+    c.fillStyle = color;
+    c.beginPath();
+    c.roundRect(x, y, w, h, r);
+    c.fill();
+  }
+
+  fillTriangle(x0, y0, x1, y1, x2, y2, color) {
+    const c = this.ctx;
+    c.fillStyle = color;
+    c.beginPath();
+    c.moveTo(x0, y0); c.lineTo(x1, y1); c.lineTo(x2, y2);
+    c.closePath();
+    c.fill();
+  }
+
+  drawEyes() {
+    const { L, R } = this;
+    const now = performance.now();
+
+    // Pre-calculations: eye sizes and tweening
+    if (this.curious) {
+      if (L.xNext <= 10) L.hOff = 8;
+      else if (L.xNext >= this.getScreenConstraint_X() - 10 && this.cyclops) L.hOff = 8;
+      else L.hOff = 0;
+      R.hOff = R.xNext >= this.screenWidth - R.w - 10 ? 8 : 0;
+    } else {
+      L.hOff = R.hOff = 0;
+    }
+
+    for (const e of [L, R]) {
+      e.h = half(e.h + e.hNext + e.hOff);
+      e.y += half(e.hDef - e.h);
+      e.y -= half(e.hOff);
+    }
+    for (const e of [L, R]) {
+      if (e.open && e.h <= 1 + e.hOff) e.hNext = e.hDef;
+    }
+
+    L.w = half(L.w + L.wNext);
+    R.w = half(R.w + R.wNext);
+    this.space = half(this.space + this.spaceNext);
+
+    L.x = half(L.x + L.xNext);
+    L.y = half(L.y + L.yNext);
+    R.xNext = L.xNext + L.w + this.space;
+    R.yNext = L.yNext;
+    R.x = half(R.x + R.xNext);
+    R.y = half(R.y + R.yNext);
+
+    L.r = half(L.r + L.rNext);
+    R.r = half(R.r + R.rNext);
+
+    // Macro animations
+    if (this.autoblinker && now >= this.blinkTimer) {
+      this.blink();
+      this.blinkTimer = now + this.blinkInterval * 1000 + rnd(this.blinkVariation) * 1000;
+    }
+
+    if (this.laugh) {
+      if (this.laughToggle) {
+        this.setVFlicker(true, 5);
+        this.laughTimer = now;
+        this.laughToggle = false;
+      } else if (now >= this.laughTimer + this.laughDuration) {
+        this.setVFlicker(false, 0);
+        this.laughToggle = true;
+        this.laugh = false;
+      }
+    }
+
+    if (this.confused) {
+      if (this.confusedToggle) {
+        this.setHFlicker(true, 20);
+        this.confusedTimer = now;
+        this.confusedToggle = false;
+      } else if (now >= this.confusedTimer + this.confusedDuration) {
+        this.setHFlicker(false, 0);
+        this.confusedToggle = true;
+        this.confused = false;
+      }
+    }
+
+    if (this.idle && now >= this.idleTimer) {
+      L.xNext = rnd(this.getScreenConstraint_X());
+      L.yNext = rnd(this.getScreenConstraint_Y());
+      this.idleTimer = now + this.idleInterval * 1000 + rnd(this.idleVariation) * 1000;
+    }
+
+    if (this.hFlicker) {
+      const d = this.hFlickerAlt ? this.hFlickerAmp : -this.hFlickerAmp;
+      L.x += d; R.x += d;
+      this.hFlickerAlt = !this.hFlickerAlt;
+    }
+    if (this.vFlicker) {
+      const d = this.vFlickerAlt ? this.vFlickerAmp : -this.vFlickerAmp;
+      L.y += d; R.y += d;
+      this.vFlickerAlt = !this.vFlickerAlt;
+    }
+
+    if (this.cyclops) {
+      R.w = 0; R.h = 0; this.space = 0;
+    }
+
+    // Drawing
+    const c = this.ctx, bg = this.bg, fg = this.main;
+    c.fillStyle = bg;
+    c.fillRect(0, 0, this.screenWidth, this.screenHeight);
+
+    this.fillRoundRect(L.x, L.y, L.w, L.h, L.r, fg);
+    if (!this.cyclops) this.fillRoundRect(R.x, R.y, R.w, R.h, R.r, fg);
+
+    if (this.tired) { this.tiredHNext = half(L.h); this.angryHNext = 0; } else this.tiredHNext = 0;
+    if (this.angry) { this.angryHNext = half(L.h); this.tiredHNext = 0; } else this.angryHNext = 0;
+    this.happyOffNext = this.happy ? half(L.h) : 0;
+
+    // Tired top eyelids: slope down towards the outer corners
+    this.tiredH = half(this.tiredH + this.tiredHNext);
+    const t = this.tiredH;
+    if (!this.cyclops) {
+      this.fillTriangle(L.x, L.y - 1, L.x + L.w, L.y - 1, L.x, L.y + t - 1, bg);
+      this.fillTriangle(R.x, R.y - 1, R.x + R.w, R.y - 1, R.x + R.w, R.y + t - 1, bg);
+    } else {
+      this.fillTriangle(L.x, L.y - 1, L.x + half(L.w), L.y - 1, L.x, L.y + t - 1, bg);
+      this.fillTriangle(L.x + half(L.w), L.y - 1, L.x + L.w, L.y - 1, L.x + L.w, L.y + t - 1, bg);
+    }
+
+    // Angry top eyelids: slope down towards the nose
+    this.angryH = half(this.angryH + this.angryHNext);
+    const a = this.angryH;
+    if (!this.cyclops) {
+      this.fillTriangle(L.x, L.y - 1, L.x + L.w, L.y - 1, L.x + L.w, L.y + a - 1, bg);
+      this.fillTriangle(R.x, R.y - 1, R.x + R.w, R.y - 1, R.x, R.y + a - 1, bg);
+    } else {
+      this.fillTriangle(L.x, L.y - 1, L.x + half(L.w), L.y - 1, L.x + half(L.w), L.y + a - 1, bg);
+      this.fillTriangle(L.x + half(L.w), L.y - 1, L.x + L.w, L.y - 1, L.x + half(L.w), L.y + a - 1, bg);
+    }
+
+    // Happy bottom eyelids
+    this.happyOff = half(this.happyOff + this.happyOffNext);
+    const h = this.happyOff;
+    this.fillRoundRect(L.x - 1, L.y + L.h - h + 1, L.w + 2, L.hDef, L.r, bg);
+    if (!this.cyclops) this.fillRoundRect(R.x - 1, R.y + R.h - h + 1, R.w + 2, R.hDef, R.r, bg);
+
+    if (this.sweat) {
+      const sw = this.screenWidth;
+      const spawnX = [() => rnd(30), () => rnd(sw - 60) + 30, () => sw - 30 + rnd(30)];
+      this.drops.forEach((d, i) => {
+        if (d.y <= d.yMax) d.y += 0.5;
+        else { d.xInit = spawnX[i](); d.y = 2; d.yMax = rnd(10) + 10; d.w = 1; d.h = 2; }
+        if (d.y <= half(d.yMax)) { d.w += 0.5; d.h += 0.5; }
+        else { d.w -= 0.1; d.h -= 0.5; }
+        d.x = Math.trunc(d.xInit - d.w / 2);
+        this.fillRoundRect(d.x, d.y, d.w, d.h, 3, fg);
+      });
+    }
+  }
+}
+
+// ---- Demo wiring ----
+const canvas = document.getElementById('screen');
+const roboEyes = new RoboEyes(canvas);
+roboEyes.begin(128, 64, 50);
+roboEyes.setAutoblinker(true, 3, 2);
+roboEyes.setIdleMode(false, 2, 2);
+roboEyes.open();
+
+let currentPos = DEFAULT;
+const $ = id => document.getElementById(id);
+
+function selectIn(container, btn) {
+  container.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+}
+
+$('moods').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  roboEyes.setMood(Number(b.dataset.mood));
+  selectIn($('moods'), b);
+});
+
+$('positions').addEventListener('click', e => {
+  const b = e.target.closest('button');
+  if (!b) return;
+  currentPos = Number(b.dataset.pos);
+  roboEyes.setPosition(currentPos);
+  selectIn($('positions'), b);
+});
+
+$('blink').onclick = () => roboEyes.blink();
+$('blinkL').onclick = () => roboEyes.blink(true, false);
+$('blinkR').onclick = () => roboEyes.blink(false, true);
+$('laugh').onclick = () => roboEyes.anim_laugh();
+$('confused').onclick = () => roboEyes.anim_confused();
+$('openClose').onclick = e => {
+  const closing = roboEyes.L.open || roboEyes.R.open;
+  if (closing) {
+    roboEyes.setAutoblinker(false);
+    $('autoblinker').checked = false;
+    roboEyes.close();
+  } else {
+    roboEyes.open();
+  }
+  e.target.textContent = closing ? '睁眼' : '闭眼';
+};
+
+const toggles = {
+  autoblinker: on => roboEyes.setAutoblinker(on),
+  idle: on => { roboEyes.setIdleMode(on); if (!on) roboEyes.setPosition(currentPos); },
+  curious: on => roboEyes.setCuriosity(on),
+  cyclops: on => { roboEyes.setCyclops(on); setTimeout(() => roboEyes.setPosition(currentPos), 100); },
+  sweat: on => roboEyes.setSweat(on),
+  hflicker: on => roboEyes.setHFlicker(on, 2),
+  vflicker: on => roboEyes.setVFlicker(on, 2),
+  pixel: on => { roboEyes.setRenderScale(on ? 1 : 8); canvas.classList.toggle('pixel', on); },
+};
+Object.entries(toggles).forEach(([id, fn]) => {
+  $(id).addEventListener('change', e => fn(e.target.checked));
+});
+
+const sliders = {
+  width: v => roboEyes.setWidth(v, v),
+  height: v => roboEyes.setHeight(v, v),
+  radius: v => roboEyes.setBorderradius(v, v),
+  space: v => roboEyes.setSpacebetween(v),
+};
+Object.entries(sliders).forEach(([id, fn]) => {
+  const input = $(id);
+  input.addEventListener('input', () => {
+    const v = Number(input.value);
+    input.nextElementSibling.textContent = v;
+    fn(v);
+    // Re-centre once the size tween has settled.
+    setTimeout(() => roboEyes.setPosition(currentPos), 200);
+  });
+});
+
+$('color').addEventListener('input', e => roboEyes.setDisplayColors('#000', e.target.value));
+</script>
+</body>
+</html>

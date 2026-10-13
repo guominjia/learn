@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>机器人面部</title>
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: radial-gradient(circle at 50% 45%, #14233d, #05080f 75%); }
+  #face { display: block; width: 100vw; height: 100vh; cursor: pointer; }
+
+  #face .tilt, #face .eye-shape, #face .blink, #face .brow, #face .spiral, #face .tongue {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform .25s ease;
+  }
+  #face .pupil { transition: transform .1s linear; }
+  #face .mouth { transition: d .25s ease; }
+  #face .glow { filter: drop-shadow(0 0 8px #3ff) drop-shadow(0 0 20px #0cf); }
+  #face .cheek, #face .tongue, #face .teeth, #face .spiral { transition: opacity .25s; }
+
+  #face.dizzy .tilt { animation: wobble 1s ease-in-out infinite; }
+  #face.dizzy .spiral { animation: spin .9s linear infinite; }
+  #face.crazy .tilt { animation: shake .35s linear infinite; }
+  #face .tongue.show { animation: wag .5s ease-in-out infinite alternate; }
+
+  @keyframes wobble { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+  @keyframes shake {
+    0%,100% { transform: translateX(0) rotate(4deg); }
+    25% { transform: translateX(-5px) rotate(6deg); }
+    75% { transform: translateX(5px) rotate(2deg); }
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes wag { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+</style>
+</head>
+<body>
+<svg id="face" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" aria-label="机器人面部">
+  <g class="tilt">
+    <rect class="brow" id="browL" x="90" y="46" width="80" height="12" rx="6" fill="#3ff" opacity=".85"/>
+    <rect class="brow" id="browR" x="230" y="46" width="80" height="12" rx="6" fill="#3ff" opacity=".85"/>
+
+    <g class="eye-shape" id="eyeL">
+      <g class="blink">
+        <circle class="glow" cx="130" cy="125" r="45" fill="#3ff"/>
+        <g class="pupil">
+          <circle cx="130" cy="125" r="19" fill="#05080f"/>
+          <circle cx="137" cy="118" r="6" fill="#fff"/>
+        </g>
+        <path class="spiral" opacity="0" fill="none" stroke="#05080f" stroke-width="5"/>
+      </g>
+    </g>
+    <g class="eye-shape" id="eyeR">
+      <g class="blink">
+        <circle class="glow" cx="270" cy="125" r="45" fill="#3ff"/>
+        <g class="pupil">
+          <circle cx="270" cy="125" r="19" fill="#05080f"/>
+          <circle cx="277" cy="118" r="6" fill="#fff"/>
+        </g>
+        <path class="spiral" opacity="0" fill="none" stroke="#05080f" stroke-width="5"/>
+      </g>
+    </g>
+
+    <ellipse class="cheek" cx="70" cy="200" rx="26" ry="13" fill="#ff7799" opacity="0"/>
+    <ellipse class="cheek" cx="330" cy="200" rx="26" ry="13" fill="#ff7799" opacity="0"/>
+
+    <!-- mouth shapes are authored around (150,215); scale them up to the face -->
+    <g transform="translate(200 222) scale(1.7) translate(-150 -215)">
+      <path class="mouth glow" id="mouth" fill="#05080f" stroke="#3ff" stroke-width="3" stroke-linejoin="round"/>
+      <g class="teeth" opacity="0">
+        <rect x="106" y="202" width="88" height="13" rx="3" fill="#f4f7ff"/>
+        <path d="M128 202v13M150 202v13M172 202v13" stroke="#9aa8c0" stroke-width="2"/>
+      </g>
+      <g class="tongue" opacity="0">
+        <path d="M133 226 Q131 266 150 266 Q169 266 167 226 Z" fill="#ff5d7a" stroke="#c23a55" stroke-width="2"/>
+        <path d="M150 232 V254" stroke="#c23a55" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>
+
+<script>
+// All mouth paths share the same command structure so CSS can morph between them.
+const MOUTH = {
+  neutral: 'M115 212 Q132 214 150 214 Q168 214 185 212 Q168 220 150 220 Q132 220 115 212 Z',
+  smile:   'M108 204 Q128 210 150 210 Q172 210 192 204 Q178 246 150 246 Q122 246 108 204 Z',
+  o:       'M134 216 Q136 194 150 194 Q164 194 166 216 Q164 238 150 238 Q136 238 134 216 Z',
+  smirk:   'M118 216 Q140 220 160 215 Q178 210 190 196 Q182 224 160 224 Q138 226 118 216 Z',
+  wavy:    'M108 212 Q129 194 150 212 Q171 230 192 212 Q171 240 150 222 Q129 204 108 212 Z',
+  wobble:  'M118 222 Q134 208 150 214 Q166 220 182 208 Q167 226 150 222 Q133 228 118 222 Z',
+  grin:    'M102 200 Q126 200 150 200 Q174 200 198 200 Q190 238 150 238 Q110 238 102 200 Z',
+};
+
+// eyes: [left, right] {sx, sy}; pupils: [[dx,dy],[dx,dy]]; brows: [{y, r}, {y, r}]
+const FACES = {
+  normal:   { mouth: 'neutral' },
+  happy:    { mouth: 'smile', eyes: [{ sy: .7 }, { sy: .7 }], brows: [{ y: -10 }, { y: -10 }], blush: true },
+  wink:     { mouth: 'smirk', eyes: [{ sy: .08 }, {}], pupils: [[0, 0], [9, -5]],
+              brows: [{ y: 10, r: 10 }, { y: -14, r: -8 }], tilt: -5, blush: true },
+  tongue:   { mouth: 'smile', tongue: true, eyes: [{ sy: .3 }, { sy: .3 }],
+              brows: [{ y: -6, r: -10 }, { y: -6, r: 10 }], tilt: 4 },
+  crosseye: { mouth: 'smile', tongue: true, pupils: [[24, 10], [-24, 10]],
+              brows: [{ y: -12, r: 12 }, { y: -12, r: -12 }], tilt: -3 },
+  surprise: { mouth: 'o', eyes: [{ sx: 1.15, sy: 1.2 }, { sx: 1.15, sy: 1.2 }], pupils: [[0, 0], [0, 0]],
+              brows: [{ y: -22 }, { y: -22 }] },
+  crazy:    { mouth: 'wavy', cls: 'crazy', eyes: [{ sx: 1.3, sy: 1.3 }, { sx: .55, sy: .55 }],
+              pupils: [[-16, -12], [12, 12]], brows: [{ y: -26, r: -15 }, { y: 14, r: 22 }] },
+  dizzy:    { mouth: 'wobble', cls: 'dizzy', spiral: true, brows: [{ y: -8, r: -8 }, { y: 4, r: 10 }] },
+  grin:     { mouth: 'grin', teeth: true, eyes: [{ sy: .55 }, { sy: .55 }],
+              brows: [{ y: 12, r: 15 }, { y: 12, r: -15 }] },
+};
+
+const face = document.getElementById('face');
+const $ = s => face.querySelector(s);
+const $$ = s => [...face.querySelectorAll(s)];
+const eyes = [$('#eyeL'), $('#eyeR')];
+const brows = [$('#browL'), $('#browR')];
+const pupils = $$('.pupil');
+const mouth = $('#mouth');
+let current = 'normal';
+
+// Semicircle spiral centred on each eye.
+$$('.spiral').forEach((el, i) => {
+  let d = `M${i ? 270 : 130} 125`;
+  for (let r = 3, dir = 1; r <= 33; r += 3, dir = -dir) d += ` a${r} ${r} 0 0 1 ${2 * r * dir} 0`;
+  el.setAttribute('d', d);
+});
+
+function setFace(name) {
+  const f = FACES[name];
+  current = name;
+  face.classList.remove('crazy', 'dizzy');
+  if (f.cls) face.classList.add(f.cls);
+
+  const d = MOUTH[f.mouth];
+  mouth.setAttribute('d', d);
+  mouth.style.d = `path("${d}")`;
+
+  eyes.forEach((el, i) => {
+    const e = (f.eyes && f.eyes[i]) || {};
+    el.style.transform = `scale(${e.sx ?? 1}, ${e.sy ?? 1})`;
+  });
+  brows.forEach((el, i) => {
+    const b = (f.brows && f.brows[i]) || {};
+    el.style.transform = `translateY(${b.y ?? 0}px) rotate(${b.r ?? 0}deg)`;
+  });
+  pupils.forEach((el, i) => {
+    const [x, y] = f.pupils ? f.pupils[i] : [0, 0];
+    el.style.transform = `translate(${x}px, ${y}px)`;
+    el.style.opacity = f.spiral ? 0 : 1;
+  });
+  $$('.spiral').forEach(el => el.style.opacity = f.spiral ? 1 : 0);
+  $$('.cheek').forEach(el => el.style.opacity = f.blush ? .8 : 0);
+  $('.teeth').style.opacity = f.teeth ? 1 : 0;
+  const tongue = $('.tongue');
+  tongue.style.opacity = f.tongue ? 1 : 0;
+  tongue.classList.toggle('show', !!f.tongue);
+  $('.tilt').style.transform = `rotate(${f.tilt ?? 0}deg)`;
+}
+
+function blink() {
+  if (current === 'dizzy') return;
+  $$('.blink').forEach(el => el.animate(
+    [{ transform: 'scaleY(1)' }, { transform: 'scaleY(0.05)' }, { transform: 'scaleY(1)' }],
+    { duration: 160, easing: 'ease-in-out' }
+  ));
+}
+
+(function scheduleBlink() {
+  setTimeout(() => {
+    blink();
+    if (Math.random() < 0.25) setTimeout(blink, 220);
+    scheduleBlink();
+  }, 1500 + Math.random() * 3500);
+})();
+
+// Pupils follow the cursor only when the current face doesn't pin them.
+document.addEventListener('mousemove', e => {
+  if (FACES[current].pupils || FACES[current].spiral) return;
+  pupils.forEach(p => {
+    const r = p.parentNode.querySelector('.glow').getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    const dist = Math.hypot(dx, dy) || 1;
+    const k = Math.min(16, dist / 20) / dist;
+    p.style.transform = `translate(${dx * k}px, ${dy * k}px)`;
+  });
+});
+
+const funny = Object.keys(FACES).filter(k => k !== 'normal');
+let idleTimer, backTimer;
+
+function prank() {
+  let k;
+  do { k = funny[Math.floor(Math.random() * funny.length)]; } while (k === current);
+  setFace(k);
+  clearTimeout(backTimer);
+  clearTimeout(idleTimer);
+  backTimer = setTimeout(() => { setFace('normal'); scheduleIdle(); }, 2000);
+}
+
+function scheduleIdle() {
+  idleTimer = setTimeout(prank, 3000 + Math.random() * 4000);
+}
+
+face.addEventListener('click', prank);
+setFace('normal');
+scheduleIdle();
+</script>
+</body>
+</html>
