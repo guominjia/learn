@@ -1,5 +1,5 @@
 ---
-title: "机器鸭复刻：学习电路"
+title: "机器鸭复刻：学习电路（3）"
 date: 2026-10-21
 categories: [robot, microduck]
 ---
