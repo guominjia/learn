@@ -2,7 +2,7 @@ title: Learning
 description: Record learning from practice
 lang: zh-CN
 timezone: Asia/Shanghai
-permalink: /:categories/:title/
+permalink: /:year/:month/:day/:title
 
 markdown: kramdown
 highlighter: rouge
