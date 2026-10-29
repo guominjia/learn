@@ -70,10 +70,23 @@ if [ -n "$BASH_ENV" ]; then . "$BASH_ENV"; fi
 
 ## 特殊情况：sshd 远程调用
 
-文档里还有一个特殊段落 **"Invoked by remote shell daemon"**：
+参考[链接][tcsh]：
 
 > If Bash determines it is being run non-interactively in this fashion [with stdin connected to a network connection, as when executed by sshd], it reads and executes commands from `~/.bashrc`, if that file exists and is readable.
 
 所以 `ssh user@host 'command'` 实际上可能**会读 `.bashrc`**——因为 bash 检测到 stdin 是网络连接时会特殊处理。这是 bash 的一个特例行为，不适用于 `bash script.sh` 这种本地非交互式调用。
 
+## TCSH 行为
+
+> **A login shell** begins by executing commands from the system files `/etc/csh.cshrc` and `/etc/csh.login`. It then executes commands from files in the user's home directory: first **~/.tcshrc** or, if ~/.tcshrc is not found, **~/.cshrc**, then the contents of ~/.history, then ~/.login, and finally ~/.cshdirs
+>
+> **Non-login shells read only /etc/csh.cshrc and ~/.tcshrc or ~/.cshrc on startup.**
+
+关键点：
+
+1. **`.cshrc`（或 `.tcshrc`）被所有 shell 读取**——登录 shell、非登录 shell、交互式、非交互式都读。文档说的是 "every shell"（`~/.tcshrc` 的 FILES 条目也写明 "Read by every shell"）。
+2. **`.login` 只被登录 shell 读取**——非登录 shell 不读。
+
 [dash_man]: https://man7.org/linux/man-pages/man1/dash.1.html
+[tcsh]: https://www.tcsh.org/Manual
+[tcsh_1]: https://man.freebsd.org/cgi/man.cgi?query=tcsh&sektion=1
