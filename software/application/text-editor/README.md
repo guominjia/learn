@@ -1,5 +1,11 @@
 # Editor
 
+- **`ed`** — the standard Unix line editor
+- **`grep`** — the name itself comes from the ed command `g/re/p` (global regular expression print)
+- **`sed`** — stream editor
+- **`awk`** — text-processing language
+- **`lex`** — lexical analyzer generator
+
 ## [VSCode](https://vscode.dev/)
 Click [here](vscode/README.md) for details
 

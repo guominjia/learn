@@ -16,13 +16,7 @@ The theory behind regular expressions was established in **1951 by Stephen Cole 
 
 The leap from theory to practice came in **1968, when Ken Thompson** implemented Kleene's notation as an executable pattern-matching engine, embedding it in the **QED** text editor. This was the first time regex was used as a tool for searching and manipulating text.
 
-From there, regex spread through the Unix ecosystem:
-
-- **`ed`** — the standard Unix line editor
-- **`grep`** — the name itself comes from the ed command `g/re/p` (global regular expression print)
-- **`sed`** — stream editor
-- **`awk`** — text-processing language
-- **`lex`** — lexical analyzer generator
+From there, regex spread through the Unix ecosystem: `ed`, `grep`, `sed`, `awk`, `lex`, etc
 
 By the **1970s**, regex was a core part of Unix text processing and compiler toolchains. The **1980s** brought more powerful "modern regex" extensions, especially in the Perl style. In **1992**, POSIX standardized BRE (Basic Regular Expressions) and ERE (Extended Regular Expressions). In **1997**, Philip Hazel began developing **PCRE** (Perl Compatible Regular Expressions), which spread the Perl-style regex syntax to a much wider ecosystem.
 
