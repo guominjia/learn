@@ -14,6 +14,10 @@ tags: [ssh]
 
 **临时处理**：删除 `known_hosts` 中的记录来暂时绕过校验。
 
+## 判断是否多地址问题
+
+如果 `nslookup example.com` 输出多个 IP，就是多IP问题
+
 ## 根源
 
 同一个服务名对应两个使用不同主机密钥的节点，而 SSH 会校验连接到的节点是否持有客户端信任的密钥。若 `known_hosts` 里只记录了其中一个节点的密钥，连接到另一个节点时就会校验失败。
@@ -73,3 +77,42 @@ ssh -o HostKeyAlias=login.example.com your_user_name@IP1 hostname
 - **`UpdateHostKeys` 仍可能影响记录**：设置 `HostKeyAlias` 只改变 SSH 查找和保存主机密钥时使用的名字，不会让不同节点的密钥自动变得相同。若节点密钥不同，应确保别名下已可信地记录所有节点的密钥；也可以设置 `UpdateHostKeys no`，避免服务器发送的密钥通知改动这些记录。
 
 建议：用了 `HostKeyAlias`，最好同时加上 `-o UpdateHostKeys=no`。
+
+## Linux获取密钥
+
+```bash
+for ip in IP1 IP2; do
+  ssh-keyscan -t ed25519 $ip 2>/dev/null | sed "s/^$ip/login.example.com/" > /tmp/kh_$ip
+  echo "$ip: $(ssh-keygen -lf /tmp/kh_$ip)"
+done
+```
+
+运行以下命令把明文地址变为 HASH 表示：
+
+```bash
+ssh-keygen -H -f known_hosts
+```
+
+哈希后的格式：
+
+```
+|1|<盐 base64>|<HMAC-SHA1(盐, 主机名) 的 base64>  密钥类型  公钥
+```
+
+Python 模拟代码如下：
+
+```python
+import hmac,hashlib,base64
+
+s=base64.b64decode('<盐 base64>');
+
+print(base64.b64encode(hmac.new(s,b'login.example.com',hashlib.sha1).digest()).decode())
+```
+
+## ssh-keygen 有用操作
+
+找到 HASH 对应行：
+
+```bash
+ssh-keygen -F login.example.com
+```
