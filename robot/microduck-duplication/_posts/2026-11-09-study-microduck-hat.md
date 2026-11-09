@@ -1,6 +1,6 @@
 ---
 title: "机器鸭复刻：学习 HAT 电路板"
-date: 2026-11-99
+date: 2026-11-09
 categories: [robot, microduck]
 ---
 
