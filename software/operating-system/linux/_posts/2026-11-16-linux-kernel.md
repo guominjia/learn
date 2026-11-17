@@ -115,7 +115,70 @@ df -h -t proc -t sysfs
 ## 内核操作命令
 
 - `modinfo, lsmod, modprobe, depmod, insmod`
-- `/lib/modules/$(uname -r)/kernel/drivers`
+
+| 命令 | 作用 | 操作对象 |
+|---|---|---|
+| `insmod` | 把 `.ko` 文件**直接加载**进内核 | 具体的 `.ko` 文件路径 |
+| `modprobe` | 按**模块名**智能加载（自动处理依赖） | 模块名（不含路径和后缀） |
+| `depmod` | 生成模块依赖关系文件（只分析，不加载） | `/lib/modules/$(uname -r)/` 下所有 `.ko` |
+
+### insmod — 最原始
+
+```bash
+insmod /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/igc/igc.ko
+```
+
+- 只加载指定的那个文件
+- **不解决依赖** — 如果 `igc.ko` 依赖 `i2c-core.ko`，而 `i2c-core` 没加载，直接报错
+- 不查 `modules.alias`，不跑 depmod 生成的任何文件
+- 路径必须写全
+
+### modprobe — 智能版 insmod
+
+```bash
+modprobe igc
+```
+
+- 按**模块名**在 `/lib/modules/$(uname -r)/` 下找 `.ko`
+- **自动加载依赖** — 先加载 `i2c-core`，再加载 `igc`
+- 查 `modules.alias` — 可以通过 PCI ID 加载：`modprobe pci:v00008086d000015F3...`
+- 卸载时也处理依赖：`modprobe -r igc` 会检查是否有其他模块在用 `i2c-core`，有就不卸载
+- 读 `/etc/modprobe.d/` 里的配置（黑名单、参数等）
+
+### depmod — 只分析，不加载
+
+```bash
+depmod -a
+```
+
+- 扫描 `/lib/modules/$(uname -r)/` 下所有 `.ko`
+- 分析每个模块的 `MODULE_DEPENDS`、`MODULE_ALIAS`、`MODULE_SYMBOL` 等 ELF 段信息
+- 生成几个文件供 `modprobe` 使用：
+
+| 生成文件 | 用途 |
+|---|---|
+| `modules.dep` | 依赖关系表：`igc.ko: i2c-core.ko` |
+| `modules.alias` | PCI/USB ID → 模块名映射：`alias pci:v00008086d000015F3sv*sd*bc*sc*i* igc` |
+| `modules.symbols` | 导出的符号 → 模块名映射 |
+| `modules.softdep` | 软依赖 |
+
+### 完整流程
+
+```
+安装新驱动
+    │
+    ▼
+cp xxx.ko → /lib/modules/$(uname -r)/kernel/drivers/.../
+    │
+    ▼
+depmod -a          ← 重新生成 modules.dep / modules.alias
+    │
+    ▼
+modprobe xxx       ← 按模块名加载（自动处理依赖）
+    │
+    ▼
+lsmod | grep xxx   ← 验证
+```
 
 ## sysfs 创建流程
 
@@ -345,6 +408,107 @@ lspci -k -s 02:00.0
 
 # 4. 看驱动统计信息
 cat /sys/class/net/eth0/device/driver/module/refcnt
-# 或者
-lsmod | grep igb
+```
+
+## 查看当前加载的驱动
+
+### 1. `lsmod` — 所有已加载的内核模块
+
+输出示例：
+```
+Module                  Size  Used by
+igc                   139264  0
+i2c_i801              40960  0
+i2c_core              98304  2 igc,i2c_i801
+```
+
+- 第一列：模块名
+- 第三列：被多少个其他模块引用（`Used by`）
+- 能看到所有类型的内核模块，不只是网卡
+
+### 2. `lspci -k` — PCI 设备 + 驱动
+
+```bash
+lspci -k
+```
+
+输出示例：
+```
+00:1f.6 Ethernet controller: Intel Corporation Device 0dc6
+        Subsystem: Intel Corporation Device 0000
+        Kernel driver in use: igc          ← 正在用的驱动
+        Kernel modules: igc                ← 可用的驱动模块
+```
+
+`lspci` 加 `-k` 显示 PCI 设备 + 对应的驱动名。
+
+### 3. `lspci -v` — 更详细的 PCI 设备信息
+
+```bash
+lspci -v -s 00:1f.6
+```
+
+### 4. 只看网卡驱动
+
+```bash
+# 所有网络设备及其驱动
+lspci -k | grep -A 2 "Ethernet"
+
+# 或
+ls /sys/class/net/
+for iface in /sys/class/net/*; do
+    echo "$(basename $iface): $(basename $(readlink $iface/device/driver))"
+done
+```
+
+### 5. `dmesg` 看驱动加载日志
+
+```bash
+dmesg | grep -i "igc\|e1000\|iwl"
+```
+对，`cp xxx.ko → /lib/modules/...` 这一步**要自己做**。
+
+## 安装驱动方法
+
+### 不同场景的复制方式
+
+**场景 1：厂商给了源码，自己编译**
+
+```bash
+# 编译
+make
+
+# 复制 — 手动
+sudo cp <driver>.ko /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/<vendor>/
+sudo depmod -a
+
+# 或者如果 Makefile 支持 install 目标
+sudo make install    # 这个会自动帮你 cp + depmod
+```
+
+**场景 2：从别处下载了预编译的 `.ko`**
+
+```bash
+sudo cp xxx.ko /lib/modules/$(uname -r)/kernel/drivers/net/ethernet/intel/
+sudo depmod -a
+```
+
+**场景 3：内核自带的驱动（不需要复制）**
+
+```bash
+# 内核源码树里的驱动，编译内核时已经装好了
+# 直接 modprobe 就行，不需要 cp
+modprobe igc
+```
+
+### 为什么不能自动？
+
+因为 `modprobe` 只从 `/lib/modules/$(uname -r)/` 下找 `.ko`，新编译出来的 `.ko` 文件在源码目录里，不在这个路径下。所以必须：
+
+```
+编译目录/xxx.ko  ── cp──→  /lib/modules/$(uname -r)/kernel/.../xxx.ko
+                                            │
+                                       depmod -a  (建索引)
+                                            │
+                                       modprobe xxx  (按名字加载)
 ```
