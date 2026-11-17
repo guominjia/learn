@@ -114,7 +114,7 @@ df -h -t proc -t sysfs
 
 ## 内核操作命令
 
-- `lsmod/modprobe/depmod/insmod`
+- `modinfo, lsmod, modprobe, depmod, insmod`
 - `/lib/modules/$(uname -r)/kernel/drivers`
 
 ## sysfs 创建流程
