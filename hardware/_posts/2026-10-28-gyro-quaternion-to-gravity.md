@@ -27,17 +27,26 @@ $$\mathbf{v}' = q^{-1} \otimes (0, \mathbf{v}) \otimes q$$
 $$w_a = w,\ x_a = -x,\ y_a = -y,\ z_a = -z$$
 $$w_b = 0,\ x_b = 0,\ y_b = 0,\ z_b = -1$$
 
-$$\text{中间结果} = (x,\ -y,\ w,\ -z \cdot(-z) \cdot... )$$
+展开四元数乘法：
 
-展开太长，直接用已化简的结果。$q^{-1} \otimes (0, 0, 0, -1) = (y,\ -x,\ -w,\ -z)$，再右乘 $q$：
+$$
+\begin{aligned}
+w &= w \cdot 0 - (-x) \cdot 0 - (-y) \cdot 0 - (-z) \cdot (-1) = -z \\
+x &= w \cdot 0 + (-x) \cdot 0 + (-y) \cdot (-1) - (-z) \cdot 0 = y \\
+y &= w \cdot 0 - (-x) \cdot (-1) + (-y) \cdot 0 + (-z) \cdot 0 = -x \\
+z &= w \cdot (-1) + (-x) \cdot 0 - (-y) \cdot 0 + (-z) \cdot 0 = -w
+\end{aligned}
+$$
 
-$$(y,\ -x,\ -w,\ -z) \otimes (w, x, y, z)$$
+所以 $q^{-1} \otimes (0, 0, 0, -1) = (-z,\ y,\ -x,\ -w)$，再右乘 $q$：
+
+$$(-z,\ y,\ -x,\ -w) \otimes (w, x, y, z)$$
 
 展开四元数乘法的四个分量：
 
-$$w' = y \cdot w - (-x) \cdot x - (-w) \cdot y - (-z) \cdot z = 0$$
+$$w' = (-z) \cdot w - y \cdot x - (-x) \cdot y - (-w) \cdot z = 0$$
 
-$$x' = y \cdot x + (-x) \cdot w + (-w) \cdot z - (-z) \cdot y = 2(xz - wy) \cdot (-1)$$
+$$x' = (-z) \cdot x + y \cdot w + (-x) \cdot z - (-w) \cdot y = 2(wy - xz)$$
 
 整理后三个分量（标量部分 $w' = 0$，符合预期——旋转向量结果还是纯向量）：
 
